@@ -1,7 +1,1441 @@
-&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-&lt;meta charset="UTF-8"&gt;
-&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-&lt;title&gt;LMGI — Kopana Club Proposal&lt;/title&gt;
-&lt;style&gt;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LMGI — Kopana Club Proposal</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:   #080A0C;
+  --off:     #F4F2EE;
+  --white:   #FFFFFF;
+  --accent:  #C8A96E;      /* Connection Network gold */
+  --accent2: #1C3F5E;      /* deep navy node */
+  --muted:   #7A7672;
+  --line:    #E0DDD8;
+  --surface: #FAFAF8;
+  --node:    #C8A96E;
+  --danger:  #8B2A2A;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--off);
+  color: var(--black);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── NETWORK CANVAS (cover background) ─── */
+#network-canvas {
+  position: absolute; inset: 0; z-index: 0;
+  pointer-events: none;
+}
+
+/* ─── COVER ─── */
+.cover {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: 52px 64px;
+  background: var(--black);
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+.cover-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative; z-index: 2;
+}
+
+.lmgi-wordmark {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.lmgi-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.lmgi-tagline {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  color: #3A3830;
+  text-transform: uppercase;
+}
+
+.doc-meta {
+  text-align: right;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: #3A3830;
+  line-height: 1.9;
+}
+
+.doc-meta span { color: #5A5650; }
+
+/* cover body */
+.cover-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative; z-index: 2;
+  padding: 60px 0 40px;
+}
+
+.cover-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.cover-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px; height: 1px;
+  background: var(--accent);
+  opacity: 0.6;
+}
+
+.cover-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(48px, 6.5vw, 88px);
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  color: var(--white);
+  max-width: 860px;
+  margin-bottom: 36px;
+}
+
+.cover-title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.cover-sub {
+  font-size: 16px;
+  font-weight: 300;
+  color: #6A6660;
+  max-width: 480px;
+  line-height: 1.75;
+  border-left: 1px solid #2A2820;
+  padding-left: 20px;
+}
+
+.badge-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 44px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border: 1px solid #1E1E1A;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: #5A5650;
+}
+
+.badge .node {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  box-shadow: 0 0 6px var(--accent);
+}
+
+.badge .node.navy  { background: #4A8FBF; box-shadow: 0 0 6px #4A8FBF44; }
+.badge .node.amber { background: #B8852A; box-shadow: 0 0 6px #B8852A44; }
+
+/* cover footer */
+.cover-footer {
+  position: relative; z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-top: 1px solid #161612;
+  padding-top: 28px;
+}
+
+.cover-contact {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: #3A3830;
+  line-height: 1.9;
+}
+
+.cover-contact strong { color: #7A7268; }
+
+.risk-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  border: 1px solid #2A2410;
+  padding: 9px 18px;
+  text-transform: uppercase;
+}
+
+/* ─── GLOBAL SECTION WRAPPER ─── */
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.section {
+  padding: 88px 64px;
+  border-bottom: 1px solid var(--line);
+}
+
+.section-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 44px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1; height: 1px;
+  background: var(--line);
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(30px, 3.5vw, 48px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-bottom: 18px;
+}
+
+.section-title em { font-style: italic; color: var(--accent); }
+
+.section-body {
+  font-size: 15px;
+  font-weight: 300;
+  color: #555;
+  max-width: 600px;
+  line-height: 1.8;
+  margin-bottom: 52px;
+}
+
+/* ─── OPTIONS ─── */
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 720px) { .options-grid { grid-template-columns: 1fr; } }
+
+.option-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  padding: 40px 36px;
+  position: relative;
+  transition: box-shadow 0.25s;
+}
+
+.option-card:hover { box-shadow: 0 12px 48px rgba(0,0,0,0.07); }
+
+.option-card.recommended { border-color: var(--accent); border-width: 1.5px; }
+
+.rec-flag {
+  position: absolute;
+  top: 0; right: 28px;
+  background: var(--accent);
+  color: var(--black);
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  font-weight: 700;
+}
+
+.option-number {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.option-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 28px;
+  line-height: 1.2;
+}
+
+/* product mockup visual */
+.product-mockup {
+  margin-bottom: 28px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.scope-list {
+  list-style: none;
+  margin-bottom: 28px;
+}
+
+.scope-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #F0EDE8;
+  font-size: 13.5px;
+  color: #333;
+  font-weight: 300;
+  line-height: 1.45;
+}
+
+.scope-list li:last-child { border-bottom: none; }
+
+.tick {
+  width: 16px; height: 16px;
+  border: 1px solid #C8A96E44;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+  font-size: 9px;
+  color: var(--accent);
+  font-family: 'Space Mono', monospace;
+}
+
+.tick.off {
+  border-color: #E0E0E0;
+  color: #CCC;
+}
+
+.price-block {
+  background: var(--off);
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.price-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.price-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px;
+  font-weight: 300;
+  color: var(--black);
+}
+
+.price-value.gold { color: var(--accent); }
+
+.acc-label {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-bottom: 7px;
+}
+
+.acc-bar {
+  height: 3px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.acc-fill { height: 100%; }
+.fill-gold  { background: var(--accent); }
+.fill-navy  { background: var(--accent2); }
+
+/* ─── STRATEGY DARK CARD ─── */
+.strategy-card {
+  background: var(--black);
+  color: var(--white);
+  padding: 60px 56px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* SVG network blob decoration inside strategy card */
+.strategy-card .net-deco {
+  position: absolute;
+  bottom: -20px; right: -20px;
+  opacity: 0.06;
+  pointer-events: none;
+}
+
+.strategy-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.strategy-title em { font-style: italic; color: var(--accent); }
+
+.strategy-body {
+  font-size: 14px;
+  font-weight: 300;
+  color: #5A5650;
+  max-width: 520px;
+  line-height: 1.8;
+  margin-bottom: 48px;
+}
+
+.lever-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: #1A1A16;
+}
+
+@media (max-width: 720px) { .lever-grid { grid-template-columns: 1fr; } }
+
+.lever {
+  background: #0D0D0A;
+  padding: 28px 24px;
+}
+
+.lever-line {
+  width: 24px; height: 1px;
+  background: var(--accent);
+  margin-bottom: 16px;
+  opacity: 0.6;
+}
+
+.lever-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.lever-body {
+  font-size: 13px;
+  font-weight: 300;
+  color: #5A5650;
+  line-height: 1.65;
+}
+
+/* ─── PHASE STEPS ─── */
+.phase-row {
+  display: flex;
+  gap: 0;
+  margin-top: 40px;
+}
+
+.phase-step {
+  flex: 1;
+  padding: 32px 28px;
+  border: 1px solid var(--line);
+  border-right: none;
+  position: relative;
+}
+
+.phase-step:last-child { border-right: 1px solid var(--line); }
+
+.phase-arrow {
+  position: absolute;
+  top: 50%; right: -12px;
+  transform: translateY(-50%);
+  width: 24px; height: 24px;
+  background: var(--off);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 2;
+}
+
+.phase-arrow svg { display: block; }
+
+.phase-step:last-child .phase-arrow { display: none; }
+
+.phase-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.phase-title {
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.phase-sub {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+@media (max-width: 720px) {
+  .phase-row { flex-direction: column; }
+  .phase-step { border-right: 1px solid var(--line); border-bottom: none; }
+  .phase-step:last-child { border-bottom: 1px solid var(--line); }
+  .phase-arrow { top: auto; right: auto; bottom: -12px; left: 50%; transform: translateX(-50%) rotate(90deg); }
+}
+
+/* ─── SERVICES SECTION ─── */
+.services-section {
+  background: var(--black);
+  padding: 88px 64px;
+}
+
+.services-header {
+  max-width: 1120px;
+  margin: 0 auto 64px;
+}
+
+.services-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #3A3830;
+  margin-bottom: 44px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.services-label::after {
+  content: '';
+  flex: 1; height: 1px;
+  background: #1A1A16;
+}
+
+.services-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 4vw, 54px);
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.08;
+  margin-bottom: 18px;
+}
+
+.services-title em { font-style: italic; color: var(--accent); }
+
+.services-sub {
+  font-size: 15px;
+  font-weight: 300;
+  color: #3A3830;
+  max-width: 520px;
+  line-height: 1.8;
+}
+
+.services-grid {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: #111108;
+}
+
+@media (max-width: 820px) { .services-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .services-grid { grid-template-columns: 1fr; } }
+
+.service-card {
+  background: #0A0A08;
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: 1px solid transparent;
+  transition: border-color 0.2s, background 0.2s;
+  cursor: default;
+}
+
+.service-card:hover {
+  background: #0F0F0C;
+  border-color: #2A2410;
+}
+
+.service-mockup {
+  margin-bottom: 4px;
+}
+
+.service-index {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: #2A2820;
+  text-transform: uppercase;
+}
+
+.service-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.2;
+}
+
+.service-desc {
+  font-size: 12.5px;
+  font-weight: 300;
+  color: #4A4840;
+  line-height: 1.7;
+  flex: 1;
+}
+
+.service-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-top: auto;
+}
+
+.service-tag::before {
+  content: '';
+  display: block;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.5;
+}
+
+/* ─── CLOSING ─── */
+.closing {
+  background: var(--off);
+  padding: 100px 64px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.closing::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 110%, #C8A96E0A 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.closing-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 5vw, 68px);
+  font-weight: 300;
+  line-height: 1.08;
+  margin-bottom: 20px;
+  position: relative; z-index: 1;
+}
+
+.closing-title em { font-style: italic; color: var(--accent); }
+
+.closing-sub {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--muted);
+  margin: 0 auto 52px;
+  max-width: 420px;
+  line-height: 1.8;
+  position: relative; z-index: 1;
+}
+
+.cta-row {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  position: relative; z-index: 1;
+  margin-bottom: 64px;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 34px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  transition: opacity 0.15s, transform 0.15s;
+  cursor: pointer;
+}
+
+.cta:hover { opacity: 0.82; transform: translateY(-1px); }
+
+.cta-primary {
+  background: var(--black);
+  color: var(--white);
+}
+
+.cta-outline {
+  border: 1px solid #C0BDB8;
+  color: var(--black);
+  background: transparent;
+}
+
+.closing-contact {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: #AAA79F;
+  line-height: 2.1;
+  position: relative; z-index: 1;
+}
+
+.closing-contact strong { color: #7A7672; }
+
+.divider {
+  display: inline-block;
+  margin: 0 10px;
+  color: #CCC;
+}
+
+/* ─── PRINT / MOBILE ─── */
+@media (max-width: 640px) {
+  .cover { padding: 36px 28px; }
+  .section { padding: 60px 28px; }
+  .strategy-card { padding: 40px 28px; }
+  .services-section { padding: 60px 28px; }
+  .closing { padding: 72px 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ COVER ═══ -->
+<div class="cover">
+  <canvas id="network-canvas"></canvas>
+
+  <div class="cover-header">
+    <div class="lmgi-wordmark">
+      <div class="lmgi-name">Let Me Get It</div>
+      <div class="lmgi-tagline">Connection Network · Service Ecosystem</div>
+    </div>
+    <div class="doc-meta">
+      <span>REF: LMGI-KPC-001</span><br>
+      Kopana Club · Blairgowrie<br>
+      Electrical Maintenance Proposal
+    </div>
+  </div>
+
+  <div class="cover-body">
+    <div class="cover-eyebrow">Maintenance Proposal</div>
+    <h1 class="cover-title">
+      Safer space.<br><em>Smarter</em> infrastructure.
+    </h1>
+    <p class="cover-sub">
+      A targeted electrical upgrade that eliminates a live trip hazard, restores compliance, and installs the foundation for a client-facing micro-revenue channel — completed in a single session.
+    </p>
+    <div class="badge-row">
+      <span class="badge"><span class="node navy"></span>Risk: Low – Medium</span>
+      <span class="badge"><span class="node"></span>Delivery confidence: 92%</span>
+      <span class="badge"><span class="node amber"></span>Site: Kopana Club, Blairgowrie</span>
+    </div>
+  </div>
+
+  <div class="cover-footer">
+    <div class="cover-contact">
+      <strong>Supplied by</strong> Let Me Get It (LMGI)<br>
+      <strong>Rep:</strong> Stiaan &nbsp;·&nbsp; <strong>071 770 0072</strong>
+    </div>
+    <div class="risk-tag">Public Safety / Trip Hazard Mitigation</div>
+  </div>
+</div>
+
+<!-- ═══ PROBLEM ═══ -->
+<div class="wrap">
+<div class="section">
+  <div class="section-label">The Situation</div>
+  <h2 class="section-title">One exposed cable.<br><em>Multiple liabilities.</em></h2>
+  <p class="section-body">
+    A 4m extension currently runs exposed from a wall plug to the counter — across an active staff and customer path. It is a trip hazard, a public liability exposure, and a compliance failure waiting to be triggered. The decision is not whether to fix it. It is how far to take the upgrade.
+  </p>
+
+  <!-- Situation diagram SVG -->
+  <svg viewBox="0 0 900 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:820px; display:block;">
+    <!-- floor baseline -->
+    <line x1="40" y1="130" x2="860" y2="130" stroke="#E0DDD8" stroke-width="1.5"/>
+    <!-- wall plug node -->
+    <rect x="40" y="60" width="80" height="60" rx="2" fill="#FAFAF8" stroke="#E0DDD8" stroke-width="1.2"/>
+    <rect x="58" y="80" width="14" height="22" rx="1" fill="#C8A96E" opacity=".5"/>
+    <rect x="80" y="80" width="14" height="22" rx="1" fill="#C8A96E" opacity=".5"/>
+    <text x="80" y="146" text-anchor="middle" font-family="Space Mono,monospace" font-size="9" fill="#AAA79F" letter-spacing="1">WALL PLUG</text>
+
+    <!-- exposed cable — danger red -->
+    <path d="M120 110 Q200 138 340 135 Q480 132 560 115" stroke="#8B2A2A" stroke-width="3" stroke-dasharray="8 5" stroke-linecap="round"/>
+    <!-- trip hazard label -->
+    <rect x="290" y="100" width="120" height="22" rx="2" fill="#8B2A2A" opacity=".9"/>
+    <text x="350" y="115" text-anchor="middle" font-family="Space Mono,monospace" font-size="9" fill="white" letter-spacing="1">TRIP HAZARD</text>
+
+    <!-- counter node -->
+    <rect x="560" y="52" width="200" height="76" rx="2" fill="#FAFAF8" stroke="#E0DDD8" stroke-width="1.2"/>
+    <line x1="560" y1="75" x2="760" y2="75" stroke="#E0DDD8" stroke-width="1"/>
+    <text x="660" y="99" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="15" fill="#555" font-weight="300">Counter / Point of Use</text>
+    <text x="660" y="118" text-anchor="middle" font-family="Space Mono,monospace" font-size="9" fill="#AAA79F" letter-spacing="1">ACTIVE STAFF ZONE</text>
+    <text x="660" y="68" text-anchor="middle" font-family="Space Mono,monospace" font-size="9" fill="#C8A96E" letter-spacing="1">DESTINATION</text>
+
+    <!-- arrows showing people crossing -->
+    <line x1="280" y1="44" x2="280" y2="130" stroke="#E0DDD8" stroke-width="1" stroke-dasharray="3 4"/>
+    <polygon points="280,44 274,58 286,58" fill="#E0DDD8"/>
+    <text x="280" y="38" text-anchor="middle" font-family="Space Mono,monospace" font-size="8" fill="#AAA79F" letter-spacing="1">FOOT TRAFFIC</text>
+
+    <line x1="420" y1="44" x2="420" y2="130" stroke="#E0DDD8" stroke-width="1" stroke-dasharray="3 4"/>
+    <polygon points="420,44 414,58 426,58" fill="#E0DDD8"/>
+
+    <!-- proposed fix line -->
+    <path d="M120 90 L560 90" stroke="#C8A96E" stroke-width="2" stroke-dasharray="0" opacity=".3"/>
+    <text x="340" y="84" text-anchor="middle" font-family="Space Mono,monospace" font-size="8" fill="#C8A96E" letter-spacing="1" opacity=".6">PROPOSED: TRUNKING ROUTE</text>
+  </svg>
+</div>
+
+<!-- ═══ OPTIONS ═══ -->
+<div class="section">
+  <div class="section-label">Scope of Work</div>
+  <h2 class="section-title">Two paths.<br>One clear answer.</h2>
+  <p class="section-body">Both options fully resolve the compliance issue. Selection depends on budget and appetite to activate the client-facing revenue channel.</p>
+
+  <div class="options-grid">
+
+    <!-- OPTION 1 -->
+    <div class="option-card recommended">
+      <div class="rec-flag">Recommended</div>
+      <div class="option-number">Option 01</div>
+      <div class="option-name">Full Safety + Client Upgrade System</div>
+
+      <!-- Product mockup: trunking + USB hub layout -->
+      <div class="product-mockup">
+        <svg viewBox="0 0 480 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; display:block;">
+          <!-- background -->
+          <rect width="480" height="160" fill="#F7F5F1"/>
+          <!-- wall -->
+          <rect x="0" y="0" width="480" height="160" fill="#F4F2EE"/>
+          <!-- trunking channel -->
+          <rect x="30" y="66" width="300" height="18" rx="2" fill="#D8D4CE" stroke="#C8C4BE" stroke-width="1"/>
+          <rect x="30" y="66" width="300" height="6" rx="1" fill="#C8C4BC"/>
+          <!-- cable inside -->
+          <line x1="40" y1="75" x2="320" y2="75" stroke="#9A9690" stroke-width="2" stroke-dasharray="12 4"/>
+          <!-- trunking label -->
+          <text x="175" y="57" text-anchor="middle" font-family="Space Mono,monospace" font-size="8" fill="#AAA79F" letter-spacing="1">3.05m TRUNKING — CONCEALED WALL RUN</text>
+          <!-- wall plug -->
+          <rect x="12" y="56" width="34" height="44" rx="2" fill="#ECEAE6" stroke="#D8D4CE" stroke-width="1"/>
+          <rect x="18" y="68" width="9" height="14" rx="1" fill="#A0A09A"/>
+          <rect x="31" y="68" width="9" height="14" rx="1" fill="#A0A09A"/>
+          <text x="29" y="110" text-anchor="middle" font-family="Space Mono,monospace" font-size="7" fill="#BBB8B2" letter-spacing=".5">PLUG</text>
+          <!-- counter surface -->
+          <rect x="330" y="48" width="138" height="90" rx="2" fill="#ECEAE6" stroke="#D8D4CE" stroke-width="1"/>
+          <text x="399" y="44" text-anchor="middle" font-family="Space Mono,monospace" font-size="8" fill="#AAA79F" letter-spacing="1">COUNTER</text>
+          <!-- multi-adapter -->
+          <rect x="342" y="60" width="60" height="36" rx="2" fill="#D0CCC6" stroke="#B8B4AE" stroke-width="1"/>
+          <text x="372" y="102" text-anchor="middle" font-family="Space Mono,monospace" font-size="7" fill="#9A9690" letter-spacing=".8">5-POINT ADAPTER</text>
+          <!-- pin sockets -->
+          <rect x="348" y="66" width="7" height="10" rx="1" fill="#888"/>
+          <rect x="360" y="66" width="7" height="10" rx="1" fill="#888"/>
+          <rect x="372" y="66" width="7" height="10" rx="1" fill="#888"/>
+          <rect x="384" y="66" width="7" height="10" rx="1" fill="#888"/>
+          <rect x="396" y="66" width="7" height="10" rx="1" fill="#888"/>
+          <!-- USB hubs -->
+          <rect x="342" y="108" width="114" height="22" rx="2" fill="#1C3F5E" opacity=".85"/>
+          <text x="399" y="123" text-anchor="middle" font-family="Space Mono,monospace" font-size="7.5" fill="#C8A96E" letter-spacing="1">USB CHARGING HUBS x2</text>
+          <!-- USB ports -->
+          <rect x="348" y="112" width="8" height="5" rx="1" fill="#4A8FBF" opacity=".7"/>
+          <rect x="360" y="112" width="8" height="5" rx="1" fill="#4A8FBF" opacity=".7"/>
+          <rect x="372" y="112" width="8" height="5" rx="1" fill="#4A8FBF" opacity=".7"/>
+          <rect x="384" y="112" width="8" height="5" rx="1" fill="#4A8FBF" opacity=".7"/>
+          <!-- gold accent line -->
+          <line x1="330" y1="160" x2="468" y2="160" stroke="#C8A96E" stroke-width="2"/>
+        </svg>
+      </div>
+
+      <ul class="scope-list">
+        <li><span class="tick">+</span>3.05m trunking supply and installation — neat wall run</li>
+        <li><span class="tick">+</span>4m extension relocation, wall plug to counter</li>
+        <li><span class="tick">+</span>Secure cable routing with clips and concealed finish</li>
+        <li><span class="tick">+</span>1 × 5-point multi-adapter (5 × 2-pin + 5 × 3-pin capacity)</li>
+        <li><span class="tick">+</span>Safety-compliant install — staff/back-end separation maintained</li>
+        <li><span class="tick">+</span>2 × under-counter USB charging hubs, client-facing</li>
+        <li><span class="tick">+</span>Bring-your-own-cable setup + optional paid cable loan system</li>
+      </ul>
+
+      <div class="price-block">
+        <div>
+          <div class="price-label">Total Estimate</div>
+          <div class="price-value gold">R 4,200 – R 5,200</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="price-label">Acceptance Probability</div>
+          <div style="font-family:'Space Mono',monospace; font-size:15px; color:var(--accent);">55 – 65%</div>
+        </div>
+      </div>
+
+      <div class="acc-label"><span>Likelihood of acceptance</span><span>60% est.</span></div>
+      <div class="acc-bar"><div class="acc-fill fill-gold" style="width:60%"></div></div>
+    </div>
+
+    <!-- OPTION 2 -->
+    <div class="option-card">
+      <div class="option-number">Option 02</div>
+      <div class="option-name">Lean Compliance — Safety Fix Only</div>
+
+      <!-- Product mockup: trunking only -->
+      <div class="product-mockup">
+        <svg viewBox="0 0 480 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; display:block;">
+          <rect width="480" height="160" fill="#F4F2EE"/>
+          <!-- trunking -->
+          <rect x="30" y="66" width="300" height="18" rx="2" fill="#D8D4CE" stroke="#C8C4BE" stroke-width="1"/>
+          <rect x="30" y="66" width="300" height="6" rx="1" fill="#C8C4BC"/>
+          <line x1="40" y1="75" x2="320" y2="75" stroke="#9A9690" stroke-width="2" stroke-dasharray="12 4"/>
+          <text x="175" y="57" text-anchor="middle" font-family="Space Mono,monospace" font-size="8" fill="#AAA79F" letter-spacing="1">3.05m TRUNKING — CONCEALED WALL RUN</text>
+          <!-- wall plug -->
+          <rect x="12" y="56" width="34" height="44" rx="2" fill="#ECEAE6" stroke="#D8D4CE" stroke-width="1"/>
+          <rect x="18" y="68" width="9" height="14" rx="1" fill="#A0A09A"/>
+          <rect x="31" y="68" width="9" height="14" rx="1" fill="#A0A09A"/>
+          <text x="29" y="110" text-anchor="middle" font-family="Space Mono,monospace" font-size="7" fill="#BBB8B2" letter-spacing=".5">PLUG</text>
+          <!-- counter -->
+          <rect x="330" y="48" width="138" height="90" rx="2" fill="#ECEAE6" stroke="#D8D4CE" stroke-width="1"/>
+          <text x="399" y="44" text-anchor="middle" font-family="Space Mono,monospace" font-size="8" fill="#AAA79F" letter-spacing="1">COUNTER</text>
+          <!-- multi-adapter only -->
+          <rect x="342" y="60" width="60" height="36" rx="2" fill="#D0CCC6" stroke="#B8B4AE" stroke-width="1"/>
+          <rect x="348" y="66" width="7" height="10" rx="1" fill="#888"/>
+          <rect x="360" y="66" width="7" height="10" rx="1" fill="#888"/>
+          <rect x="372" y="66" width="7" height="10" rx="1" fill="#888"/>
+          <rect x="384" y="66" width="7" height="10" rx="1" fill="#888"/>
+          <rect x="396" y="66" width="7" height="10" rx="1" fill="#888"/>
+          <text x="372" y="102" text-anchor="middle" font-family="Space Mono,monospace" font-size="7" fill="#9A9690" letter-spacing=".8">5-POINT ADAPTER</text>
+          <!-- USB hubs greyed out / not included -->
+          <rect x="342" y="108" width="114" height="22" rx="2" fill="#E0DDD8" stroke="#D0CCC6" stroke-width="1"/>
+          <text x="399" y="123" text-anchor="middle" font-family="Space Mono,monospace" font-size="7.5" fill="#C0BDB8" letter-spacing="1">USB HUBS — NOT INCLUDED</text>
+        </svg>
+      </div>
+
+      <ul class="scope-list">
+        <li><span class="tick">+</span>3.05m trunking installation</li>
+        <li><span class="tick">+</span>Extension relocation + wall plug extension to counter</li>
+        <li><span class="tick">+</span>Cable clips and tidy finish</li>
+        <li><span class="tick">+</span>5-point multi-adapter installation</li>
+        <li><span class="tick">+</span>Full hazard elimination — compliance restored</li>
+        <li><span class="tick off">–</span><span style="color:#BBB8B2;">No client-facing USB charging infrastructure</span></li>
+        <li><span class="tick off">–</span><span style="color:#BBB8B2;">No micro-revenue channel</span></li>
+      </ul>
+
+      <div class="price-block">
+        <div>
+          <div class="price-label">Total Estimate</div>
+          <div class="price-value">R 2,300 – R 2,900</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="price-label">Acceptance Probability</div>
+          <div style="font-family:'Space Mono',monospace; font-size:15px; color:#4A8FBF;">75 – 85%</div>
+        </div>
+      </div>
+
+      <div class="acc-label"><span>Likelihood of acceptance</span><span>80% est.</span></div>
+      <div class="acc-bar"><div class="acc-fill fill-navy" style="width:80%"></div></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ STRATEGY ═══ -->
+<div class="section" style="padding-top:0; border-bottom:none;">
+  <div class="strategy-card">
+    <svg class="net-deco" width="320" height="320" viewBox="0 0 320 320">
+      <circle cx="160" cy="160" r="140" stroke="#C8A96E" stroke-width="1.5" fill="none"/>
+      <circle cx="160" cy="160" r="90" stroke="#C8A96E" stroke-width="1" fill="none"/>
+      <circle cx="160" cy="160" r="40" stroke="#C8A96E" stroke-width="0.8" fill="none"/>
+      <line x1="20" y1="160" x2="300" y2="160" stroke="#C8A96E" stroke-width="0.8"/>
+      <line x1="160" y1="20" x2="160" y2="300" stroke="#C8A96E" stroke-width="0.8"/>
+      <line x1="60" y1="60" x2="260" y2="260" stroke="#C8A96E" stroke-width="0.5"/>
+      <line x1="260" y1="60" x2="60" y2="260" stroke="#C8A96E" stroke-width="0.5"/>
+    </svg>
+
+    <div class="section-label" style="color:#2A2820;">Strategic Note</div>
+    <div class="strategy-title">The wiring is the entry point.<br><em>Not the value proposition.</em></div>
+    <p class="strategy-body">
+      The cable fix removes a liability. The real prize is installing a node in the client's physical space — one that routes customer behaviour, creates a service touchpoint, and generates recurring income. This is how LMGI operates: small interventions with compounding returns.
+    </p>
+
+    <div class="lever-grid">
+      <div class="lever">
+        <div class="lever-line"></div>
+        <div class="lever-title">Liability Eliminated</div>
+        <div class="lever-body">Trip hazard removed. Compliance gap closed before an incident triggers a claim or an insurance review.</div>
+      </div>
+      <div class="lever">
+        <div class="lever-line"></div>
+        <div class="lever-title">Flow Architecture</div>
+        <div class="lever-body">Under-counter placement separates staff zones from client access and creates a controlled service point.</div>
+      </div>
+      <div class="lever">
+        <div class="lever-line"></div>
+        <div class="lever-title">Micro-Revenue Node</div>
+        <div class="lever-body">Paid cable loan or device charging creates a recurring, low-friction income point from existing foot traffic.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PHASING ═══ -->
+<div class="section">
+  <div class="section-label">Close Sequence</div>
+  <h2 class="section-title">Budget-sensitive?<br><em>Phase it.</em></h2>
+  <p class="section-body">Close Option 2 immediately to remove the hazard. Return in two to three weeks with the USB upgrade proposal. Two invoices. One growing relationship.</p>
+
+  <div class="phase-row">
+    <div class="phase-step">
+      <div class="phase-num">Phase 01 · Now</div>
+      <div class="phase-title">Close Option 2</div>
+      <div class="phase-sub">Safety fix. Compliance restored. Hazard eliminated. R 2,300 – 2,900.</div>
+      <div class="phase-arrow">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5" stroke="#C0BDB8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+    <div class="phase-step">
+      <div class="phase-num">Phase 02 · Week 2–3</div>
+      <div class="phase-title">Upgrade Pitch</div>
+      <div class="phase-sub">Return with USB hub proposal. Anchor on revenue potential and improved client experience.</div>
+      <div class="phase-arrow">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5" stroke="#C0BDB8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+    <div class="phase-step">
+      <div class="phase-num">Phase 03 · Close</div>
+      <div class="phase-title">Option 1 Delta</div>
+      <div class="phase-sub">Incremental R 1,900 – 2,300 for the charging system. Client already trusts the work.</div>
+    </div>
+  </div>
+</div>
+</div><!-- /wrap -->
+
+<!-- ═══ SERVICES ═══ -->
+<div class="services-section">
+  <div class="services-header">
+    <div class="services-label">Also Available Through LMGI</div>
+    <h2 class="services-title">Beyond the cable.<br><em>Everything your business needs</em><br>to connect and grow.</h2>
+    <p class="services-sub">LMGI is a people-first service and coordination ecosystem. We supply, coordinate, and deliver across digital, physical, and operational domains — under one accountable relationship.</p>
+  </div>
+
+  <div class="services-grid">
+
+    <!-- Website -->
+    <div class="service-card">
+      <div class="service-mockup">
+        <svg viewBox="0 0 280 140" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; display:block;">
+          <rect width="280" height="140" fill="#0A0A08"/>
+          <!-- browser chrome -->
+          <rect x="12" y="12" width="256" height="116" rx="3" fill="#111108" stroke="#1E1E1A" stroke-width="1"/>
+          <rect x="12" y="12" width="256" height="22" rx="3" fill="#161612"/>
+          <rect x="12" y="28" width="256" height="6" fill="#161612"/>
+          <!-- browser dots -->
+          <circle cx="24" cy="23" r="3.5" fill="#2A2820"/>
+          <circle cx="35" cy="23" r="3.5" fill="#2A2820"/>
+          <circle cx="46" cy="23" r="3.5" fill="#2A2820"/>
+          <!-- url bar -->
+          <rect x="58" y="16" width="160" height="14" rx="2" fill="#1E1E1A"/>
+          <text x="138" y="26.5" text-anchor="middle" font-family="Space Mono,monospace" font-size="7.5" fill="#3A3830" letter-spacing=".5">kopanaclub.co.za</text>
+          <!-- hero section -->
+          <rect x="20" y="42" width="240" height="78" rx="2" fill="#1A1A16"/>
+          <!-- nav bar -->
+          <line x1="20" y1="56" x2="260" y2="56" stroke="#252520" stroke-width="1"/>
+          <rect x="26" y="46" width="28" height="6" rx="1" fill="#2A2820"/>
+          <rect x="180" y="46" width="18" height="6" rx="1" fill="#1E1E1A"/>
+          <rect x="202" y="46" width="18" height="6" rx="1" fill="#1E1E1A"/>
+          <rect x="224" y="46" width="18" height="6" rx="1" fill="#1E1E1A"/>
+          <!-- hero headline -->
+          <rect x="26" y="65" width="120" height="10" rx="1" fill="#C8A96E" opacity=".6"/>
+          <rect x="26" y="79" width="80" height="7" rx="1" fill="#2A2820"/>
+          <rect x="26" y="90" width="90" height="7" rx="1" fill="#2A2820"/>
+          <!-- CTA button -->
+          <rect x="26" y="103" width="52" height="14" rx="2" fill="#C8A96E" opacity=".8"/>
+          <text x="52" y="113" text-anchor="middle" font-family="Space Mono,monospace" font-size="6.5" fill="#0A0A08" letter-spacing=".5">GET STARTED</text>
+          <!-- hero image placeholder -->
+          <rect x="166" y="60" width="86" height="54" rx="2" fill="#252520"/>
+          <line x1="166" y1="60" x2="252" y2="114" stroke="#1A1A16" stroke-width="1"/>
+          <line x1="252" y1="60" x2="166" y2="114" stroke="#1A1A16" stroke-width="1"/>
+          <circle cx="209" cy="87" r="10" fill="#1E1E1A" stroke="#2A2820" stroke-width="1"/>
+          <text x="209" y="91" text-anchor="middle" font-family="Space Mono,monospace" font-size="8" fill="#3A3830">IMG</text>
+          <!-- bottom accent -->
+          <line x1="12" y1="139" x2="268" y2="139" stroke="#C8A96E" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="service-index">01</div>
+      <div class="service-name">Website Design &amp; Development</div>
+      <div class="service-desc">Custom-built, mobile-first websites with premium design language. From landing pages to multi-page business platforms — deployed and owned by you.</div>
+      <div class="service-tag">From R 4,500</div>
+    </div>
+
+    <!-- Mobile App -->
+    <div class="service-card">
+      <div class="service-mockup">
+        <svg viewBox="0 0 280 140" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; display:block;">
+          <rect width="280" height="140" fill="#0A0A08"/>
+          <!-- phone frame -->
+          <rect x="94" y="8" width="92" height="124" rx="12" fill="#111108" stroke="#1E1E1A" stroke-width="1.5"/>
+          <rect x="100" y="16" width="80" height="108" rx="6" fill="#0D0D0A"/>
+          <!-- notch -->
+          <rect x="122" y="16" width="36" height="8" rx="4" fill="#111108"/>
+          <!-- status bar -->
+          <rect x="106" y="26" width="12" height="4" rx="1" fill="#2A2820"/>
+          <rect x="162" y="26" width="12" height="4" rx="1" fill="#2A2820"/>
+          <!-- app header -->
+          <rect x="100" y="32" width="80" height="18" rx="2" fill="#161612"/>
+          <text x="140" y="44" text-anchor="middle" font-family="Space Mono,monospace" font-size="7" fill="#C8A96E" letter-spacing="1">KOPANA</text>
+          <!-- content cards -->
+          <rect x="104" y="54" width="72" height="22" rx="2" fill="#1E1E1A"/>
+          <rect x="108" y="58" width="30" height="5" rx="1" fill="#C8A96E" opacity=".5"/>
+          <rect x="108" y="66" width="48" height="4" rx="1" fill="#2A2820"/>
+          <rect x="104" y="80" width="72" height="22" rx="2" fill="#1E1E1A"/>
+          <rect x="108" y="84" width="20" height="5" rx="1" fill="#4A8FBF" opacity=".5"/>
+          <rect x="108" y="92" width="36" height="4" rx="1" fill="#2A2820"/>
+          <rect x="104" y="106" width="72" height="14" rx="2" fill="#C8A96E" opacity=".8"/>
+          <text x="140" y="116" text-anchor="middle" font-family="Space Mono,monospace" font-size="6.5" fill="#0A0A08" letter-spacing=".5">BOOK NOW</text>
+          <!-- second phone, offset -->
+          <rect x="158" y="20" width="80" height="104" rx="10" fill="#0F0F0C" stroke="#1E1E1A" stroke-width="1" opacity=".6"/>
+          <rect x="164" y="28" width="68" height="88" rx="5" fill="#0A0A08" opacity=".8"/>
+          <!-- accent line -->
+          <line x1="0" y1="139" x2="280" y2="139" stroke="#C8A96E" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="service-index">02</div>
+      <div class="service-name">Mobile Application Development</div>
+      <div class="service-desc">iOS and Android applications built for real business use — booking systems, loyalty programmes, internal tools, and customer-facing platforms.</div>
+      <div class="service-tag">Scoped on brief</div>
+    </div>
+
+    <!-- SEO -->
+    <div class="service-card">
+      <div class="service-mockup">
+        <svg viewBox="0 0 280 140" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; display:block;">
+          <rect width="280" height="140" fill="#0A0A08"/>
+          <!-- chart background -->
+          <rect x="12" y="12" width="256" height="116" rx="3" fill="#111108" stroke="#1E1E1A" stroke-width="1"/>
+          <!-- axis lines -->
+          <line x1="36" y1="24" x2="36" y2="112" stroke="#1E1E1A" stroke-width="1"/>
+          <line x1="36" y1="112" x2="260" y2="112" stroke="#1E1E1A" stroke-width="1"/>
+          <!-- grid lines -->
+          <line x1="36" y1="90" x2="260" y2="90" stroke="#1A1A16" stroke-width="0.8"/>
+          <line x1="36" y1="68" x2="260" y2="68" stroke="#1A1A16" stroke-width="0.8"/>
+          <line x1="36" y1="46" x2="260" y2="46" stroke="#1A1A16" stroke-width="0.8"/>
+          <line x1="36" y1="24" x2="260" y2="24" stroke="#1A1A16" stroke-width="0.8"/>
+          <!-- rank position bars (lower = better rank) -->
+          <rect x="50"  y="95" width="18" height="17" rx="1" fill="#C8A96E" opacity=".3"/>
+          <rect x="78"  y="88" width="18" height="24" rx="1" fill="#C8A96E" opacity=".4"/>
+          <rect x="106" y="78" width="18" height="34" rx="1" fill="#C8A96E" opacity=".55"/>
+          <rect x="134" y="62" width="18" height="50" rx="1" fill="#C8A96E" opacity=".7"/>
+          <rect x="162" y="44" width="18" height="68" rx="1" fill="#C8A96E" opacity=".85"/>
+          <rect x="190" y="30" width="18" height="82" rx="1" fill="#C8A96E"/>
+          <rect x="218" y="26" width="18" height="86" rx="1" fill="#C8A96E"/>
+          <!-- trend line overlay -->
+          <polyline points="59,96 87,89 115,79 143,63 171,45 199,31 227,27" stroke="#4A8FBF" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- circles on line -->
+          <circle cx="227" cy="27" r="4" fill="#4A8FBF"/>
+          <circle cx="199" cy="31" r="3" fill="#4A8FBF" opacity=".7"/>
+          <!-- labels -->
+          <text x="24" y="113" font-family="Space Mono,monospace" font-size="7" fill="#3A3830">POS</text>
+          <text x="14" y="96" font-family="Space Mono,monospace" font-size="6.5" fill="#3A3830">10</text>
+          <text x="14" y="74" font-family="Space Mono,monospace" font-size="6.5" fill="#3A3830">5</text>
+          <text x="14" y="48" font-family="Space Mono,monospace" font-size="6.5" fill="#3A3830">2</text>
+          <text x="14" y="30" font-family="Space Mono,monospace" font-size="6.5" fill="#C8A96E">1</text>
+          <!-- title -->
+          <text x="148" y="20" text-anchor="middle" font-family="Space Mono,monospace" font-size="7.5" fill="#3A3830" letter-spacing="1">SEARCH RANKING PROGRESSION</text>
+          <line x1="12" y1="139" x2="268" y2="139" stroke="#C8A96E" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="service-index">03</div>
+      <div class="service-name">Search Engine Optimisation</div>
+      <div class="service-desc">Technical SEO audits, keyword strategy, content architecture, schema markup, and Google Business Profile optimisation. Organic reach, built systematically.</div>
+      <div class="service-tag">Audit from R 2,800</div>
+    </div>
+
+    <!-- Digital Marketing -->
+    <div class="service-card">
+      <div class="service-mockup">
+        <svg viewBox="0 0 280 140" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; display:block;">
+          <rect width="280" height="140" fill="#0A0A08"/>
+          <!-- ad card mockup -->
+          <rect x="12" y="12" width="256" height="116" rx="3" fill="#111108" stroke="#1E1E1A" stroke-width="1"/>
+          <!-- meta/social feed layout -->
+          <rect x="20" y="20" width="116" height="100" rx="2" fill="#161612"/>
+          <!-- image block -->
+          <rect x="24" y="24" width="108" height="60" rx="1" fill="#1E1E1A"/>
+          <rect x="24" y="24" width="108" height="60" rx="1" fill="url(#grad1)"/>
+          <defs>
+            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#1C3F5E;stop-opacity:0.6"/>
+              <stop offset="100%" style="stop-color:#C8A96E;stop-opacity:0.3"/>
+            </linearGradient>
+          </defs>
+          <text x="78" y="57" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="14" fill="#C8A96E" opacity=".9">KOPANA</text>
+          <text x="78" y="70" text-anchor="middle" font-family="Space Mono,monospace" font-size="6" fill="#AAA79F" letter-spacing="1">EST. BLAIRGOWRIE</text>
+          <!-- ad metrics row -->
+          <rect x="24" y="89" width="24" height="8" rx="1" fill="#C8A96E" opacity=".7"/>
+          <rect x="52" y="89" width="18" height="8" rx="1" fill="#2A2820"/>
+          <rect x="74" y="89" width="14" height="8" rx="1" fill="#2A2820"/>
+          <rect x="24" y="101" width="80" height="5" rx="1" fill="#1E1E1A"/>
+          <rect x="24" y="109" width="60" height="5" rx="1" fill="#1E1E1A"/>
+          <!-- metrics panel -->
+          <rect x="144" y="20" width="116" height="100" rx="2" fill="#0D0D0A"/>
+          <!-- KPI blocks -->
+          <rect x="152" y="28" width="50" height="34" rx="2" fill="#161612"/>
+          <text x="177" y="44" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="16" fill="#C8A96E">4.2×</text>
+          <text x="177" y="56" text-anchor="middle" font-family="Space Mono,monospace" font-size="6.5" fill="#3A3830" letter-spacing=".5">ROAS</text>
+          <rect x="208" y="28" width="50" height="34" rx="2" fill="#161612"/>
+          <text x="233" y="44" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="16" fill="#4A8FBF">12%</text>
+          <text x="233" y="56" text-anchor="middle" font-family="Space Mono,monospace" font-size="6.5" fill="#3A3830" letter-spacing=".5">CTR</text>
+          <rect x="152" y="68" width="106" height="44" rx="2" fill="#111108"/>
+          <!-- mini bar chart -->
+          <rect x="160" y="94" width="8"  height="10" rx="1" fill="#C8A96E" opacity=".4"/>
+          <rect x="173" y="88" width="8"  height="16" rx="1" fill="#C8A96E" opacity=".6"/>
+          <rect x="186" y="80" width="8"  height="24" rx="1" fill="#C8A96E" opacity=".8"/>
+          <rect x="199" y="74" width="8"  height="30" rx="1" fill="#C8A96E"/>
+          <rect x="212" y="76" width="8"  height="28" rx="1" fill="#C8A96E" opacity=".9"/>
+          <rect x="225" y="72" width="8"  height="32" rx="1" fill="#C8A96E"/>
+          <rect x="238" y="70" width="8"  height="34" rx="1" fill="#C8A96E"/>
+          <text x="200" y="78" text-anchor="middle" font-family="Space Mono,monospace" font-size="6" fill="#3A3830" letter-spacing=".5">IMPRESSIONS</text>
+          <line x1="12" y1="139" x2="268" y2="139" stroke="#C8A96E" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="service-index">04</div>
+      <div class="service-name">Digital Marketing &amp; Paid Ads</div>
+      <div class="service-desc">Google Ads, Meta campaigns, and performance creative. Managed end-to-end with keyword strategy, copy, targeting, and ROAS reporting.</div>
+      <div class="service-tag">From R 3,500 / month</div>
+    </div>
+
+    <!-- Branding -->
+    <div class="service-card">
+      <div class="service-mockup">
+        <svg viewBox="0 0 280 140" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; display:block;">
+          <rect width="280" height="140" fill="#0A0A08"/>
+          <!-- brand system display -->
+          <rect x="12" y="12" width="256" height="116" rx="3" fill="#111108" stroke="#1E1E1A" stroke-width="1"/>
+          <!-- logo zone -->
+          <rect x="20" y="20" width="100" height="60" rx="2" fill="#0D0D0A"/>
+          <!-- abstract monogram mark -->
+          <path d="M50 68 L50 36 L62 36 L62 52 L70 52 L70 36 L82 36 L82 68" stroke="#C8A96E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <rect x="56" y="60" width="20" height="8" rx="1" fill="#C8A96E" opacity=".25"/>
+          <text x="70" y="75" text-anchor="middle" font-family="Space Mono,monospace" font-size="6.5" fill="#3A3830" letter-spacing="2">LMGI</text>
+          <!-- color palette -->
+          <rect x="128" y="20" width="132" height="24" rx="2" fill="#C8A96E"/>
+          <rect x="128" y="48" width="132" height="24" rx="2" fill="#1C3F5E"/>
+          <rect x="128" y="76" width="132" height="16" rx="2" fill="#0A0A08" stroke="#1E1E1A" stroke-width="1"/>
+          <rect x="128" y="96" width="132" height="12" rx="2" fill="#F4F2EE"/>
+          <!-- colour labels -->
+          <text x="138" y="33" font-family="Space Mono,monospace" font-size="7" fill="#0A0A08" letter-spacing=".5">PRIMARY — #C8A96E</text>
+          <text x="138" y="61" font-family="Space Mono,monospace" font-size="7" fill="#C8A96E" letter-spacing=".5">NAVY — #1C3F5E</text>
+          <text x="138" y="88" font-family="Space Mono,monospace" font-size="7" fill="#3A3830" letter-spacing=".5">INK — #080A0C</text>
+          <text x="138" y="106" font-family="Space Mono,monospace" font-size="7" fill="#9A9690" letter-spacing=".5">OFF — #F4F2EE</text>
+          <!-- type specimen -->
+          <rect x="20" y="86" width="100" height="34" rx="2" fill="#0D0D0A"/>
+          <text x="30" y="104" font-family="Cormorant Garamond,serif" font-size="18" fill="#C8A96E" opacity=".8">Kopana</text>
+          <text x="30" y="115" font-family="Space Mono,monospace" font-size="6.5" fill="#3A3830" letter-spacing="1">BRAND TYPEFACE</text>
+          <line x1="12" y1="139" x2="268" y2="139" stroke="#C8A96E" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="service-index">05</div>
+      <div class="service-name">Brand Identity &amp; Design System</div>
+      <div class="service-desc">Logo, colour architecture, typography, and brand guidelines delivered as a deployment-ready system — print, digital, and social variants included.</div>
+      <div class="service-tag">From R 5,500</div>
+    </div>
+
+    <!-- Infrastructure -->
+    <div class="service-card">
+      <div class="service-mockup">
+        <svg viewBox="0 0 280 140" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; display:block;">
+          <rect width="280" height="140" fill="#0A0A08"/>
+          <rect x="12" y="12" width="256" height="116" rx="3" fill="#111108" stroke="#1E1E1A" stroke-width="1"/>
+          <!-- connection network diagram -->
+          <!-- central node -->
+          <circle cx="140" cy="70" r="16" fill="#1C3F5E" stroke="#4A8FBF" stroke-width="1.5"/>
+          <text x="140" y="74" text-anchor="middle" font-family="Space Mono,monospace" font-size="7.5" fill="#C8A96E" letter-spacing=".5">LMGI</text>
+          <!-- satellite nodes -->
+          <circle cx="60"  cy="38"  r="10" fill="#161612" stroke="#C8A96E" stroke-width="1"/>
+          <circle cx="220" cy="38"  r="10" fill="#161612" stroke="#C8A96E" stroke-width="1"/>
+          <circle cx="36"  cy="90"  r="10" fill="#161612" stroke="#2A2820" stroke-width="1"/>
+          <circle cx="244" cy="90"  r="10" fill="#161612" stroke="#2A2820" stroke-width="1"/>
+          <circle cx="100" cy="118" r="10" fill="#161612" stroke="#C8A96E" stroke-width="1"/>
+          <circle cx="180" cy="118" r="10" fill="#161612" stroke="#C8A96E" stroke-width="1"/>
+          <!-- node labels -->
+          <text x="60"  y="41"  text-anchor="middle" font-family="Space Mono,monospace" font-size="5.5" fill="#C8A96E">WEB</text>
+          <text x="220" y="41"  text-anchor="middle" font-family="Space Mono,monospace" font-size="5.5" fill="#C8A96E">ADS</text>
+          <text x="36"  y="93"  text-anchor="middle" font-family="Space Mono,monospace" font-size="4.5" fill="#5A5650">ELEC</text>
+          <text x="244" y="93"  text-anchor="middle" font-family="Space Mono,monospace" font-size="5"   fill="#5A5650">SEO</text>
+          <text x="100" y="121" text-anchor="middle" font-family="Space Mono,monospace" font-size="5.5" fill="#C8A96E">APPS</text>
+          <text x="180" y="121" text-anchor="middle" font-family="Space Mono,monospace" font-size="5.5" fill="#C8A96E">BRAND</text>
+          <!-- connection lines -->
+          <line x1="124" y1="57" x2="68"  y2="46"  stroke="#C8A96E" stroke-width="0.8" opacity=".5"/>
+          <line x1="156" y1="57" x2="212" y2="46"  stroke="#C8A96E" stroke-width="0.8" opacity=".5"/>
+          <line x1="124" y1="74" x2="46"  y2="86"  stroke="#3A3830" stroke-width="0.8"/>
+          <line x1="156" y1="74" x2="234" y2="86"  stroke="#3A3830" stroke-width="0.8"/>
+          <line x1="130" y1="84" x2="108" y2="108" stroke="#C8A96E" stroke-width="0.8" opacity=".5"/>
+          <line x1="150" y1="84" x2="172" y2="108" stroke="#C8A96E" stroke-width="0.8" opacity=".5"/>
+          <!-- pulse ring on centre -->
+          <circle cx="140" cy="70" r="24" stroke="#C8A96E" stroke-width="0.5" fill="none" opacity=".3"/>
+          <circle cx="140" cy="70" r="32" stroke="#C8A96E" stroke-width="0.3" fill="none" opacity=".15"/>
+          <line x1="12" y1="139" x2="268" y2="139" stroke="#C8A96E" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="service-index">06</div>
+      <div class="service-name">Physical Infrastructure &amp; Electrical</div>
+      <div class="service-desc">Trunking, wiring, power distribution, USB charging stations, and compliance upgrades. Coordinated through LMGI — a single accountable point for physical and digital work.</div>
+      <div class="service-tag">Quoted per scope</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ CLOSING ═══ -->
+<div class="closing">
+  <h2 class="closing-title">Scoped. Priced.<br><em>Ready to move.</em></h2>
+  <p class="closing-sub">One call confirms the option. One team delivers the work. No subcontractor ambiguity.</p>
+
+  <div class="cta-row">
+    <a class="cta cta-primary" href="tel:0717700072">Call Stiaan — 071 770 0072</a>
+    <a class="cta cta-outline" href="https://wa.me/27717700072" target="_blank">WhatsApp</a>
+  </div>
+
+  <div class="closing-contact">
+    <strong>Supplied by</strong> Let Me Get It (LMGI)
+    <span class="divider">·</span>
+    <strong>Rep:</strong> Stiaan
+    <span class="divider">·</span>
+    <strong>Cell:</strong> 071 770 0072<br>
+    <strong>Ref:</strong> LMGI-KPC-001
+    <span class="divider">·</span>
+    Kopana Club, Blairgowrie
+    <span class="divider">·</span>
+    Electrical Maintenance Proposal
+  </div>
+</div>
+
+<script>
+// Animated node network on cover canvas
+(function(){
+  const canvas = document.getElementById('network-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+
+  const GOLD = 'rgba(200,169,110,';
+  const NODE_COUNT = 38;
+  const nodes = [];
+
+  for (let i = 0; i < NODE_COUNT; i++) {
+    nodes.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.35,
+      vy: (Math.random() - 0.5) * 0.35,
+      r: Math.random() * 2.5 + 1
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // edges
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 180) {
+          const alpha = (1 - dist / 180) * 0.18;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.strokeStyle = GOLD + alpha + ')';
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+      }
+    }
+
+    // nodes
+    nodes.forEach(n => {
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = GOLD + '0.55)';
+      ctx.fill();
+    });
+
+    // update
+    nodes.forEach(n => {
+      n.x += n.vx;
+      n.y += n.vy;
+      if (n.x < 0 || n.x > canvas.width)  n.vx *= -1;
+      if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+})();
+</script>
+</body>
+</html>
