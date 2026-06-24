@@ -1,0 +1,130 @@
+{
+  "id": "TCN-KL-001",
+  "date": "June 2026",
+  "client": { "name": "Kopano Lounge", "location": "Randburg" },
+  "master": {
+    "name": "The Connection Network",
+    "tagline": "Dynamic IT Solutions · System Coordination",
+    "website": "www.theconnectionnetwork.com",
+    "contact": {
+      "name": "Stiaan",
+      "phone": "071 770 0072",
+      "email": "iamstiaan@theconnectionnetwork.com",
+      "whatsapp": "https://wa.me/27717700072"
+    }
+  },
+  "coverTitle": "One account.<br><span class=\"hi\">One contact.</span><br><span class=\"gold\">Everything connected.</span>",
+  "coverSub": "A unified service delivery across IT, digital presence, electrical infrastructure, luxury turf, and Google visibility — coordinated under a single accountable relationship. Independent execution partners. One governed account.",
+  "badges": [
+    "IT & Digital Presence",
+    "Google SEO & GBP",
+    "Electrical & USB Infrastructure",
+    "Luxury Turf — PrimeTurf SA"
+  ],
+  "introHeading": "Why this proposal<br><em>is different.</em>",
+  "introBody": "Kopano Lounge recently relocated to Randburg — a new chapter, a new address, and a critical window to own the digital and physical space before competitors do. The Connection Network does not perform the work itself. It coordinates a network of independent, specialist partners — delivered as one account, one monthly relationship, and one person who answers your call.",
+  "unityHeadline": "One Umbrella. Independent Partners.",
+  "unitySub": "Every division below is scoped, branded, and delivered by its own independent execution partner. The Connection Network governs the relationship — one invoice, one point of contact, one monthly review — without merging any partner's identity into its own.",
+  "pillars": [
+    { "value": "1", "label": "Account" },
+    { "value": "1", "label": "Contact" },
+    { "value": "1", "label": "Payment" },
+    { "value": "4", "label": "Partners" }
+  ],
+  "modulesIntro": "Each division is independently delivered by a qualified, separately branded partner — coordinated, invoiced, and reviewed as a single engagement through The Connection Network.",
+  "modules": [
+    {
+      "partner": "CrossTech Systems",
+      "accentColor": "#5AB4FF",
+      "title": "IT & Digital Presence",
+      "body": "Your website currently routes to Instagram — which ranks at zero on Google. CrossTech Systems builds a professional, conversion-focused web presence with full SEO architecture so that anyone searching \"lounge Randburg\" or \"day vibes Blairgowrie\" finds Kopano Lounge first.",
+      "scope": [
+        "Custom business website — menu, events, WhatsApp booking, gallery",
+        "On-page SEO + schema markup — local search ranking activation",
+        "Monthly performance report",
+        "Social content strategy — 4 posts/week brief included"
+      ],
+      "price": { "label": "Setup + Monthly", "note": "Website build once-off + monthly retainer", "value": "R 3,500 / mo", "subnote": "+ R 4,500 setup once-off" }
+    },
+    {
+      "partner": "InsightForge",
+      "accentColor": "#2E7FC0",
+      "title": "Google SEO & GBP Dominance",
+      "body": "Your Google rating is 4.3 stars across 26 reviews — strong social proof sitting behind incorrect operating hours and no indexable website. InsightForge fixes this within 48 hours and compounds the advantage monthly.",
+      "scope": [
+        "Emergency GBP audit — hours, categories, attributes corrected within 48hr",
+        "Keyword mapping — \"lounge Randburg,\" \"Blairgowrie nightlife,\" \"day vibes Joburg\"",
+        "Local citation building — directories, Apple Maps, Bing, Foursquare",
+        "Weekly Google Posts schedule + monthly rank tracking report"
+      ],
+      "price": { "label": "Monthly Management", "note": "Billed via CrossTech Systems retainer", "value": "Bundled", "subnote": "Zero additional cost in Division 01" }
+    },
+    {
+      "partner": "LMGi",
+      "accentColor": "#5ADFAA",
+      "title": "Electrical + USB Client Infrastructure",
+      "body": "The exposed 4m extension cable running to your counter is a trip hazard, a compliance failure, and a liability. LMGi eliminates it with concealed trunking and adds a modernised USB charging station — turning a safety problem into a client-facing service point.",
+      "scope": [
+        "3.05m cable trunking — concealed wall run, clips, clean finish",
+        "Extension relocation — wall plug to counter, hazard eliminated",
+        "1 × 5-point multi-adapter (5×2-pin + 5×3-pin) counter-mounted",
+        "2 × under-counter USB charging hubs — client-facing BYOC setup",
+        "Safety-compliant installation — staff/client zone separation"
+      ],
+      "price": { "label": "Total Estimate (Opt. 01)", "note": "Full upgrade incl. USB hubs · once-off", "value": "R 4,200 – R 5,200" }
+    },
+    {
+      "partner": "PrimeTurf SA",
+      "accentColor": "#C9A44A",
+      "title": "Luxury Turf — Brand Statement",
+      "body": "Kopano Lounge has an opportunity to use its outdoor or transitional space as a visual brand statement. A premium artificial turf installation from PrimeTurf SA — Gauteng's leading luxury estate grass specialist — signals permanence, care, and quality before a single drink is ordered.",
+      "scope": [
+        "Free site assessment — space measurement and product specification",
+        "Estate-grade luxury turf — high-pile, UV-stabilised, pet-safe",
+        "Full base preparation, infill, and drainage system",
+        "Professional installation — Gauteng-based crew, HOA-compliant",
+        "12-year product warranty · zero irrigation · zero maintenance"
+      ],
+      "price": { "label": "Scoped After Site Assessment", "note": "Free assessment — no obligation", "value": "From R 12,000" }
+    }
+  ],
+  "beforeAfterHeading": "See the<br><em>transformation.</em>",
+  "beforeAfterIntro": "Drag the handle to compare current site conditions against the proposed outcome.",
+  "beforeAfter": [],
+  "offer": {
+    "sectionLabel": "The Relocation Offer",
+    "heading": "A first act of trust.<br><em>And a legacy.</em>",
+    "body": "Kopano Lounge has recently relocated. That move represents risk, reinvestment, and belief in the venue's future. The Connection Network responds with something significant on day one — offered in good faith, not as a discount.",
+    "eyebrow": "Relocation Launch Package · One-Time Offer",
+    "title": "The Connection Offer:<br><em>substantial value, immediate legacy.</em>",
+    "intro": "As a gesture of trust — and because we intend to earn the right to be Kopano Lounge's long-term coordination partner — the following concessions are offered exclusively on first engagement.",
+    "items": [
+      { "label": "Website Build", "value": "FREE", "desc": "R 4,500 setup waived entirely on sign-up to the Digital Presence retainer." },
+      { "label": "GBP Emergency Fix", "value": "48 hrs", "desc": "Google Business \"Closed\" status corrected and hours published within 48 hours — at no charge, even without a retainer." },
+      { "label": "Turf Assessment", "value": "FREE", "desc": "Full PrimeTurf SA site assessment — space mapped, product specified, quotation issued. Zero obligation." }
+    ],
+    "disclaimer": "<strong>Offer valid:</strong> 14 days from date of issue &nbsp;·&nbsp; <strong>Ref:</strong> TCN-KL-001 &nbsp;·&nbsp; All services independently delivered by licensed and qualified partners &nbsp;·&nbsp; Monthly retainer is month-to-month — no long-term lock-in required."
+  },
+  "investment": {
+    "totalLabel": "Month One — All-In",
+    "totalSub": "Electrical + Digital retainer + Turf (est.) · Website setup waived",
+    "totalValue": "R 19,700 – R 21,700",
+    "totalNote": "EXCL. VAT · ONGOING: R 3,500/mo from month 2",
+    "lines": [
+      { "name": "IT & Digital Presence", "desc": "Website + SEO + GBP management + social strategy — CrossTech Systems / InsightForge", "type": "Monthly", "price": "R 3,500 / mo", "color": "var(--blue-hi)" },
+      { "name": "Website Build", "desc": "Once-off setup — <strong style=\"color:#5AB4FF;\">WAIVED under Relocation Offer</strong>", "type": "Once-off", "price": "R 4,500", "strike": true },
+      { "name": "Electrical + USB Infrastructure", "desc": "Full trunking, relocation, multi-adapter, USB hubs — LMGi", "type": "Once-off", "price": "R 4,200 – R 5,200" },
+      { "name": "Luxury Turf Installation", "desc": "PrimeTurf SA — scoped after free site assessment", "type": "Once-off", "price": "From R 12,000", "color": "var(--gold-hi)" }
+    ]
+  },
+  "terms": [
+    { "label": "Payment Structure", "value": "50% / 50%", "desc": "Deposit on acceptance. Balance on completion for all once-off items." },
+    { "label": "Retainer", "value": "Month-to-Month", "desc": "No lock-in. Digital retainer cancellable with 30 days notice." },
+    { "label": "GBP Fix", "value": "48 Hours", "desc": "Google \"Closed\" status corrected on engagement — no contract required." },
+    { "label": "Offer Validity", "value": "14 Days", "desc": "Relocation package and waived setup fee valid until 6 July 2026." }
+  ],
+  "closing": {
+    "title": "Let's make<br><span class=\"hi\">the</span> <span class=\"go\">connection.</span>",
+    "sub": "One call. One conversation. Independent partners handle everything else — professionally, under a single unified account."
+  }
+}
