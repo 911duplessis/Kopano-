@@ -7,9 +7,59 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;1,300;1,600&family=Barlow:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="engine/theme.css">
+<style>
+  #proposal-selector {
+    position: fixed; inset: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--void); padding: 24px;
+  }
+  #proposal-selector.hidden { display: none; }
+  .ps-panel {
+    width: 100%; max-width: 560px; background: var(--panel);
+    border: 1px solid var(--border2); border-top: 2px solid var(--gold);
+    padding: 44px 40px;
+  }
+  .ps-eyebrow {
+    font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
+  }
+  .ps-title {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 30px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.03em; color: var(--white);
+    margin-bottom: 32px;
+  }
+  .ps-list { display: flex; flex-direction: column; gap: 2px; background: var(--border); margin-bottom: 8px; }
+  .ps-item {
+    background: var(--deep); padding: 18px 20px; display: flex;
+    align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .ps-item-meta { display: flex; flex-direction: column; gap: 4px; }
+  .ps-item-label {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 600;
+    color: var(--white); text-transform: uppercase; letter-spacing: 0.02em;
+  }
+  .ps-item-ref {
+    font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.1em;
+    color: var(--muted); text-transform: uppercase;
+  }
+  .ps-open {
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--gold); background: transparent;
+    border: 1px solid var(--gold); padding: 9px 18px; cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .ps-open:hover { opacity: 0.75; }
+</style>
 </head>
 <body>
 <canvas id="stars"></canvas>
+<div id="proposal-selector" class="hidden">
+  <div class="ps-panel">
+    <div class="ps-eyebrow">The Connection Network</div>
+    <div class="ps-title">Select a Proposal</div>
+    <div id="ps-list" class="ps-list"></div>
+  </div>
+</div>
 <div id="proposal-root"></div>
 
 <script src="engine/starfield.js"></script>
@@ -18,12 +68,47 @@
 <script src="engine/renderer.js"></script>
 <script src="engine/export.js"></script>
 <script>
-  fetch('data/tcn-kl-001.json')
+  function loadProposal(entry) {
+    fetch(entry.json)
+      .then((r) => r.json())
+      .then((data) => {
+        document.getElementById('proposal-selector').classList.add('hidden');
+        mountProposal(data, document.getElementById('proposal-root'));
+        initExportToolbar(data);
+        initStarfield();
+      });
+  }
+
+  function showSelector(manifest) {
+    const list = document.getElementById('ps-list');
+    manifest.forEach((entry) => {
+      const item = document.createElement('div');
+      item.className = 'ps-item';
+      item.innerHTML =
+        '<div class="ps-item-meta">' +
+          '<div class="ps-item-label">' + entry.label + '</div>' +
+          '<div class="ps-item-ref">' + entry.ref + '</div>' +
+        '</div>' +
+        '<button class="ps-open" type="button">Open</button>';
+      item.querySelector('.ps-open').addEventListener('click', () => loadProposal(entry));
+      list.appendChild(item);
+    });
+    document.getElementById('proposal-selector').classList.remove('hidden');
+  }
+
+  fetch('data/manifest.json')
     .then((r) => r.json())
-    .then((data) => {
-      mountProposal(data, document.getElementById('proposal-root'));
-      initExportToolbar(data);
-      initStarfield();
+    .then((manifest) => {
+      const requestedId = new URLSearchParams(window.location.search).get('p');
+      const requested = requestedId && manifest.find((e) => e.id === requestedId);
+
+      if (requested) {
+        loadProposal(requested);
+      } else if (manifest.length === 1) {
+        loadProposal(manifest[0]);
+      } else {
+        showSelector(manifest);
+      }
     });
 </script>
 </body>
