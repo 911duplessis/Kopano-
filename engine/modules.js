@@ -102,6 +102,15 @@ function renderZoneGrid(zones, total) {
   `;
 }
 
+function renderDeckLink(mod, accent) {
+  if (!mod.deckUrl) return '';
+  return `
+    <a class="deck-link" href="${escapeHtml(mod.deckUrl)}" target="_blank" rel="noopener" style="--mod-accent:${accent};">
+      ${escapeHtml(mod.deckLabel || 'View Full Proposal')} <span class="deck-link-arrow">&rarr;</span>
+    </a>
+  `;
+}
+
 function renderModuleCard(mod, index) {
   const accent = mod.accentColor || '#5AB4FF';
   return `
@@ -120,6 +129,7 @@ function renderModuleCard(mod, index) {
       ${renderAddendum(mod.addendum)}
       ${renderZoneGrid(mod.zones, mod.totalPackage)}
       ${renderExtraServices(mod.extraServices)}
+      ${renderDeckLink(mod, accent)}
     </div>
   `;
 }

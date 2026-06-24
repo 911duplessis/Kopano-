@@ -1,0 +1,1701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrimeTurf × Connection Network — Storyboard & Floor Map Deck</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Rajdhani:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --pt-green:   #0B3D2E;
+  --pt-green2:  #1A3A2A;
+  --pt-green3:  #2d6b43;
+  --gold:       #C9A44A;
+  --gold-lt:    #E2C06A;
+  --gold-dim:   #7a6128;
+  --ivory:      #F5F2EC;
+  --ivory-dim:  rgba(245,242,236,0.6);
+  --ivory-faint:rgba(245,242,236,0.15);
+  --charcoal:   #0D0D0D;
+  --smoke:      #1A1A1A;
+  --mid:        #2E2E2E;
+  --cn-blue:    #00C8FF;
+  --cn-blue2:   #0070A8;
+  --cn-silver:  #8EA8C0;
+  --cn-glow:    rgba(0,200,255,0.12);
+  --danger:     #FF3B30;
+  --warn:       #FF9500;
+  --ok:         #30D158;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--charcoal);
+  color: var(--ivory);
+  font-family: 'Rajdhani', sans-serif;
+  overflow-x: hidden;
+  font-size: 16px;
+}
+
+/* ══ SLIDE WRAPPER ══ */
+.slide {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.slide + .slide { border-top: 1px solid rgba(201,164,74,0.1); }
+
+/* ══════════════════════════════════════
+   SLIDE 01 — COVER
+══════════════════════════════════════ */
+.s-cover {
+  background: linear-gradient(140deg, #020d07 0%, #0B3D2E 45%, #040c18 100%);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 40px;
+}
+.s-cover .grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(201,164,74,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,164,74,0.04) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+/* Orbital rings */
+.orbit-wrap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.orbit {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid;
+  animation: spin linear infinite;
+}
+.orbit-1 {
+  width: 700px; height: 700px;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  border-color: rgba(0,200,255,0.06);
+  animation-duration: 60s;
+}
+.orbit-2 {
+  width: 500px; height: 500px;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  border-color: rgba(201,164,74,0.08);
+  animation-duration: 40s;
+  animation-direction: reverse;
+}
+.orbit-3 {
+  width: 300px; height: 300px;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  border-color: rgba(0,200,255,0.1);
+  animation-duration: 25s;
+}
+@keyframes spin { to { transform: translate(-50%,-50%) rotate(360deg); } }
+
+.cover-inner { position: relative; z-index: 2; }
+.cover-badge {
+  display: inline-block;
+  border: 1px solid rgba(0,200,255,0.4);
+  background: rgba(0,200,255,0.08);
+  color: var(--cn-blue);
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  padding: 6px 20px;
+  margin-bottom: 40px;
+}
+.cover-logo-pt {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 90px; height: 90px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--pt-green), var(--gold), var(--pt-green));
+  margin-bottom: 32px;
+  position: relative;
+}
+.cover-logo-pt .monogram {
+  font-family: 'Cinzel', serif;
+  font-size: 32px;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--gold), var(--gold-lt));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -2px;
+}
+.cover-h1 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(32px,5.5vw,72px);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--ivory);
+  text-shadow: 0 0 80px rgba(201,164,74,0.2);
+  margin-bottom: 8px;
+}
+.cover-h1 .x { color: var(--gold); }
+.cover-h1 .cn { color: var(--cn-blue); }
+.cover-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(16px,2vw,24px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ivory-dim);
+  margin-bottom: 48px;
+}
+.cover-divider {
+  width: 200px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold) 40%, var(--cn-blue) 60%, transparent);
+  margin: 0 auto 48px;
+}
+.cover-stats {
+  display: flex;
+  gap: 60px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.cs-item { text-align: center; }
+.cs-val {
+  font-family: 'Cinzel', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--gold);
+  display: block;
+}
+.cs-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--cn-silver);
+  margin-top: 4px;
+  display: block;
+}
+.cover-venue {
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(201,164,74,0.15);
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--ivory-faint);
+  text-transform: uppercase;
+}
+
+/* ══════════════════════════════════════
+   SLIDE HEADER COMPONENT
+══════════════════════════════════════ */
+.slide-hdr {
+  padding: 48px 60px 0;
+  position: relative;
+  z-index: 2;
+}
+.slide-hdr .eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.slide-hdr .eyebrow::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(201,164,74,0.3), transparent);
+}
+.slide-hdr h2 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(22px,3.5vw,42px);
+  font-weight: 700;
+  color: var(--ivory);
+  margin-bottom: 8px;
+}
+.slide-hdr .intro {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ivory-dim);
+  max-width: 620px;
+}
+.slide-body { padding: 40px 60px 60px; position: relative; z-index: 2; }
+
+/* ══════════════════════════════════════
+   SLIDE 02–06 — STORYBOARD ZONES
+══════════════════════════════════════ */
+.s-zone {
+  background: var(--charcoal);
+}
+.s-zone.alt { background: #080808; }
+
+/* Before / After frame */
+.ba-frame {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+  border: 1px solid rgba(201,164,74,0.12);
+  background: rgba(201,164,74,0.05);
+  overflow: hidden;
+}
+@media(max-width:700px){ .ba-frame { grid-template-columns:1fr; } }
+
+.ba-panel {
+  position: relative;
+  min-height: 320px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.ba-img {
+  width:100%; height:100%;
+  object-fit: cover;
+  display: block;
+  flex: 1;
+  min-height: 280px;
+}
+.ba-panel.before .ba-img {
+  filter: saturate(0.3) brightness(0.6) contrast(1.1);
+}
+.ba-panel.after-render {
+  background: linear-gradient(140deg, #030f08 0%, var(--pt-green) 60%, #050d1a 100%);
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 32px;
+}
+
+.ba-stamp {
+  position: absolute;
+  top: 14px; left: 14px;
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  z-index: 3;
+}
+.ba-panel.before .ba-stamp { background: var(--danger); color: #fff; }
+.ba-panel.after .ba-stamp,
+.ba-panel.after-render .ba-stamp { background: var(--gold); color: #000; }
+
+.ba-caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.85));
+  padding: 24px 16px 14px;
+  z-index: 2;
+}
+.ba-caption .zone-id {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--cn-blue);
+  margin-bottom: 4px;
+}
+.ba-caption .issue {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* After mockup content */
+.ar-icon { font-size: 48px; }
+.ar-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(14px,1.8vw,22px);
+  color: var(--gold);
+  text-align: center;
+  letter-spacing: 2px;
+}
+.ar-desc {
+  font-size: 13px;
+  color: var(--ivory-dim);
+  text-align: center;
+  line-height: 1.6;
+  max-width: 280px;
+}
+.ar-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--cn-blue);
+  border: 1px solid rgba(0,200,255,0.3);
+  padding: 4px 12px;
+}
+.ar-turf {
+  width: 80%;
+  height: 8px;
+  background: repeating-linear-gradient(90deg, #1e5c36, #1e5c36 3px, #2d7a4e 3px, #2d7a4e 6px);
+  border-radius: 2px;
+  box-shadow: 0 0 16px rgba(45,122,78,0.4);
+}
+.ar-led {
+  width: 80%;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--gold), var(--gold-lt), var(--gold), transparent);
+  box-shadow: 0 0 12px rgba(201,164,74,0.6);
+  border-radius: 2px;
+}
+
+/* Annotation strip */
+.annotations {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2px;
+  margin-top: 3px;
+}
+.ann {
+  background: var(--smoke);
+  padding: 20px 22px;
+  border-top: 2px solid var(--gold-dim);
+  position: relative;
+}
+.ann.cn { border-top-color: var(--cn-blue2); }
+.ann.ok { border-top-color: var(--ok); }
+.ann-ico {
+  font-size: 20px;
+  margin-bottom: 8px;
+  display: block;
+}
+.ann-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+.ann.cn .ann-label { color: var(--cn-blue); }
+.ann.ok .ann-label { color: var(--ok); }
+.ann-text {
+  font-size: 13px;
+  color: var(--ivory-dim);
+  line-height: 1.5;
+}
+.ann-spec {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  color: var(--gold-dim);
+  margin-top: 6px;
+}
+
+/* zone color bars */
+.zone-bar {
+  height: 4px;
+  width: 100%;
+}
+.zone-a .zone-bar { background: linear-gradient(90deg, var(--gold), var(--gold-lt)); }
+.zone-b .zone-bar { background: linear-gradient(90deg, var(--cn-blue2), var(--cn-blue)); }
+.zone-c .zone-bar { background: linear-gradient(90deg, var(--pt-green3), var(--ok)); }
+.zone-d .zone-bar { background: linear-gradient(90deg, var(--gold-dim), var(--gold)); }
+.zone-e .zone-bar { background: linear-gradient(90deg, var(--cn-blue), var(--gold)); }
+
+/* ══════════════════════════════════════
+   SLIDE 07 — FLOOR MAP
+══════════════════════════════════════ */
+.s-floormap {
+  background: linear-gradient(180deg, #060f0a 0%, #030609 100%);
+}
+.floormap-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Top-down floor SVG container */
+.floor-svg-wrap {
+  background: #060d09;
+  border: 1px solid rgba(0,200,255,0.15);
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.floor-svg-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,200,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,200,255,0.04) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+.floor-svg-wrap svg { position: relative; z-index: 2; display: block; }
+
+/* Pricing table */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 2px;
+  margin-top: 3px;
+}
+.price-card {
+  background: var(--smoke);
+  padding: 24px 20px;
+  border-left: 3px solid var(--gold-dim);
+  transition: border-color 0.2s;
+}
+.price-card:hover { border-left-color: var(--gold); }
+.price-card.featured {
+  background: linear-gradient(135deg, #0B3D2E 0%, #072918 100%);
+  border-left-color: var(--gold);
+}
+.price-zone {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--cn-blue);
+  margin-bottom: 6px;
+}
+.price-name {
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  color: var(--ivory);
+  margin-bottom: 8px;
+}
+.price-sqm {
+  font-size: 12px;
+  color: var(--ivory-dim);
+  margin-bottom: 4px;
+}
+.price-val {
+  font-family: 'Cinzel', serif;
+  font-size: 20px;
+  color: var(--gold);
+}
+.price-tier {
+  font-size: 10px;
+  color: var(--cn-silver);
+  margin-top: 4px;
+  font-style: italic;
+}
+.price-note {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  color: var(--ok);
+  margin-top: 8px;
+  letter-spacing: 1px;
+}
+
+/* ══════════════════════════════════════
+   SLIDE 08 — BRAND SYSTEM
+══════════════════════════════════════ */
+.s-brand { background: #050505; }
+.palette-strip {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+.swatch {
+  flex: 1; min-width: 100px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 10px;
+}
+.sw-name {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.sw-hex { font-family: monospace; font-size: 9px; opacity: 0.6; }
+.light-system {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-bottom: 32px;
+}
+.light-card {
+  padding: 24px 28px;
+  position: relative;
+  overflow: hidden;
+}
+.light-card.warm {
+  background: linear-gradient(135deg, #1a0f00, #2a1800);
+  border: 1px solid rgba(201,164,74,0.2);
+}
+.light-card.cool {
+  background: linear-gradient(135deg, #000a14, #001520);
+  border: 1px solid rgba(0,200,255,0.2);
+}
+.light-card::before {
+  content: '';
+  position: absolute;
+  top: -30px; right: -30px;
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  opacity: 0.15;
+}
+.light-card.warm::before { background: #FF8C00; }
+.light-card.cool::before { background: var(--cn-blue); }
+.light-temp {
+  font-family: 'Cinzel', serif;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.light-card.warm .light-temp { color: #FFB347; }
+.light-card.cool .light-temp { color: var(--cn-blue); }
+.light-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--ivory-dim);
+  margin-bottom: 10px;
+}
+.light-desc { font-size: 13px; color: var(--ivory-dim); line-height: 1.6; }
+
+/* ══════════════════════════════════════
+   SLIDE 09 — CTA / CONTACT
+══════════════════════════════════════ */
+.s-cta {
+  background: linear-gradient(140deg, #020c06 0%, #0B3D2E 50%, #020a12 100%);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 40px;
+}
+.cta-inner { position: relative; z-index: 2; max-width: 700px; margin: 0 auto; }
+.cta-badge {
+  display: inline-block;
+  background: rgba(201,164,74,0.12);
+  border: 1px solid rgba(201,164,74,0.4);
+  color: var(--gold);
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  padding: 6px 20px;
+  margin-bottom: 32px;
+}
+.cta-h {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(28px,4vw,52px);
+  font-weight: 900;
+  color: var(--ivory);
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+.cta-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ivory-dim);
+  margin-bottom: 48px;
+  line-height: 1.6;
+}
+.contact-row {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.contact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.contact-btn.primary {
+  background: var(--gold);
+  color: var(--charcoal);
+  border: 1px solid var(--gold);
+}
+.contact-btn.primary:hover { background: var(--gold-lt); }
+.contact-btn.secondary {
+  background: transparent;
+  color: var(--cn-blue);
+  border: 1px solid var(--cn-blue);
+}
+.contact-btn.secondary:hover { background: rgba(0,200,255,0.08); }
+.footer-line {
+  border-top: 1px solid rgba(201,164,74,0.12);
+  padding-top: 32px;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--ivory-faint);
+  text-transform: uppercase;
+  line-height: 2;
+}
+
+/* ══════════════════════════════════════
+   NAV DOTS
+══════════════════════════════════════ */
+.nav-dots {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 100;
+}
+.nd {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(201,164,74,0.3);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.nd:hover, .nd.active { background: var(--gold); transform: scale(1.4); }
+
+/* ══ UTILITY ══ */
+.divider-gold {
+  width: 80px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 20px 0;
+}
+.tag {
+  display: inline-block;
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border: 1px solid rgba(201,164,74,0.3);
+  color: var(--gold);
+  margin: 2px;
+}
+.tag.cn { border-color: rgba(0,200,255,0.3); color: var(--cn-blue); }
+.tag.ok { border-color: rgba(48,209,88,0.3); color: var(--ok); }
+
+/* CN brand mark */
+.cn-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: rgba(0,200,255,0.06);
+  border: 1px solid rgba(0,200,255,0.2);
+}
+.cn-mark-text {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--cn-blue);
+  text-transform: uppercase;
+}
+.cn-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--cn-blue);
+  box-shadow: 0 0 8px var(--cn-blue);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 8px var(--cn-blue); opacity: 1; }
+  50% { box-shadow: 0 0 18px var(--cn-blue); opacity: 0.7; }
+}
+
+/* image fallback placeholder */
+.img-placeholder {
+  width: 100%; min-height: 260px;
+  background: linear-gradient(135deg, #111 0%, #1a2a1e 100%);
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 8px;
+}
+.img-placeholder .ph-icon { font-size: 36px; opacity: 0.3; }
+.img-placeholder .ph-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px; letter-spacing: 2px; opacity: 0.3; text-transform: uppercase;
+}
+
+/* Slide number */
+.slide-num {
+  position: absolute;
+  top: 32px; right: 60px;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--ivory-faint);
+  z-index: 5;
+}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:768px){
+  .slide-hdr, .slide-body { padding-left: 24px; padding-right: 24px; }
+  .slide-num { right: 24px; }
+  .annotations { grid-template-columns: 1fr 1fr; }
+  .pricing-grid { grid-template-columns: 1fr 1fr; }
+  .light-system { grid-template-columns: 1fr; }
+}
+@media(max-width:480px){
+  .annotations { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .cover-stats { gap: 30px; }
+  .nav-dots { display: none; }
+}
+</style>
+</head>
+<body>
+
+<a href="../index.html" style="position:fixed; top:18px; left:18px; z-index:999; font-family:'Space Mono',monospace; font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:#C9A44A; border:1px solid rgba(201,164,74,0.4); background:rgba(11,61,46,0.7); padding:8px 14px; text-decoration:none;">&larr; Unified Connection Network Proposal</a>
+
+<!-- NAV DOTS -->
+<nav class="nav-dots">
+  <div class="nd" onclick="document.getElementById('s1').scrollIntoView({behavior:'smooth'})"></div>
+  <div class="nd" onclick="document.getElementById('s2').scrollIntoView({behavior:'smooth'})"></div>
+  <div class="nd" onclick="document.getElementById('s3').scrollIntoView({behavior:'smooth'})"></div>
+  <div class="nd" onclick="document.getElementById('s4').scrollIntoView({behavior:'smooth'})"></div>
+  <div class="nd" onclick="document.getElementById('s5').scrollIntoView({behavior:'smooth'})"></div>
+  <div class="nd" onclick="document.getElementById('s6').scrollIntoView({behavior:'smooth'})"></div>
+  <div class="nd" onclick="document.getElementById('s7').scrollIntoView({behavior:'smooth'})"></div>
+  <div class="nd" onclick="document.getElementById('s8').scrollIntoView({behavior:'smooth'})"></div>
+  <div class="nd" onclick="document.getElementById('s9').scrollIntoView({behavior:'smooth'})"></div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 01 — COVER
+══════════════════════════════════════════ -->
+<section class="slide s-cover" id="s1">
+  <div class="grid-lines"></div>
+  <div class="orbit-wrap">
+    <div class="orbit orbit-1"></div>
+    <div class="orbit orbit-2"></div>
+    <div class="orbit orbit-3"></div>
+  </div>
+
+  <div class="cover-inner">
+    <div class="cover-badge">Venue Transformation Intelligence · Kopano Lounge · June 2026</div>
+
+    <div class="cover-logo-pt">
+      <span class="monogram">PT</span>
+    </div>
+
+    <h1 class="cover-h1">
+      PrimeTurf <span class="x">×</span><br>
+      <span class="cn">Connection Network</span>
+    </h1>
+    <p class="cover-sub">Visual Storyboard & Architectural Floor Deck · Kopano Lounge Transformation</p>
+
+    <div class="cover-divider"></div>
+
+    <div class="cover-stats">
+      <div class="cs-item">
+        <span class="cs-val">5</span>
+        <span class="cs-label">Zones</span>
+      </div>
+      <div class="cs-item">
+        <span class="cs-val">+68%</span>
+        <span class="cs-label">Visual Premium</span>
+      </div>
+      <div class="cs-item">
+        <span class="cs-val">8</span>
+        <span class="cs-label">Days Install</span>
+      </div>
+      <div class="cs-item">
+        <span class="cs-val">∞</span>
+        <span class="cs-label">Brand Lifetime</span>
+      </div>
+    </div>
+
+    <div class="cover-venue">
+      Kopano Lounge & Elite Club · Pretoria, Gauteng · Confidential · Prepared June 2026
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SLIDE 02 — ZONE A: ENTRANCE CORRIDOR
+══════════════════════════════════════════ -->
+<section class="slide s-zone zone-a" id="s2">
+  <div class="zone-bar"></div>
+  <div class="slide-num">02 / 09</div>
+
+  <div class="slide-hdr">
+    <div class="eyebrow">Zone A · Storyboard · Entrance Sequence</div>
+    <h2>Entrance Corridor</h2>
+    <p class="intro">The venue's first handshake. Every guest, every event, every memory begins here. Currently underwhelming — redesigned as an immersive brand arrival.</p>
+  </div>
+
+  <div class="slide-body">
+    <div class="ba-frame">
+      <!-- BEFORE -->
+      <div class="ba-panel before">
+        <img class="ba-img" src="image_24_.jpg" alt="Entrance corridor before — worn brick, harsh lighting" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="img-placeholder" style="display:none"><span class="ph-icon">📷</span><span class="ph-text">Before · Entrance Corridor</span></div>
+        <div class="ba-stamp">Before</div>
+        <div class="ba-caption">
+          <div class="zone-id">Zone A · Current State</div>
+          <div class="issue">Worn brick pavers · 4.8m × 15m · Zero brand presence</div>
+        </div>
+      </div>
+      <!-- AFTER -->
+      <div class="ba-panel after-render">
+        <div class="ba-stamp" style="position:relative;top:auto;left:auto;margin-bottom:8px">After</div>
+        <div class="ar-turf"></div>
+        <div class="ar-led"></div>
+        <div class="ar-title">PrimeTurf Ultimate<br>Entrance Runner</div>
+        <div class="ar-desc">Deep Pile, Ultra-Luxe — 4.8m × 15m seamless coverage with Kopano Elite Club branded entry panel, warm 2700K downlight wash, perimeter LED reveal</div>
+        <div class="ar-turf"></div>
+        <div class="ar-tag">Dims: 4.8m × 15m · 72m²</div>
+        <div class="ar-tag" style="border-color:rgba(201,164,74,0.3);color:var(--gold);margin-top:4px">PrimeTurf Ultimate · Deep Pile</div>
+      </div>
+    </div>
+
+    <div class="annotations">
+      <div class="ann">
+        <span class="ann-ico">🌿</span>
+        <div class="ann-label">Turf Flooring</div>
+        <div class="ann-text">PrimeTurf Ultimate — Deep Pile, Ultra-Luxe. Full corridor width, seamless joint-free installation.</div>
+        <div class="ann-spec">72m² · 35mm pile</div>
+      </div>
+      <div class="ann">
+        <span class="ann-ico">💡</span>
+        <div class="ann-label">Lighting Upgrade</div>
+        <div class="ann-text">Warm 2700K downlights replace harsh overhead fluorescents. Perimeter amber LED reveal at floor edge.</div>
+        <div class="ann-spec">2700K ambient + LED reveal</div>
+      </div>
+      <div class="ann cn">
+        <span class="ann-ico">🏷️</span>
+        <div class="ann-label">Brand Integration</div>
+        <div class="ann-text">Illuminated PrimeTurf × Kopano co-branded entry panel. Backlit monogram at security gate threshold.</div>
+        <div class="ann-spec">Connection Network signage tier</div>
+      </div>
+      <div class="ann ok">
+        <span class="ann-ico">🔇</span>
+        <div class="ann-label">Acoustics</div>
+        <div class="ann-text">Deep pile turf reduces ambient reverb. Corridor echo eliminated — measured improvement expected.</div>
+        <div class="ann-spec">Est. −15dB reflectivity</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SLIDE 03 — ZONE B: STAIRCASE
+══════════════════════════════════════════ -->
+<section class="slide s-zone alt zone-b" id="s3">
+  <div class="zone-bar"></div>
+  <div class="slide-num">03 / 09</div>
+
+  <div class="slide-hdr">
+    <div class="eyebrow">Zone B · Storyboard · Vertical Transition</div>
+    <h2>Staircase & Corridor</h2>
+    <p class="intro">The most Instagram-worthy moment in the venue. Worn terracotta tile — hazardous and visually incoherent — replaced with a precision-engineered turf-clad ascent.</p>
+  </div>
+
+  <div class="slide-body">
+    <div class="ba-frame">
+      <!-- BEFORE -->
+      <div class="ba-panel before">
+        <img class="ba-img" src="image_34_.jpg" alt="Staircase before — terracotta tile, poor lighting" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="img-placeholder" style="display:none"><span class="ph-icon">📷</span><span class="ph-text">Before · Staircase</span></div>
+        <div class="ba-stamp">Before</div>
+        <div class="ba-caption">
+          <div class="zone-id">Zone B · Current State</div>
+          <div class="issue">Weathered terracotta tile · Acoustic harshness · Slip risk · Zero brand</div>
+        </div>
+      </div>
+      <!-- AFTER mockup -->
+      <div class="ba-panel after-render">
+        <div class="ba-stamp" style="position:relative;top:auto;left:auto;margin-bottom:8px">After</div>
+        <!-- stair SVG mockup -->
+        <svg width="200" height="140" viewBox="0 0 200 140" style="margin-bottom:8px">
+          <defs>
+            <linearGradient id="turfG" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#1e5c36"/>
+              <stop offset="100%" stop-color="#2d7a4e"/>
+            </linearGradient>
+            <linearGradient id="ledG" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="transparent"/>
+              <stop offset="30%" stop-color="#C9A44A"/>
+              <stop offset="70%" stop-color="#E2C06A"/>
+              <stop offset="100%" stop-color="transparent"/>
+            </linearGradient>
+          </defs>
+          <!-- Steps -->
+          <rect x="10" y="100" width="180" height="18" fill="url(#turfG)" rx="1"/>
+          <rect x="10" y="98" width="180" height="2" fill="url(#ledG)" opacity="0.9"/>
+          <rect x="30" y="75"  width="160" height="18" fill="url(#turfG)" rx="1"/>
+          <rect x="30" y="73"  width="160" height="2" fill="url(#ledG)" opacity="0.9"/>
+          <rect x="50" y="50"  width="140" height="18" fill="url(#turfG)" rx="1"/>
+          <rect x="50" y="48"  width="140" height="2" fill="url(#ledG)" opacity="0.9"/>
+          <rect x="70" y="25"  width="120" height="18" fill="url(#turfG)" rx="1"/>
+          <rect x="70" y="23"  width="120" height="2" fill="url(#ledG)" opacity="0.9"/>
+          <!-- Handrail -->
+          <line x1="14" y1="118" x2="74" y2="23" stroke="#B8902A" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="186" y1="118" x2="126" y2="23" stroke="#B8902A" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- KL monogram -->
+          <text x="100" y="15" fill="#C9A44A" font-family="serif" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="2">K.L.</text>
+        </svg>
+        <div class="ar-title">PrimeTurf Elite Weave<br>Stair Installation</div>
+        <div class="ar-desc">Turf-clad risers with precision-milled edge profiles. LED nosing strips in amber. Flush handrail integration. K.L. Legacy monogram at landing.</div>
+        <div class="ar-tag">4.5m × 6m · 27m²</div>
+        <div class="ar-tag" style="border-color:rgba(0,200,255,0.3);color:var(--cn-blue);margin-top:4px">−22dB Acoustic Reduction</div>
+      </div>
+    </div>
+
+    <div class="annotations">
+      <div class="ann">
+        <span class="ann-ico">🌿</span>
+        <div class="ann-label">Turf — Stair Risers</div>
+        <div class="ann-text">PrimeTurf Elite Weave (Kopano Green). 15mm pile on all risers. Precision-milled edge profiles — confirmed secure-bond.</div>
+        <div class="ann-spec">27m² · 15mm pile</div>
+      </div>
+      <div class="ann">
+        <span class="ann-ico">✨</span>
+        <div class="ann-label">LED Nosing Strips</div>
+        <div class="ann-text">Amber LED strip on each stair nosing. Eliminates slip risk, creates dramatic visual hierarchy ascending to VIP level.</div>
+        <div class="ann-spec">2700K amber · each step</div>
+      </div>
+      <div class="ann cn">
+        <span class="ann-ico">🏆</span>
+        <div class="ann-label">Brand Moment</div>
+        <div class="ann-text">Illuminated K.L. Legacy monogram at mid-landing. Banister vinyl wrap in Forest Green + Gold — co-branded wayfinding plates.</div>
+        <div class="ann-spec">Dimensional · backlit</div>
+      </div>
+      <div class="ann ok">
+        <span class="ann-ico">🔊</span>
+        <div class="ann-label">Acoustic Reflectivity</div>
+        <div class="ann-text">Terracotta tile confirmed high-dB. Elite Weave turf delivers measured −22dB reduction. Corridor harshness eliminated.</div>
+        <div class="ann-spec">−22dB confirmed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SLIDE 04 — ZONE C: OUTDOOR TERRACE / BAR AREA
+══════════════════════════════════════════ -->
+<section class="slide s-zone zone-c" id="s4">
+  <div class="zone-bar"></div>
+  <div class="slide-num">04 / 09</div>
+
+  <div class="slide-hdr">
+    <div class="eyebrow">Zone C · Storyboard · Outdoor Terrace & Bar</div>
+    <h2>Bar Area & Outdoor Terrace</h2>
+    <p class="intro">The single largest visual upgrade in the venue. Worn brick pavers replaced with PrimeTurf 40mm Pro Pile — transforming the terrace from utilitarian to destination-worthy.</p>
+  </div>
+
+  <div class="slide-body">
+    <div class="ba-frame">
+      <!-- BEFORE: image_24_ shows the corridor/terrace with worn brick -->
+      <div class="ba-panel before">
+        <img class="ba-img" src="image_24_.jpg" alt="Bar terrace before — worn brick, mixed lighting" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="img-placeholder" style="display:none"><span class="ph-icon">📷</span><span class="ph-text">Before · Outdoor Terrace</span></div>
+        <div class="ba-stamp">Before</div>
+        <div class="ba-caption">
+          <div class="zone-id">Zone C · Current State</div>
+          <div class="issue">Original brick pavers · 4.8m × 15m · Patchy, unbranded, no ambience</div>
+        </div>
+      </div>
+      <!-- AFTER render -->
+      <div class="ba-panel after-render">
+        <div class="ba-stamp" style="position:relative;top:auto;left:auto;margin-bottom:8px">After</div>
+        <svg width="180" height="100" viewBox="0 0 180 100" style="margin-bottom:8px">
+          <defs>
+            <pattern id="turfPat" patternUnits="userSpaceOnUse" width="6" height="6">
+              <rect width="6" height="6" fill="#1e5c36"/>
+              <rect x="0" y="2" width="3" height="2" fill="#266e42" opacity="0.5"/>
+            </pattern>
+          </defs>
+          <rect x="10" y="20" width="160" height="70" fill="url(#turfPat)" rx="2"/>
+          <!-- perimeter LED -->
+          <rect x="8" y="18" width="164" height="4" fill="none" stroke="#C9A44A" stroke-width="1.5" rx="2" opacity="0.8" filter="url(#glow)"/>
+          <!-- tables -->
+          <circle cx="50" cy="55" r="12" fill="#1a1a1a" stroke="#C9A44A" stroke-width="1"/>
+          <circle cx="90" cy="55" r="12" fill="#1a1a1a" stroke="#C9A44A" stroke-width="1"/>
+          <circle cx="130" cy="55" r="12" fill="#1a1a1a" stroke="#C9A44A" stroke-width="1"/>
+          <!-- string lights -->
+          <path d="M10,15 Q45,8 90,12 Q135,16 170,10" stroke="#FFD700" stroke-width="1" fill="none" opacity="0.5" stroke-dasharray="2,4"/>
+          <text x="90" y="10" fill="#C9A44A" font-family="monospace" font-size="8" text-anchor="middle" opacity="0.6">string lights preserved</text>
+        </svg>
+        <div class="ar-title">PrimeTurf 40mm Pro Pile<br>Full Terrace Coverage</div>
+        <div class="ar-desc">4.8m × 15m seamless install. Warm gold LED perimeter. String light canopy preserved. White bar table tops with branded coasters.</div>
+        <div class="ar-led" style="width:70%"></div>
+        <div class="ar-tag">4.8m × 15m · 72m²</div>
+        <div class="ar-tag" style="border-color:rgba(201,164,74,0.3);color:var(--gold);margin-top:4px">40mm Pro Pile · Ultra Luxe</div>
+      </div>
+    </div>
+
+    <div class="annotations">
+      <div class="ann">
+        <span class="ann-ico">🌿</span>
+        <div class="ann-label">PrimeTurf 40mm Pro</div>
+        <div class="ann-text">Full 72m² terrace coverage. Highest pile spec in range — deepest luxury underfoot feel, UV-stabilised for outdoor longevity.</div>
+        <div class="ann-spec">72m² · 40mm outdoor pro</div>
+      </div>
+      <div class="ann">
+        <span class="ann-ico">🔆</span>
+        <div class="ann-label">Perimeter LED Drama</div>
+        <div class="ann-text">Warm gold LED reveal along all four edges of the turf. Night-time photography moment — transformative for social content and events.</div>
+        <div class="ann-spec">360° edge reveal · warm gold</div>
+      </div>
+      <div class="ann cn">
+        <span class="ann-ico">🍸</span>
+        <div class="ann-label">Bar Integration</div>
+        <div class="ann-text">White bar table tops retained. PrimeTurf branded coasters and table signage. Bar surround panels — Forest turf with gold reveal strip.</div>
+        <div class="ann-spec">Co-branded bar collateral</div>
+      </div>
+      <div class="ann ok">
+        <span class="ann-ico">📸</span>
+        <div class="ann-label">Content Value</div>
+        <div class="ann-text">Highest photogenic ROI of all five zones. String light canopy + turf + LED perimeter = signature content backdrop for Reel production.</div>
+        <div class="ann-spec">Priority social content zone</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SLIDE 05 — ZONE D: HALLWAY & PILLARS
+══════════════════════════════════════════ -->
+<section class="slide s-zone alt zone-d" id="s5">
+  <div class="zone-bar"></div>
+  <div class="slide-num">05 / 09</div>
+
+  <div class="slide-hdr">
+    <div class="eyebrow">Zone D · Storyboard · Architectural Features</div>
+    <h2>Hallway & Feature Pillars</h2>
+    <p class="intro">Structural pillars are the venue's vertical canvas. Turf-clad from base to capital with gold trim — they become the repeating brand signature throughout the interior.</p>
+  </div>
+
+  <div class="slide-body">
+    <div class="ba-frame">
+      <div class="ba-panel before">
+        <div class="img-placeholder">
+          <span class="ph-icon">🏛️</span>
+          <span class="ph-text">Before · Hallway &amp; Pillars</span>
+          <span style="font-size:11px;color:rgba(245,242,236,0.3);margin-top:8px;font-style:italic;padding:0 20px;text-align:center">Unfinished concrete pillars · No brand treatment · Generic hallway aesthetic</span>
+        </div>
+        <div class="ba-stamp">Before</div>
+        <div class="ba-caption">
+          <div class="zone-id">Zone D · Current State</div>
+          <div class="issue">Raw pillars · No wayfinding · Acoustic dead zones · Missed brand touchpoints</div>
+        </div>
+      </div>
+      <div class="ba-panel after-render">
+        <div class="ba-stamp" style="position:relative;top:auto;left:auto;margin-bottom:8px">After</div>
+        <!-- Pillar SVG -->
+        <svg width="140" height="130" viewBox="0 0 140 130">
+          <defs>
+            <pattern id="tP2" patternUnits="userSpaceOnUse" width="4" height="4">
+              <rect width="4" height="4" fill="#1e5c36"/>
+              <line x1="0" y1="2" x2="4" y2="2" stroke="#266e42" stroke-width="0.5"/>
+            </pattern>
+          </defs>
+          <!-- 3 pillars -->
+          <rect x="10"  y="15" width="30" height="100" fill="url(#tP2)" rx="1"/>
+          <rect x="10"  y="13" width="30" height="4" fill="#C9A44A" rx="1"/>
+          <rect x="10" y="111" width="30" height="4" fill="#C9A44A" rx="1"/>
+
+          <rect x="55"  y="15" width="30" height="100" fill="url(#tP2)" rx="1"/>
+          <rect x="55"  y="13" width="30" height="4" fill="#C9A44A" rx="1"/>
+          <rect x="55" y="111" width="30" height="4" fill="#C9A44A" rx="1"/>
+
+          <rect x="100" y="15" width="30" height="100" fill="url(#tP2)" rx="1"/>
+          <rect x="100" y="13" width="30" height="4" fill="#C9A44A" rx="1"/>
+          <rect x="100" y="111" width="30" height="4" fill="#C9A44A" rx="1"/>
+
+          <!-- KL + PT logos -->
+          <text x="25"  y="70" fill="#C9A44A" font-family="serif" font-size="10" text-anchor="middle" font-weight="700">PT</text>
+          <text x="70"  y="70" fill="#C9A44A" font-family="serif" font-size="10" text-anchor="middle" font-weight="700">KL</text>
+          <text x="115" y="70" fill="#C9A44A" font-family="serif" font-size="10" text-anchor="middle" font-weight="700">PT</text>
+        </svg>
+        <div class="ar-title">Turf-Clad Pillars<br>Gold Base Trim</div>
+        <div class="ar-desc">All structural pillars clad in PrimeTurf. Kopano + PrimeTurf co-branded vinyl wraps. Gold base-trim around all pillar footings. Directional wayfinding plates.</div>
+        <div class="ar-tag">Per pillar · custom spec</div>
+        <div class="ar-tag" style="border-color:rgba(0,200,255,0.3);color:var(--cn-blue);margin-top:4px">Hallway acoustic treatment</div>
+      </div>
+    </div>
+
+    <div class="annotations">
+      <div class="ann">
+        <span class="ann-ico">🌿</span>
+        <div class="ann-label">Pillar Cladding</div>
+        <div class="ann-text">Full-wrap turf cladding on all structural pillars. Custom-cut to column diameter. Forest Green spec consistent with zone palette.</div>
+        <div class="ann-spec">Custom cut · per pillar</div>
+      </div>
+      <div class="ann">
+        <span class="ann-ico">🥇</span>
+        <div class="ann-label">Gold Base Trim</div>
+        <div class="ann-text">Precision gold reveal trim at base and capital of each pillar. Creates visual anchor — repeating luxury motif across the full venue floor.</div>
+        <div class="ann-spec">Gold anodised trim</div>
+      </div>
+      <div class="ann cn">
+        <span class="ann-ico">🔗</span>
+        <div class="ann-label">Co-Brand Integration</div>
+        <div class="ann-text">Alternating PrimeTurf and Kopano vinyl wraps on pillar faces. Directional wayfinding plates at each junction — branded typography.</div>
+        <div class="ann-spec">Connection Network standard</div>
+      </div>
+      <div class="ann ok">
+        <span class="ann-ico">🛤️</span>
+        <div class="ann-label">Wayfinding</div>
+        <div class="ann-text">Guest circulation clarity improved. VIP Lounge, Bar, and Exit clearly signed in PrimeTurf brand typography at pillar face level.</div>
+        <div class="ann-spec">UX: spatial clarity upgrade</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SLIDE 06 — ZONE E: VIP LOUNGE
+══════════════════════════════════════════ -->
+<section class="slide s-zone zone-e" id="s6">
+  <div class="zone-bar"></div>
+  <div class="slide-num">06 / 09</div>
+
+  <div class="slide-hdr">
+    <div class="eyebrow">Zone E · Storyboard · Crown Jewel</div>
+    <h2>VIP Lounge Interior</h2>
+    <p class="intro">The interior already possesses the right furniture and warmth. PrimeTurf elevates it from good to gallery-worthy — the brand's flagship case study photograph.</p>
+  </div>
+
+  <div class="slide-body">
+    <div class="ba-frame">
+      <!-- BEFORE: image_38_ shows raw VIP before state -->
+      <div class="ba-panel before">
+        <img class="ba-img" src="image_38_.jpg" alt="VIP Lounge before" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="img-placeholder" style="display:none"><span class="ph-icon">📷</span><span class="ph-text">Before · VIP Lounge</span></div>
+        <div class="ba-stamp">Before</div>
+        <div class="ba-caption">
+          <div class="zone-id">Zone E · Current State</div>
+          <div class="issue">Raw plywood tables · Unbranded · Mixed party lighting · No floor identity</div>
+        </div>
+      </div>
+      <!-- AFTER: image_23_ shows the PrimeTurf-transformed VIP entry -->
+      <div class="ba-panel after">
+        <img class="ba-img" src="image_23_.jpg" alt="VIP Lounge after PrimeTurf installation" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="img-placeholder" style="display:none"><span class="ph-icon">✅</span><span class="ph-text">After · VIP Lounge</span></div>
+        <div class="ba-stamp">After</div>
+        <div class="ba-caption">
+          <div class="zone-id">Zone E · PrimeTurf Installed</div>
+          <div class="issue">Deep Pile Elite · Full floor + wall feature · 75m² · Bronze & glass furnishing</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="annotations">
+      <div class="ann">
+        <span class="ann-ico">🌿</span>
+        <div class="ann-label">20mm Indoor Pile</div>
+        <div class="ann-text">PrimeTurf 20mm indoor pile beneath all seating clusters. Gallery-level finish — compressed underfoot, visually rich photography surface.</div>
+        <div class="ann-spec">75m² · 20mm indoor elite</div>
+      </div>
+      <div class="ann">
+        <span class="ann-ico">🍫</span>
+        <div class="ann-label">Bar Surround Panels</div>
+        <div class="ann-text">Dark Forest turf panels on bar surround with gold reveal strip. Entry medallion — PrimeTurf × Kopano branded floor feature inset.</div>
+        <div class="ann-spec">Custom-cut cladding</div>
+      </div>
+      <div class="ann cn">
+        <span class="ann-ico">🏅</span>
+        <div class="ann-label">Certification Display</div>
+        <div class="ann-text">Framed PrimeTurf certification on feature wall. Connection Network installation verification plaque. Brand authority on permanent display.</div>
+        <div class="ann-spec">Premium framed cert</div>
+      </div>
+      <div class="ann ok">
+        <span class="ann-ico">📐</span>
+        <div class="ann-label">Floor Medallion</div>
+        <div class="ann-text">Custom inlaid floor medallion at VIP entrance — PrimeTurf × Kopano co-branded. The defining photographic brand moment of the project.</div>
+        <div class="ann-spec">Inlaid · custom artwork</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SLIDE 07 — 3D TOP-DOWN FLOOR MAP
+══════════════════════════════════════════ -->
+<section class="slide s-floormap" id="s7">
+  <div class="slide-num">07 / 09</div>
+
+  <div class="slide-hdr">
+    <div class="eyebrow">Architectural Floor Map · All 5 Zones · Pricing Overlay</div>
+    <h2>Venue Zone Master Plan</h2>
+    <p class="intro">Top-down layout with PrimeTurf coverage measurement overlays, zone identifiers, pricing tiers, and installation sequencing.</p>
+  </div>
+
+  <div class="slide-body">
+    <div class="floor-svg-wrap">
+      <!-- ████ 3D TOP-DOWN FLOOR SVG ████ -->
+      <svg width="100%" viewBox="0 0 900 580" xmlns="http://www.w3.org/2000/svg" style="max-height:560px">
+        <defs>
+          <!-- Turf fills -->
+          <pattern id="tfA" patternUnits="userSpaceOnUse" width="6" height="6">
+            <rect width="6" height="6" fill="#1A3A2A"/>
+            <line x1="0" y1="3" x2="6" y2="3" stroke="#2d6b43" stroke-width="0.5"/>
+            <line x1="3" y1="0" x2="3" y2="6" stroke="#2d6b43" stroke-width="0.5" opacity="0.4"/>
+          </pattern>
+          <pattern id="tfB" patternUnits="userSpaceOnUse" width="6" height="6">
+            <rect width="6" height="6" fill="#163228"/>
+            <line x1="0" y1="3" x2="6" y2="3" stroke="#24563e" stroke-width="0.6"/>
+          </pattern>
+          <pattern id="tfC" patternUnits="userSpaceOnUse" width="5" height="5">
+            <rect width="5" height="5" fill="#0e2a1c"/>
+            <rect x="0" y="2" width="2.5" height="1.5" fill="#1e5c36" opacity="0.6"/>
+          </pattern>
+          <pattern id="tfE" patternUnits="userSpaceOnUse" width="8" height="8">
+            <rect width="8" height="8" fill="#1A3A2A"/>
+            <circle cx="4" cy="4" r="1" fill="#2d6b43" opacity="0.5"/>
+          </pattern>
+          <!-- Glows -->
+          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="glowCN" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="4" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <!-- Gradients -->
+          <linearGradient id="wallG" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#2a2a2a"/>
+            <stop offset="100%" stop-color="#1a1a1a"/>
+          </linearGradient>
+        </defs>
+
+        <!-- ── OUTER WALLS ── -->
+        <rect x="30" y="30" width="840" height="520" fill="#111" rx="4" stroke="#333" stroke-width="2"/>
+
+        <!-- COMPASS + NORTH -->
+        <text x="862" y="48" fill="#C9A44A" font-family="monospace" font-size="9" text-anchor="middle" opacity="0.5">N ↑</text>
+        <line x1="862" y1="52" x2="862" y2="64" stroke="#C9A44A" stroke-width="1" opacity="0.3"/>
+
+        <!-- ══ ZONE A — ENTRANCE CORRIDOR (bottom) ══ -->
+        <rect x="50" y="460" width="800" height="70" fill="url(#tfA)" rx="2"/>
+        <!-- LED perimeter glow -->
+        <rect x="50" y="460" width="800" height="70" fill="none" stroke="#C9A44A" stroke-width="2" rx="2" opacity="0.5" filter="url(#glow)"/>
+        <!-- Grid overlay -->
+        <line x1="210" y1="460" x2="210" y2="530" stroke="rgba(0,200,255,0.15)" stroke-width="1"/>
+        <line x1="370" y1="460" x2="370" y2="530" stroke="rgba(0,200,255,0.15)" stroke-width="1"/>
+        <line x1="530" y1="460" x2="530" y2="530" stroke="rgba(0,200,255,0.15)" stroke-width="1"/>
+        <line x1="690" y1="460" x2="690" y2="530" stroke="rgba(0,200,255,0.15)" stroke-width="1"/>
+        <!-- Zone Label -->
+        <rect x="50" y="460" width="160" height="22" fill="rgba(201,164,74,0.85)" rx="1"/>
+        <text x="58" y="475" fill="#000" font-family="monospace" font-size="9" font-weight="700" letter-spacing="1">ZONE A · ENTRANCE</text>
+        <!-- Dimension lines -->
+        <line x1="52" y1="538" x2="848" y2="538" stroke="#C9A44A" stroke-width="0.5" stroke-dasharray="3,3" opacity="0.5"/>
+        <text x="450" y="550" fill="#C9A44A" font-family="monospace" font-size="8" text-anchor="middle" opacity="0.7">15.0m</text>
+        <line x1="856" y1="462" x2="856" y2="530" stroke="#C9A44A" stroke-width="0.5" stroke-dasharray="3,3" opacity="0.5"/>
+        <text x="874" y="500" fill="#C9A44A" font-family="monospace" font-size="8" text-anchor="middle" opacity="0.7">4.8m</text>
+        <!-- sqm badge -->
+        <rect x="700" y="480" width="80" height="28" fill="rgba(201,164,74,0.1)" stroke="rgba(201,164,74,0.3)" stroke-width="1" rx="1"/>
+        <text x="740" y="491" fill="#C9A44A" font-family="monospace" font-size="8" text-anchor="middle">72 m²</text>
+        <text x="740" y="503" fill="rgba(201,164,74,0.6)" font-family="monospace" font-size="7" text-anchor="middle">40mm Pro</text>
+
+        <!-- Entrance gate element -->
+        <rect x="390" y="452" width="120" height="12" fill="#B8902A" rx="1"/>
+        <text x="450" y="461" fill="#000" font-family="monospace" font-size="7" text-anchor="middle" font-weight="700">ENTRY GATE · LED SIGNAGE</text>
+
+        <!-- ══ ZONE B — STAIRCASE (left side) ══ -->
+        <rect x="50" y="310" width="140" height="145" fill="url(#tfB)" rx="2"/>
+        <rect x="50" y="310" width="140" height="145" fill="none" stroke="rgba(0,200,255,0.5)" stroke-width="1.5" rx="2"/>
+        <!-- Stair lines -->
+        <line x1="50" y1="330" x2="190" y2="330" stroke="rgba(0,200,255,0.2)" stroke-width="1"/>
+        <line x1="50" y1="355" x2="190" y2="355" stroke="rgba(0,200,255,0.2)" stroke-width="1"/>
+        <line x1="50" y1="380" x2="190" y2="380" stroke="rgba(0,200,255,0.2)" stroke-width="1"/>
+        <line x1="50" y1="405" x2="190" y2="405" stroke="rgba(0,200,255,0.2)" stroke-width="1"/>
+        <line x1="50" y1="430" x2="190" y2="430" stroke="rgba(0,200,255,0.2)" stroke-width="1"/>
+        <!-- LED nosing lines (gold) -->
+        <line x1="52" y1="330" x2="188" y2="330" stroke="#C9A44A" stroke-width="1.5" opacity="0.7" filter="url(#glow)"/>
+        <line x1="52" y1="355" x2="188" y2="355" stroke="#C9A44A" stroke-width="1.5" opacity="0.7" filter="url(#glow)"/>
+        <line x1="52" y1="380" x2="188" y2="380" stroke="#C9A44A" stroke-width="1.5" opacity="0.7" filter="url(#glow)"/>
+        <line x1="52" y1="405" x2="188" y2="405" stroke="#C9A44A" stroke-width="1.5" opacity="0.7" filter="url(#glow)"/>
+        <line x1="52" y1="430" x2="188" y2="430" stroke="#C9A44A" stroke-width="1.5" opacity="0.7" filter="url(#glow)"/>
+        <!-- Handrail lines -->
+        <line x1="80"  y1="314" x2="80"  y2="455" stroke="#B8902A" stroke-width="2" opacity="0.6"/>
+        <line x1="160" y1="314" x2="160" y2="455" stroke="#B8902A" stroke-width="2" opacity="0.6"/>
+        <!-- Zone label -->
+        <rect x="50" y="310" width="140" height="20" fill="rgba(0,100,168,0.85)" rx="1 1 0 0"/>
+        <text x="120" y="323" fill="#fff" font-family="monospace" font-size="8" text-anchor="middle" font-weight="700">ZONE B · STAIRS</text>
+        <!-- sqm -->
+        <text x="120" y="400" fill="rgba(0,200,255,0.8)" font-family="monospace" font-size="9" text-anchor="middle" font-weight="700">27m²</text>
+        <text x="120" y="412" fill="rgba(0,200,255,0.5)" font-family="monospace" font-size="7" text-anchor="middle">15mm Elite Weave</text>
+        <!-- KL monogram indicator -->
+        <circle cx="120" cy="360" r="14" fill="none" stroke="#C9A44A" stroke-width="1" opacity="0.5"/>
+        <text x="120" y="365" fill="#C9A44A" font-family="serif" font-size="10" text-anchor="middle" font-weight="700">K.L.</text>
+
+        <!-- ══ ZONE D — FEATURE PILLARS (hallway) ══ -->
+        <!-- Pillar circles arranged in corridor -->
+        <rect x="195" y="310" width="280" height="145" fill="rgba(26,26,26,0.7)" rx="2" stroke="rgba(201,164,74,0.15)" stroke-width="1"/>
+        <rect x="195" y="310" width="280" height="20" fill="rgba(120,90,30,0.6)" rx="1"/>
+        <text x="335" y="323" fill="#E2C06A" font-family="monospace" font-size="8" text-anchor="middle" font-weight="700">ZONE D · HALLWAY + PILLARS</text>
+        <!-- Pillar elements -->
+        <circle cx="250" cy="382" r="18" fill="url(#tfA)" stroke="#C9A44A" stroke-width="2"/>
+        <circle cx="250" cy="382" r="8" fill="rgba(0,0,0,0.4)"/>
+        <text x="250" y="386" fill="#C9A44A" font-family="serif" font-size="8" text-anchor="middle">PT</text>
+        <circle cx="335" cy="382" r="18" fill="url(#tfA)" stroke="#C9A44A" stroke-width="2"/>
+        <circle cx="335" cy="382" r="8" fill="rgba(0,0,0,0.4)"/>
+        <text x="335" y="386" fill="#C9A44A" font-family="serif" font-size="8" text-anchor="middle">KL</text>
+        <circle cx="420" cy="382" r="18" fill="url(#tfA)" stroke="#C9A44A" stroke-width="2"/>
+        <circle cx="420" cy="382" r="8" fill="rgba(0,0,0,0.4)"/>
+        <text x="420" y="386" fill="#C9A44A" font-family="serif" font-size="8" text-anchor="middle">PT</text>
+
+        <!-- ══ ZONE C — OUTDOOR TERRACE / BAR (top portion) ══ -->
+        <rect x="50" y="50" width="800" height="250" fill="url(#tfC)" rx="2"/>
+        <rect x="50" y="50" width="800" height="250" fill="none" stroke="rgba(45,107,67,0.6)" stroke-width="2" rx="2"/>
+        <!-- Zone label -->
+        <rect x="50" y="50" width="200" height="22" fill="rgba(30,92,54,0.9)" rx="1"/>
+        <text x="60" y="65" fill="#fff" font-family="monospace" font-size="9" font-weight="700" letter-spacing="0.5">ZONE C · TERRACE + BAR</text>
+        <!-- sqm badge -->
+        <rect x="700" y="60" width="120" height="32" fill="rgba(45,107,67,0.2)" stroke="rgba(45,107,67,0.4)" stroke-width="1" rx="1"/>
+        <text x="760" y="73" fill="#2d7a4e" font-family="monospace" font-size="9" text-anchor="middle" font-weight="700">72 m²</text>
+        <text x="760" y="85" fill="rgba(45,107,67,0.7)" font-family="monospace" font-size="7" text-anchor="middle">40mm Pro Pile</text>
+        <!-- Bar counter shape -->
+        <rect x="600" y="80" width="220" height="60" fill="#1a1a1a" stroke="#C9A44A" stroke-width="1.5" rx="2"/>
+        <rect x="600" y="80" width="220" height="16" fill="rgba(201,164,74,0.2)" rx="1"/>
+        <text x="710" y="92" fill="#C9A44A" font-family="monospace" font-size="8" text-anchor="middle">BAR COUNTER</text>
+        <!-- Table arrangement -->
+        <circle cx="130" cy="135" r="22" fill="rgba(26,26,26,0.8)" stroke="#C9A44A" stroke-width="1" opacity="0.7"/>
+        <circle cx="230" cy="135" r="22" fill="rgba(26,26,26,0.8)" stroke="#C9A44A" stroke-width="1" opacity="0.7"/>
+        <circle cx="330" cy="135" r="22" fill="rgba(26,26,26,0.8)" stroke="#C9A44A" stroke-width="1" opacity="0.7"/>
+        <circle cx="430" cy="135" r="22" fill="rgba(26,26,26,0.8)" stroke="#C9A44A" stroke-width="1" opacity="0.7"/>
+        <circle cx="130" cy="215" r="22" fill="rgba(26,26,26,0.8)" stroke="#C9A44A" stroke-width="1" opacity="0.7"/>
+        <circle cx="230" cy="215" r="22" fill="rgba(26,26,26,0.8)" stroke="#C9A44A" stroke-width="1" opacity="0.7"/>
+        <circle cx="330" cy="215" r="22" fill="rgba(26,26,26,0.8)" stroke="#C9A44A" stroke-width="1" opacity="0.7"/>
+        <circle cx="430" cy="215" r="22" fill="rgba(26,26,26,0.8)" stroke="#C9A44A" stroke-width="1" opacity="0.7"/>
+        <!-- String lights indicator -->
+        <path d="M55,75 Q200,58 350,72 Q500,78 650,62 Q750,55 840,70" stroke="#FFD700" stroke-width="1.5" fill="none" stroke-dasharray="3,5" opacity="0.4"/>
+        <text x="450" y="58" fill="rgba(255,215,0,0.4)" font-family="monospace" font-size="7" text-anchor="middle">string light canopy ↑ preserved</text>
+        <!-- LED perimeter of terrace -->
+        <rect x="52" y="52" width="796" height="246" fill="none" stroke="#C9A44A" stroke-width="1.5" rx="2" opacity="0.3" filter="url(#glow)"/>
+
+        <!-- ══ ZONE E — VIP LOUNGE (centre-right) ══ -->
+        <rect x="480" y="310" width="370" height="145" fill="url(#tfE)" rx="2"/>
+        <rect x="480" y="310" width="370" height="145" fill="none" stroke="#C9A44A" stroke-width="2" rx="2" filter="url(#glow)"/>
+        <!-- Zone label -->
+        <rect x="480" y="310" width="370" height="22" fill="rgba(201,164,74,0.9)" rx="1 1 0 0"/>
+        <text x="665" y="324" fill="#000" font-family="monospace" font-size="9" text-anchor="middle" font-weight="700">ZONE E · VIP LOUNGE INTERIOR ★</text>
+        <!-- Seating clusters -->
+        <rect x="500" y="345" width="70" height="50" fill="rgba(0,0,0,0.5)" stroke="rgba(201,164,74,0.4)" stroke-width="1" rx="2"/>
+        <text x="535" y="365" fill="rgba(201,164,74,0.6)" font-family="monospace" font-size="7" text-anchor="middle">SEAT</text>
+        <text x="535" y="377" fill="rgba(201,164,74,0.6)" font-family="monospace" font-size="7" text-anchor="middle">CLUSTER</text>
+        <rect x="590" y="345" width="70" height="50" fill="rgba(0,0,0,0.5)" stroke="rgba(201,164,74,0.4)" stroke-width="1" rx="2"/>
+        <text x="625" y="365" fill="rgba(201,164,74,0.6)" font-family="monospace" font-size="7" text-anchor="middle">SEAT</text>
+        <text x="625" y="377" fill="rgba(201,164,74,0.6)" font-family="monospace" font-size="7" text-anchor="middle">CLUSTER</text>
+        <rect x="680" y="345" width="70" height="50" fill="rgba(0,0,0,0.5)" stroke="rgba(201,164,74,0.4)" stroke-width="1" rx="2"/>
+        <text x="715" y="365" fill="rgba(201,164,74,0.6)" font-family="monospace" font-size="7" text-anchor="middle">SEAT</text>
+        <text x="715" y="377" fill="rgba(201,164,74,0.6)" font-family="monospace" font-size="7" text-anchor="middle">CLUSTER</text>
+        <!-- sqm badge -->
+        <rect x="770" y="345" width="70" height="40" fill="rgba(201,164,74,0.1)" stroke="rgba(201,164,74,0.4)" stroke-width="1" rx="1"/>
+        <text x="805" y="360" fill="#C9A44A" font-family="monospace" font-size="9" text-anchor="middle" font-weight="700">75 m²</text>
+        <text x="805" y="374" fill="rgba(201,164,74,0.6)" font-family="monospace" font-size="7" text-anchor="middle">20mm Indoor</text>
+        <!-- Bar surround in VIP -->
+        <rect x="500" y="408" width="200" height="35" fill="rgba(26,26,26,0.8)" stroke="#C9A44A" stroke-width="1.5" rx="1"/>
+        <text x="600" y="420" fill="#C9A44A" font-family="monospace" font-size="7" text-anchor="middle">BAR SURROUND · TURF CLADDING + GOLD REVEAL</text>
+        <!-- Floor medallion -->
+        <circle cx="820" cy="420" r="20" fill="none" stroke="#C9A44A" stroke-width="2" filter="url(#glow)"/>
+        <circle cx="820" cy="420" r="8" fill="rgba(201,164,74,0.2)"/>
+        <text x="820" y="424" fill="#C9A44A" font-family="serif" font-size="8" text-anchor="middle" font-weight="700">PT</text>
+        <text x="820" y="448" fill="rgba(201,164,74,0.5)" font-family="monospace" font-size="6" text-anchor="middle">MEDALLION</text>
+
+        <!-- ══ DIMENSION + TOTAL ══ -->
+        <!-- Total sqm -->
+        <rect x="350" y="380" width="120" height="55" fill="rgba(0,30,18,0.9)" stroke="#C9A44A" stroke-width="1.5" rx="2"/>
+        <text x="410" y="400" fill="rgba(201,164,74,0.6)" font-family="monospace" font-size="7" text-anchor="middle">TOTAL COVERAGE</text>
+        <text x="410" y="420" fill="#C9A44A" font-family="monospace" font-size="18" text-anchor="middle" font-weight="700">271m²</text>
+        <text x="410" y="432" fill="rgba(0,200,255,0.6)" font-family="monospace" font-size="7" text-anchor="middle">5 ZONES · 8 DAYS</text>
+
+        <!-- CN orbital indicator -->
+        <circle cx="450" cy="300" r="0" fill="none"/>
+        <circle cx="148" cy="390" r="28" fill="none" stroke="rgba(0,200,255,0.2)" stroke-width="1" stroke-dasharray="3,4"/>
+
+        <!-- Legend -->
+        <rect x="610" y="485" width="240" height="60" fill="rgba(0,0,0,0.6)" stroke="rgba(255,255,255,0.05)" stroke-width="1" rx="2"/>
+        <rect x="618" y="493" width="10" height="6" fill="url(#tfA)"/>
+        <text x="634" y="500" fill="rgba(245,242,236,0.5)" font-family="monospace" font-size="7">PrimeTurf installed zones</text>
+        <line x1="618" y1="509" x2="628" y2="509" stroke="#C9A44A" stroke-width="2" filter="url(#glow)"/>
+        <text x="634" y="512" fill="rgba(245,242,236,0.5)" font-family="monospace" font-size="7">LED reveal / nosing strip</text>
+        <circle cx="623" cy="524" r="5" fill="none" stroke="#C9A44A" stroke-width="1"/>
+        <text x="634" y="527" fill="rgba(245,242,236,0.5)" font-family="monospace" font-size="7">Feature pillar (clad)</text>
+
+        <!-- Branding badge -->
+        <text x="450" y="570" fill="rgba(201,164,74,0.25)" font-family="monospace" font-size="8" text-anchor="middle" letter-spacing="3">PRIMETURF SA × CONNECTION NETWORK · KOPANO LOUNGE · 2026</text>
+      </svg>
+    </div>
+
+    <!-- PRICING TABLE -->
+    <div class="pricing-grid" style="margin-top:16px">
+      <div class="price-card">
+        <div class="price-zone">Zone A</div>
+        <div class="price-name">Entrance Corridor</div>
+        <div class="price-sqm">72m² · 40mm Pro Pile</div>
+        <div class="price-val">R 145,000</div>
+        <div class="price-tier">Tier 1 · Priority Install</div>
+        <div class="price-note">✓ Included: LED reveal + signage panel</div>
+      </div>
+      <div class="price-card">
+        <div class="price-zone">Zone B</div>
+        <div class="price-name">Staircase + Corridor</div>
+        <div class="price-sqm">27m² · 15mm Elite Weave</div>
+        <div class="price-val">R 85,000</div>
+        <div class="price-tier">Tier 2 · Incl. LED nosing</div>
+        <div class="price-note">✓ Incl: vinyl banister wrap + wayfinding</div>
+      </div>
+      <div class="price-card featured">
+        <div class="price-zone">Zone C</div>
+        <div class="price-name">Outdoor Terrace + Bar</div>
+        <div class="price-sqm">72m² · 40mm Outdoor Pro</div>
+        <div class="price-val">R 165,000</div>
+        <div class="price-tier">★ Highest Visual ROI</div>
+        <div class="price-note">✓ Incl: LED perimeter + bar cladding</div>
+      </div>
+      <div class="price-card">
+        <div class="price-zone">Zone D</div>
+        <div class="price-name">Feature Pillars + Hallway</div>
+        <div class="price-sqm">Custom · Per pillar spec</div>
+        <div class="price-val">R 45,000</div>
+        <div class="price-tier">Tier 3 · Custom cut</div>
+        <div class="price-note">✓ Incl: gold trim + co-brand vinyl</div>
+      </div>
+      <div class="price-card featured">
+        <div class="price-zone">Zone E</div>
+        <div class="price-name">VIP Lounge Interior</div>
+        <div class="price-sqm">75m² · 20mm Indoor Elite</div>
+        <div class="price-val">R 155,000</div>
+        <div class="price-tier">★ Crown Jewel · Case Study Zone</div>
+        <div class="price-note">✓ Incl: bar cladding + floor medallion</div>
+      </div>
+      <div class="price-card" style="background:linear-gradient(135deg,#0B3D2E,#061f14);border-left-color:var(--gold)">
+        <div class="price-zone" style="color:var(--gold)">Total Package</div>
+        <div class="price-name">All 5 Zones · Full Venue</div>
+        <div class="price-sqm">271m² · 8-Day Install</div>
+        <div class="price-val" style="font-size:24px">R 595,000</div>
+        <div class="price-tier">★ Full Venue Transformation</div>
+        <div class="price-note" style="color:var(--gold)">Photography + Reel Production included</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SLIDE 08 — BRAND SYSTEM
+══════════════════════════════════════════ -->
+<section class="slide s-brand" id="s8">
+  <div class="slide-num">08 / 09</div>
+
+  <div class="slide-hdr">
+    <div class="eyebrow">Brand Architecture · PrimeTurf × Connection Network</div>
+    <h2>Design System Reference</h2>
+    <p class="intro">The unified visual language governing every touchpoint across this venue transformation — from floor to signage to content output.</p>
+  </div>
+
+  <div class="slide-body">
+    <!-- PALETTE -->
+    <div style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:3px;color:var(--cn-silver);text-transform:uppercase;margin-bottom:12px">Colour System</div>
+    <div class="palette-strip">
+      <div class="swatch" style="background:#0B3D2E">
+        <div class="sw-name" style="color:#fff">PT Green</div>
+        <div class="sw-hex" style="color:rgba(255,255,255,0.5)">#0B3D2E</div>
+      </div>
+      <div class="swatch" style="background:#1A3A2A">
+        <div class="sw-name" style="color:#fff">Forest</div>
+        <div class="sw-hex" style="color:rgba(255,255,255,0.5)">#1A3A2A</div>
+      </div>
+      <div class="swatch" style="background:#C9A44A">
+        <div class="sw-name" style="color:#000">Gold</div>
+        <div class="sw-hex" style="color:rgba(0,0,0,0.5)">#C9A44A</div>
+      </div>
+      <div class="swatch" style="background:#E2C06A">
+        <div class="sw-name" style="color:#000">Gold Light</div>
+        <div class="sw-hex" style="color:rgba(0,0,0,0.5)">#E2C06A</div>
+      </div>
+      <div class="swatch" style="background:#00C8FF">
+        <div class="sw-name" style="color:#000">CN Blue</div>
+        <div class="sw-hex" style="color:rgba(0,0,0,0.5)">#00C8FF</div>
+      </div>
+      <div class="swatch" style="background:#8EA8C0">
+        <div class="sw-name" style="color:#000">CN Silver</div>
+        <div class="sw-hex" style="color:rgba(0,0,0,0.5)">#8EA8C0</div>
+      </div>
+      <div class="swatch" style="background:#F5F2EC">
+        <div class="sw-name" style="color:#1a1a1a">Ivory</div>
+        <div class="sw-hex" style="color:rgba(0,0,0,0.5)">#F5F2EC</div>
+      </div>
+      <div class="swatch" style="background:#0D0D0D;border:1px solid #222">
+        <div class="sw-name" style="color:#fff">Charcoal</div>
+        <div class="sw-hex" style="color:rgba(255,255,255,0.4)">#0D0D0D</div>
+      </div>
+    </div>
+
+    <!-- LIGHTING SYSTEM -->
+    <div style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:3px;color:var(--cn-silver);text-transform:uppercase;margin-bottom:12px">Lighting System · Dual-Tone Architecture</div>
+    <div class="light-system" style="margin-bottom:32px">
+      <div class="light-card warm">
+        <div class="light-temp">2700K</div>
+        <div class="light-label">Warm Ambient — Zone Presence</div>
+        <div class="light-desc">Applied at: Entrance downlights, terrace perimeter LED, stair nosing strips, VIP seating zone wash. Creates hospitality warmth and organic connection to turf surface.</div>
+        <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+          <span class="tag">Entrance</span>
+          <span class="tag">Terrace</span>
+          <span class="tag">Staircase</span>
+          <span class="tag">VIP Floor</span>
+        </div>
+      </div>
+      <div class="light-card cool">
+        <div class="light-temp">4000K</div>
+        <div class="light-label" style="color:var(--cn-blue)">Futuristic Accent — CN Identity</div>
+        <div class="light-desc">Applied at: Monogram backlighting, feature wall signage, directional wayfinding, pillar base accents. Projects the Connection Network's orbital / holographic identity language.</div>
+        <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+          <span class="tag cn">KL Monogram</span>
+          <span class="tag cn">Feature Wall</span>
+          <span class="tag cn">Wayfinding</span>
+          <span class="tag cn">Pillars</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TYPOGRAPHY -->
+    <div style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:3px;color:var(--cn-silver);text-transform:uppercase;margin-bottom:12px">Typography System</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2px;margin-bottom:32px">
+      <div style="background:var(--smoke);padding:28px 24px">
+        <div style="font-family:'Cinzel',serif;font-size:28px;font-weight:700;color:var(--gold);margin-bottom:6px">Cinzel</div>
+        <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--cn-silver);letter-spacing:2px;margin-bottom:10px">HEADERS · ZONE IDS · PRICES</div>
+        <div style="font-size:12px;color:var(--ivory-dim);line-height:1.6">Authority, permanence, and brand gravitas. Used for all section titles, zone identifiers, and price figures where exclusivity must be communicated.</div>
+      </div>
+      <div style="background:var(--smoke);padding:28px 24px">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;font-weight:300;color:var(--ivory);margin-bottom:6px">Cormorant Garamond</div>
+        <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--cn-silver);letter-spacing:2px;margin-bottom:10px">CAPTIONS · ASPIRATIONAL COPY</div>
+        <div style="font-size:12px;color:var(--ivory-dim);line-height:1.6">Bridges Cinzel's structural rigidity with body text utility. Signals luxury without pretension — used for all aspirational narrative and zone introductions.</div>
+      </div>
+      <div style="background:var(--smoke);padding:28px 24px">
+        <div style="font-family:'Space Mono',monospace;font-size:16px;font-weight:700;color:var(--cn-blue);margin-bottom:6px">Space Mono</div>
+        <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--cn-silver);letter-spacing:2px;margin-bottom:10px">DATA · SPECS · CN IDENTITY</div>
+        <div style="font-size:12px;color:var(--ivory-dim);line-height:1.6">Technical precision and CN futuristic identity. Applied to measurements, sqm data, price tiers, installation specs, and all Connection Network labelling.</div>
+      </div>
+    </div>
+
+    <!-- CN identity -->
+    <div style="text-align:center;padding:32px;background:linear-gradient(135deg,#030a14,#050f1f);border:1px solid rgba(0,200,255,0.15)">
+      <div style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:4px;color:var(--cn-silver);text-transform:uppercase;margin-bottom:20px">Connection Network Identity Motif</div>
+      <svg width="200" height="80" viewBox="0 0 200 80" style="display:block;margin:0 auto 16px">
+        <circle cx="100" cy="40" r="35" fill="none" stroke="rgba(0,200,255,0.2)" stroke-width="1"/>
+        <circle cx="100" cy="40" r="25" fill="none" stroke="rgba(0,200,255,0.3)" stroke-width="1" stroke-dasharray="4,4"/>
+        <circle cx="100" cy="40" r="8" fill="rgba(0,200,255,0.15)" stroke="rgba(0,200,255,0.5)" stroke-width="1"/>
+        <ellipse cx="100" cy="40" rx="35" ry="12" fill="none" stroke="rgba(0,200,255,0.15)" stroke-width="1"/>
+        <circle cx="135" cy="40" r="4" fill="rgba(0,200,255,0.6)"/>
+        <circle cx="65" cy="40" r="4" fill="rgba(201,164,74,0.6)"/>
+        <circle cx="100" cy="12" r="3" fill="rgba(0,200,255,0.4)"/>
+        <line x1="100" y1="40" x2="135" y2="40" stroke="rgba(0,200,255,0.2)" stroke-width="1"/>
+        <line x1="100" y1="40" x2="65" y2="40" stroke="rgba(201,164,74,0.2)" stroke-width="1"/>
+        <line x1="100" y1="40" x2="100" y2="12" stroke="rgba(0,200,255,0.2)" stroke-width="1"/>
+      </svg>
+      <div style="font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600;letter-spacing:4px;color:var(--cn-blue);text-transform:uppercase">Orbital · Holographic · Earth Network</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:var(--ivory-dim);margin-top:8px">Connecting premium brands to premium audiences across Gauteng hospitality.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SLIDE 09 — CTA / CONTACT
+══════════════════════════════════════════ -->
+<section class="slide s-cta" id="s9">
+  <div class="orbit-wrap">
+    <div class="orbit orbit-1" style="opacity:0.4"></div>
+    <div class="orbit orbit-2" style="opacity:0.3"></div>
+  </div>
+
+  <div class="cta-inner">
+    <div class="cta-badge">Ready to Transform · Kopano Lounge × PrimeTurf</div>
+
+    <h2 class="cta-h">
+      Luxury Living.<br>
+      <span style="color:var(--gold)">Lifestyle Enhancement.</span>
+    </h2>
+
+    <p class="cta-sub">
+      271m² across 5 zones. 8 days to complete transformation.<br>
+      The Connection Network documents every step — before, during, and after.
+    </p>
+
+    <div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:40px">
+      <div class="cn-mark">
+        <div class="cn-dot"></div>
+        <span class="cn-mark-text">Connection Network · Active</span>
+      </div>
+    </div>
+
+    <div class="contact-row">
+      <a href="https://www.primeturf.co.za" class="contact-btn primary" target="_blank">
+        🌐 www.primeturf.co.za
+      </a>
+      <a href="https://wa.me/27768048868" class="contact-btn secondary" target="_blank">
+        📱 WhatsApp 076 804 8868
+      </a>
+    </div>
+
+    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:40px">
+      <span class="tag">5 Zones</span>
+      <span class="tag">271m² Coverage</span>
+      <span class="tag">8 Day Install</span>
+      <span class="tag cn">CN Documented</span>
+      <span class="tag cn">Before / After Reel</span>
+      <span class="tag ok">+68% Visual Premium</span>
+    </div>
+
+    <div class="footer-line">
+      PrimeTurf SA · social@primeturf.co.za · www.primeturf.co.za<br>
+      WhatsApp: 076 804 8868 · Gauteng & Cape Town<br>
+      <span style="color:var(--cn-blue)">The Connection Network</span> · Kopano Lounge Flagship Case Study · Pretoria 2026<br>
+      Prepared by Prime T · Tedani Digital Operations · Confidential
+    </div>
+  </div>
+</section>
+
+<script>
+// Nav dot highlighting on scroll
+const dots = document.querySelectorAll('.nd');
+const slides = document.querySelectorAll('.slide');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      const idx = Array.from(slides).indexOf(entry.target);
+      dots.forEach((d,i) => d.classList.toggle('active', i === idx));
+    }
+  });
+}, { threshold: 0.4 });
+slides.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

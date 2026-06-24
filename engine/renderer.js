@@ -197,17 +197,27 @@ function renderClosing(data) {
 /* Brand separation footer — lists each execution partner as an
    independent mark; TCN appears only as the coordinating layer beneath. */
 function renderBrandFooter(data) {
-  const partners = [...new Set(data.modules.map((m) => m.partner))];
+  const seen = new Set();
+  const partners = data.modules.filter((m) => {
+    if (seen.has(m.partner)) return false;
+    seen.add(m.partner);
+    return true;
+  });
   return `
   <div class="brand-footer">
     <div class="bf-label">Independently Delivered By</div>
     <div class="bf-partners">
-      ${partners.map((p) => `
-        <div class="bf-partner">
-          <div class="bf-mark">${escapeHtml(p[0])}</div>
-          <div class="bf-name">${escapeHtml(p)}</div>
-        </div>
-      `).join('')}
+      ${partners.map((m) => {
+        const accent = m.accentColor || '#A8BDD0';
+        const inner = `
+          <div class="bf-mark" style="border-color:${accent}; color:${accent};">${escapeHtml(m.partner[0])}</div>
+          <div class="bf-name">${escapeHtml(m.partner)}</div>
+          ${m.deckUrl ? '<div class="bf-view">View Proposal &rarr;</div>' : ''}
+        `;
+        return m.deckUrl
+          ? `<a class="bf-partner bf-partner-link" href="${escapeHtml(m.deckUrl)}" target="_blank" rel="noopener">${inner}</a>`
+          : `<div class="bf-partner">${inner}</div>`;
+      }).join('')}
     </div>
     <div class="bf-powered">Powered under <strong>${escapeHtml(data.master.name)}</strong></div>
   </div>`;

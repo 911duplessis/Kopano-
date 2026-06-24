@@ -158,6 +158,12 @@ body {
 .zone-card.zone-total .zone-tier { color: rgba(4,6,10,0.7); }
 .zone-card.zone-total .zone-price { color: var(--void); font-size: 19px; }
 
+/* ─── DECK LINK (within a division card, opens partner's own branded proposal) ─── */
+.deck-link { margin-top: 24px; display: flex; align-items: center; justify-content: space-between; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mod-accent); border: 1px solid var(--mod-accent); padding: 12px 16px; text-decoration: none; transition: opacity 0.15s; }
+.deck-link:hover { opacity: 0.75; }
+.deck-link-arrow { transition: transform 0.15s; }
+.deck-link:hover .deck-link-arrow { transform: translateX(3px); }
+
 /* ─── BEFORE / AFTER SLIDER ─── */
 .ba-slider { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; border: 1px solid var(--border2); user-select: none; touch-action: none; background: var(--deep); }
 .ba-slider img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
@@ -234,8 +240,12 @@ body {
 .bf-label { font-family: 'Space Mono', monospace; font-size: 8.5px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); margin-bottom: 28px; text-align: center; }
 .bf-partners { display: flex; justify-content: center; align-items: center; gap: 36px; flex-wrap: wrap; margin-bottom: 28px; }
 .bf-partner { display: flex; flex-direction: column; align-items: center; gap: 6px; opacity: 0.85; }
-.bf-partner .bf-mark { width: 34px; height: 34px; border: 1px solid var(--border2); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.bf-partner .bf-mark { width: 34px; height: 34px; border: 1px solid var(--border2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Barlow Condensed', sans-serif; font-weight: 600; }
 .bf-partner .bf-name { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--silver-lo); }
+.bf-partner-link { text-decoration: none; cursor: pointer; transition: opacity 0.15s, transform 0.15s; }
+.bf-partner-link:hover { opacity: 1; transform: translateY(-2px); }
+.bf-view { font-family: 'Space Mono', monospace; font-size: 7.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.bf-partner-link:hover .bf-view { color: var(--blue-hi); }
 .bf-powered { text-align: center; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
 .bf-powered strong { color: var(--blue-hi); }
 
