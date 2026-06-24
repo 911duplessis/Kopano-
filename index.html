@@ -289,6 +289,19 @@ body {
   font-weight: 700;
 }
 
+.add-flag {
+  position: absolute;
+  top: 0; right: 28px;
+  background: var(--accent2);
+  color: var(--white);
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  font-weight: 700;
+}
+
 .option-number {
   font-family: 'Space Mono', monospace;
   font-size: 9px;
@@ -785,6 +798,7 @@ body {
       <span class="badge"><span class="node navy"></span>Risk: Low – Medium</span>
       <span class="badge"><span class="node"></span>Delivery confidence: 92%</span>
       <span class="badge"><span class="node amber"></span>Site: Kopana Club, Blairgowrie</span>
+      <span class="badge"><span class="node navy"></span>Addendum: DJ Box Wiring</span>
     </div>
   </div>
 
@@ -804,6 +818,9 @@ body {
   <h2 class="section-title">One exposed cable.<br><em>Multiple liabilities.</em></h2>
   <p class="section-body">
     A 4m extension currently runs exposed from a wall plug to the counter — across an active staff and customer path. It is a trip hazard, a public liability exposure, and a compliance failure waiting to be triggered. The decision is not whether to fix it. It is how far to take the upgrade.
+  </p>
+  <p class="section-body">
+    A second finding surfaced during the site walk: the DJ box is running off a shared, unprotected circuit — sound and lighting equipment with no dedicated power or surge protection, and its own loose cable run across the booth floor. Scoped below as Addendum 01, alongside the counter fix.
   </p>
 
   <!-- Situation diagram SVG -->
@@ -847,7 +864,7 @@ body {
 <div class="section">
   <div class="section-label">Scope of Work</div>
   <h2 class="section-title">Two paths.<br>One clear answer.</h2>
-  <p class="section-body">Both options fully resolve the compliance issue. Selection depends on budget and appetite to activate the client-facing revenue channel.</p>
+  <p class="section-body">Both options fully resolve the compliance issue. Selection depends on budget and appetite to activate the client-facing revenue channel. Addendum 01 below — DJ box wiring — is a separate, confirmed finding that bundles with either option on the same site visit.</p>
 
   <div class="options-grid">
 
@@ -987,6 +1004,67 @@ body {
       <div class="acc-bar"><div class="acc-fill fill-navy" style="width:80%"></div></div>
     </div>
 
+    <!-- ADDENDUM 01 — DJ BOX WIRING (new finding, spans full width) -->
+    <div class="option-card" style="grid-column: 1 / -1;">
+      <div class="add-flag">Addendum 01</div>
+      <div class="option-number">Confirmed On Site Walk</div>
+      <div class="option-name">DJ Box Power Distribution</div>
+
+      <!-- Product mockup: DJ booth dedicated circuit -->
+      <div class="product-mockup">
+        <svg viewBox="0 0 900 150" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; display:block;">
+          <rect width="900" height="150" fill="#F4F2EE"/>
+          <!-- distribution board -->
+          <rect x="24" y="46" width="84" height="58" rx="2" fill="#ECEAE6" stroke="#D8D4CE" stroke-width="1"/>
+          <rect x="38" y="58" width="20" height="10" rx="1" fill="#A0A09A"/>
+          <rect x="38" y="74" width="20" height="10" rx="1" fill="#A0A09A"/>
+          <text x="66" y="118" text-anchor="middle" font-family="Space Mono,monospace" font-size="8" fill="#AAA79F" letter-spacing="1">DB BOARD</text>
+          <!-- dedicated circuit run -->
+          <path d="M108 75 Q300 50 500 70 Q650 86 760 60" stroke="#1C3F5E" stroke-width="3" stroke-dasharray="10 5" stroke-linecap="round"/>
+          <rect x="330" y="38" width="200" height="22" rx="2" fill="#1C3F5E" opacity=".9"/>
+          <text x="430" y="53" text-anchor="middle" font-family="Space Mono,monospace" font-size="8.5" fill="#C8A96E" letter-spacing="1">DEDICATED, SURGE-PROTECTED CIRCUIT</text>
+          <!-- DJ booth -->
+          <rect x="760" y="30" width="116" height="90" rx="2" fill="#ECEAE6" stroke="#D8D4CE" stroke-width="1"/>
+          <text x="818" y="24" text-anchor="middle" font-family="Space Mono,monospace" font-size="8" fill="#AAA79F" letter-spacing="1">DJ BOOTH</text>
+          <!-- power module -->
+          <rect x="772" y="42" width="92" height="30" rx="2" fill="#D0CCC6" stroke="#B8B4AE" stroke-width="1"/>
+          <text x="818" y="61" text-anchor="middle" font-family="Space Mono,monospace" font-size="7" fill="#6A6660" letter-spacing=".5">4-WAY ISOLATED MODULE</text>
+          <!-- equipment row -->
+          <rect x="772" y="80" width="26" height="18" rx="1" fill="#1C3F5E" opacity=".7"/>
+          <text x="785" y="92" text-anchor="middle" font-family="Space Mono,monospace" font-size="5.5" fill="white">MIX</text>
+          <rect x="802" y="80" width="26" height="18" rx="1" fill="#1C3F5E" opacity=".7"/>
+          <text x="815" y="92" text-anchor="middle" font-family="Space Mono,monospace" font-size="5.5" fill="white">AMP</text>
+          <rect x="832" y="80" width="26" height="18" rx="1" fill="#1C3F5E" opacity=".7"/>
+          <text x="845" y="92" text-anchor="middle" font-family="Space Mono,monospace" font-size="5.5" fill="white">LGT</text>
+          <!-- floor hazard removed marker -->
+          <line x1="760" y1="130" x2="876" y2="130" stroke="#C8A96E" stroke-width="2"/>
+          <text x="818" y="144" text-anchor="middle" font-family="Space Mono,monospace" font-size="7.5" fill="#9A9690" letter-spacing="1">LOOSE BOOTH CABLE — ELIMINATED</text>
+        </svg>
+      </div>
+
+      <ul class="scope-list">
+        <li><span class="tick">+</span>Dedicated circuit run — distribution board to DJ booth, concealed conduit</li>
+        <li><span class="tick">+</span>Isolated earth and surge protection for sound and lighting equipment</li>
+        <li><span class="tick">+</span>4-way recessed power module inside booth — mixer, amp, laptop, lighting controller</li>
+        <li><span class="tick">+</span>Cable management across booth floor and rear panel — hazard eliminated</li>
+        <li><span class="tick">+</span>Compliance sign-off bundled with the main installation visit</li>
+      </ul>
+
+      <div class="price-block">
+        <div>
+          <div class="price-label">Total Estimate</div>
+          <div class="price-value gold">R 2,600 – R 3,400</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="price-label">Bundle Note</div>
+          <div style="font-family:'Space Mono',monospace; font-size:13px; color:var(--accent2);">Single site visit with Option 01 or 02</div>
+        </div>
+      </div>
+
+      <div class="acc-label"><span>Likelihood of acceptance</span><span>75% est.</span></div>
+      <div class="acc-bar"><div class="acc-fill fill-navy" style="width:75%"></div></div>
+    </div>
+
   </div>
 </div>
 
@@ -1033,7 +1111,7 @@ body {
 <div class="section">
   <div class="section-label">Close Sequence</div>
   <h2 class="section-title">Budget-sensitive?<br><em>Phase it.</em></h2>
-  <p class="section-body">Close Option 2 immediately to remove the hazard. Return in two to three weeks with the USB upgrade proposal. Two invoices. One growing relationship.</p>
+  <p class="section-body">Close Option 2 immediately to remove the hazard. Return in two to three weeks with the USB upgrade proposal. Two invoices. One growing relationship. DJ box wiring rides along on whichever visit gets booked first — same crew, no extra call-out fee.</p>
 
   <div class="phase-row">
     <div class="phase-step">
@@ -1060,6 +1138,16 @@ body {
       <div class="phase-num">Phase 03 · Close</div>
       <div class="phase-title">Option 1 Delta</div>
       <div class="phase-sub">Incremental R 1,900 – 2,300 for the charging system. Client already trusts the work.</div>
+      <div class="phase-arrow">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5" stroke="#C0BDB8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+    <div class="phase-step">
+      <div class="phase-num">Addendum · Same Visit</div>
+      <div class="phase-title">DJ Box Wiring</div>
+      <div class="phase-sub">R 2,600 – 3,400. Bundled into whichever option closes — one crew, one invoice, no second call-out.</div>
     </div>
   </div>
 </div>
