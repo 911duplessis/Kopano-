@@ -15,7 +15,7 @@ function renderCover(data) {
     </svg>
     <div class="cover-top">
       <div class="tcn-mark">
-        ${m.logo ? `<img class="tcn-logo" src="${escapeHtml(m.logo)}" alt="${escapeHtml(m.name)}">` : `
+        ${m.logo ? `<div class="tcn-logo-plate"><img class="tcn-logo" src="${escapeHtml(m.logo)}" alt="${escapeHtml(m.name)}"></div>` : `
         <svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="27" cy="27" r="20" fill="#0C1828" stroke="#2E7FC0" stroke-width="1.2"/>
           <ellipse cx="27" cy="27" rx="20" ry="7.5" stroke="#2E7FC0" stroke-width="0.8" opacity=".5"/>
