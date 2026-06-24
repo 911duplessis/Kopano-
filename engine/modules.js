@@ -121,7 +121,10 @@ function renderModuleCard(mod, index) {
         <div class="line"></div>
       </div>
       <div class="div-name">${escapeHtml(mod.title)}</div>
-      <div class="div-partner-badge"><span class="mark"></span>${escapeHtml(mod.partner)} · Independent Execution Partner</div>
+      <div class="div-partner-badge">
+        ${mod.logo ? `<img class="badge-logo" src="${escapeHtml(mod.logo)}" alt="${escapeHtml(mod.partner)}">` : '<span class="mark"></span>'}
+        ${escapeHtml(mod.partner)} · Independent Execution Partner
+      </div>
       <div class="div-body">${escapeHtml(mod.body)}</div>
       <ul class="scope">${renderScopeList(mod.scope || [], accent)}</ul>
       ${renderPrice(mod.price)}

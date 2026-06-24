@@ -15,12 +15,13 @@ function renderCover(data) {
     </svg>
     <div class="cover-top">
       <div class="tcn-mark">
+        ${m.logo ? `<img class="tcn-logo" src="${escapeHtml(m.logo)}" alt="${escapeHtml(m.name)}">` : `
         <svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="27" cy="27" r="20" fill="#0C1828" stroke="#2E7FC0" stroke-width="1.2"/>
           <ellipse cx="27" cy="27" rx="20" ry="7.5" stroke="#2E7FC0" stroke-width="0.8" opacity=".5"/>
           <ellipse cx="27" cy="27" rx="28" ry="9" stroke="#5AB4FF" stroke-width="1.8" transform="rotate(-32 27 27)" opacity=".75"/>
           <circle cx="46" cy="17" r="2.8" fill="#5AB4FF"/>
-        </svg>
+        </svg>`}
         <div class="tcn-text">
           <div class="tcn-the">The</div>
           <div class="tcn-name">${escapeHtml(m.name.replace(/^The /, ''))}</div>
@@ -209,13 +210,18 @@ function renderBrandFooter(data) {
     <div class="bf-partners">
       ${partners.map((m) => {
         const accent = m.accentColor || '#A8BDD0';
+        const linkUrl = m.website || m.deckUrl;
+        const linkLabel = m.website ? 'Visit Website' : 'View Proposal';
+        const mark = m.logo
+          ? `<div class="bf-mark bf-mark-logo" style="border-color:${accent};"><img src="${escapeHtml(m.logo)}" alt="${escapeHtml(m.partner)}"></div>`
+          : `<div class="bf-mark" style="border-color:${accent}; color:${accent};">${escapeHtml(m.partner[0])}</div>`;
         const inner = `
-          <div class="bf-mark" style="border-color:${accent}; color:${accent};">${escapeHtml(m.partner[0])}</div>
+          ${mark}
           <div class="bf-name">${escapeHtml(m.partner)}</div>
-          ${m.deckUrl ? '<div class="bf-view">View Proposal &rarr;</div>' : ''}
+          ${linkUrl ? `<div class="bf-view">${linkLabel} &rarr;</div>` : ''}
         `;
-        return m.deckUrl
-          ? `<a class="bf-partner bf-partner-link" href="${escapeHtml(m.deckUrl)}" target="_blank" rel="noopener">${inner}</a>`
+        return linkUrl
+          ? `<a class="bf-partner bf-partner-link" href="${escapeHtml(linkUrl)}" target="_blank" rel="noopener">${inner}</a>`
           : `<div class="bf-partner">${inner}</div>`;
       }).join('')}
     </div>

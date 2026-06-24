@@ -66,6 +66,7 @@ body {
 .cover > * { position: relative; z-index: 1; }
 .cover-top { display: flex; justify-content: space-between; align-items: flex-start; }
 .tcn-mark { display: flex; align-items: center; gap: 16px; }
+.tcn-logo { width: 54px; height: 54px; object-fit: contain; }
 .tcn-text { display: flex; flex-direction: column; gap: 2px; }
 .tcn-the { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.4em; text-transform: uppercase; color: var(--silver-lo); }
 .tcn-name { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue-hi); line-height: 1; }
@@ -112,6 +113,7 @@ body {
 /* brand badge — kept visually separate, never merged with TCN identity */
 .div-partner-badge { display: inline-flex; align-items: center; gap: 7px; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.14em; color: var(--muted); margin-bottom: 20px; text-transform: uppercase; padding: 5px 10px 5px 4px; border: 1px solid var(--border2); }
 .div-partner-badge .mark { width: 7px; height: 7px; border-radius: 50%; background: var(--mod-accent); flex-shrink: 0; }
+.div-partner-badge .badge-logo { width: 18px; height: 18px; object-fit: contain; flex-shrink: 0; border-radius: 3px; }
 
 .div-body { font-size: 13.5px; font-weight: 300; color: var(--silver-lo); line-height: 1.72; margin-bottom: 24px; }
 .scope { list-style: none; border-top: 1px solid var(--border2); padding-top: 20px; }
@@ -240,7 +242,9 @@ body {
 .bf-label { font-family: 'Space Mono', monospace; font-size: 8.5px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); margin-bottom: 28px; text-align: center; }
 .bf-partners { display: flex; justify-content: center; align-items: center; gap: 36px; flex-wrap: wrap; margin-bottom: 28px; }
 .bf-partner { display: flex; flex-direction: column; align-items: center; gap: 6px; opacity: 0.85; }
-.bf-partner .bf-mark { width: 34px; height: 34px; border: 1px solid var(--border2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Barlow Condensed', sans-serif; font-weight: 600; }
+.bf-partner .bf-mark { width: 34px; height: 34px; border: 1px solid var(--border2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Barlow Condensed', sans-serif; font-weight: 600; overflow: hidden; }
+.bf-partner .bf-mark.bf-mark-logo { background: #fff; }
+.bf-partner .bf-mark-logo img { width: 100%; height: 100%; object-fit: cover; }
 .bf-partner .bf-name { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--silver-lo); }
 .bf-partner-link { text-decoration: none; cursor: pointer; transition: opacity 0.15s, transform 0.15s; }
 .bf-partner-link:hover { opacity: 1; transform: translateY(-2px); }

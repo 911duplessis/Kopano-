@@ -6,6 +6,7 @@
     "name": "The Connection Network",
     "tagline": "Dynamic IT Solutions · System Coordination",
     "website": "www.theconnectionnetwork.com",
+    "logo": "assets/logos/connection-network.jpg",
     "contact": {
       "name": "Stiaan",
       "phone": "071 770 0072",
@@ -36,6 +37,7 @@
     {
       "partner": "CrossTech Systems",
       "accentColor": "#5AB4FF",
+      "logo": "assets/logos/crosstech.jpg",
       "title": "IT & Digital Presence",
       "body": "Your website currently routes to Instagram — which ranks at zero on Google. CrossTech Systems builds a professional, conversion-focused web presence with full SEO architecture so that anyone searching \"lounge Randburg\" or \"day vibes Blairgowrie\" finds Kopano Lounge first.",
       "scope": [
@@ -62,6 +64,7 @@
     {
       "partner": "LMGi",
       "accentColor": "#5ADFAA",
+      "logo": "assets/logos/lmgi.jpg",
       "title": "Electrical + USB Client Infrastructure",
       "deckUrl": "reference/lmgi-kopana-club.html",
       "deckLabel": "View Full LMGi Proposal",
@@ -118,6 +121,8 @@
     {
       "partner": "PrimeTurf SA",
       "accentColor": "#C9A44A",
+      "logo": "assets/logos/primeturf.jpg",
+      "website": "https://www.primeturf.co.za",
       "title": "Luxury Turf — Brand Statement",
       "deckUrl": "proposals/primeturf-storyboard.html",
       "deckLabel": "View Full PrimeTurf Storyboard",
