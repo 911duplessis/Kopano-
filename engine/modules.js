@@ -31,6 +31,77 @@ function renderPrice(price) {
   `;
 }
 
+function renderPriceOptions(options) {
+  if (!options || !options.length) return '';
+  return `
+    <div class="price-options">
+      ${options.map((o) => `
+        <div class="price-option${o.recommended ? ' recommended' : ''}">
+          ${o.recommended ? '<div class="po-badge">Recommended</div>' : ''}
+          <div class="po-name">${escapeHtml(o.name)}</div>
+          <ul class="po-items">${(o.items || []).map((i) => `<li>${escapeHtml(i)}</li>`).join('')}</ul>
+          <div class="po-price">${escapeHtml(o.price)}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function renderAddendum(a) {
+  if (!a) return '';
+  return `
+    <div class="addendum-card">
+      <div class="ad-label">Addendum · ${escapeHtml(a.name)}</div>
+      <ul class="po-items">${(a.items || []).map((i) => `<li>${escapeHtml(i)}</li>`).join('')}</ul>
+      <div class="ad-row">
+        <div class="ad-price">${escapeHtml(a.price)}</div>
+        ${a.note ? `<div class="ad-note">${escapeHtml(a.note)}</div>` : ''}
+      </div>
+    </div>
+  `;
+}
+
+function renderExtraServices(list) {
+  if (!list || !list.length) return '';
+  return `
+    <div class="extra-services-wrap">
+      <div class="es-label">Additional Capability — Available On Request</div>
+      <div class="extra-services">
+        ${list.map((s) => `<span class="es-chip">${escapeHtml(s.name)} <span class="es-price">${escapeHtml(s.price)}</span></span>`).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function renderZoneGrid(zones, total) {
+  if (!zones || !zones.length) return '';
+  return `
+    <div class="zone-grid-wrap">
+      <div class="es-label">Zone-By-Zone Breakdown</div>
+      <div class="zone-grid">
+        ${zones.map((z) => `
+          <div class="zone-card">
+            <div class="zone-id">${escapeHtml(z.id)}</div>
+            <div class="zone-name">${escapeHtml(z.name)}</div>
+            <div class="zone-spec">${escapeHtml(z.sqm)} · ${escapeHtml(z.spec)}</div>
+            <div class="zone-price">${escapeHtml(z.price)}</div>
+            <div class="zone-tier">${escapeHtml(z.tier)}</div>
+          </div>
+        `).join('')}
+        ${total ? `
+          <div class="zone-card zone-total">
+            <div class="zone-id">Total</div>
+            <div class="zone-name">${escapeHtml(total.name)}</div>
+            <div class="zone-spec">${escapeHtml(total.sqm)}</div>
+            <div class="zone-price">${escapeHtml(total.price)}</div>
+            <div class="zone-tier">${escapeHtml(total.note || '')}</div>
+          </div>
+        ` : ''}
+      </div>
+    </div>
+  `;
+}
+
 function renderModuleCard(mod, index) {
   const accent = mod.accentColor || '#5AB4FF';
   return `
@@ -45,6 +116,10 @@ function renderModuleCard(mod, index) {
       <div class="div-body">${escapeHtml(mod.body)}</div>
       <ul class="scope">${renderScopeList(mod.scope || [], accent)}</ul>
       ${renderPrice(mod.price)}
+      ${renderPriceOptions(mod.priceOptions)}
+      ${renderAddendum(mod.addendum)}
+      ${renderZoneGrid(mod.zones, mod.totalPackage)}
+      ${renderExtraServices(mod.extraServices)}
     </div>
   `;
 }

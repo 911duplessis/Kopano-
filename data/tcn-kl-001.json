@@ -71,7 +71,47 @@
         "2 × under-counter USB charging hubs — client-facing BYOC setup",
         "Safety-compliant installation — staff/client zone separation"
       ],
-      "price": { "label": "Total Estimate (Opt. 01)", "note": "Full upgrade incl. USB hubs · once-off", "value": "R 4,200 – R 5,200" }
+      "price": { "label": "Total Estimate (Opt. 01)", "note": "Full upgrade incl. USB hubs · once-off", "value": "R 4,200 – R 5,200" },
+      "priceOptions": [
+        {
+          "name": "Option 01 — Full Safety + Client Upgrade System",
+          "price": "R 4,200 – R 5,200",
+          "recommended": true,
+          "items": [
+            "3.05m concealed cable trunking — full hazard elimination",
+            "Extension relocation — wall plug to counter",
+            "1 × 5-point multi-adapter (5×2-pin + 5×3-pin)",
+            "2 × under-counter USB charging hubs — client-facing"
+          ]
+        },
+        {
+          "name": "Option 02 — Lean Compliance",
+          "price": "R 2,300 – R 2,900",
+          "items": [
+            "3.05m concealed cable trunking — hazard elimination only",
+            "Extension relocation — wall plug to counter",
+            "Safety-compliant termination, no client-facing USB upgrade"
+          ]
+        }
+      ],
+      "addendum": {
+        "name": "Addendum 01 — DJ Box Power Distribution",
+        "price": "R 2,600 – R 3,400",
+        "note": "Bundle discount applied when combined with Option 01 on the same site visit",
+        "items": [
+          "Dedicated circuit run to DJ booth — eliminates extension daisy-chaining",
+          "Distribution box with isolated, labelled outlets for sound + lighting rigs",
+          "Surge-protected output for sensitive audio equipment"
+        ]
+      },
+      "extraServices": [
+        { "name": "Website", "price": "R 4,500+" },
+        { "name": "Mobile App", "price": "Scoped" },
+        { "name": "SEO Audit", "price": "R 2,800+" },
+        { "name": "Digital Marketing", "price": "R 3,500/mo+" },
+        { "name": "Brand Identity", "price": "R 5,500+" },
+        { "name": "Physical Infrastructure", "price": "Quoted per scope" }
+      ]
     },
     {
       "partner": "PrimeTurf SA",
@@ -85,7 +125,20 @@
         "Professional installation — Gauteng-based crew, HOA-compliant",
         "12-year product warranty · zero irrigation · zero maintenance"
       ],
-      "price": { "label": "Scoped After Site Assessment", "note": "Free assessment — no obligation", "value": "From R 12,000" }
+      "price": { "label": "Scoped After Site Assessment", "note": "Free assessment — no obligation", "value": "From R 12,000" },
+      "zones": [
+        { "id": "Zone A", "name": "Entrance Corridor", "sqm": "72m²", "spec": "40mm Pro Pile", "price": "R 145,000", "tier": "Tier 1 · Priority Install" },
+        { "id": "Zone B", "name": "Staircase + Corridor", "sqm": "27m²", "spec": "15mm Elite Weave", "price": "R 85,000", "tier": "Tier 2 · Incl. LED nosing" },
+        { "id": "Zone C", "name": "Outdoor Terrace + Bar", "sqm": "72m²", "spec": "40mm Outdoor Pro", "price": "R 165,000", "tier": "★ Highest Visual ROI" },
+        { "id": "Zone D", "name": "Feature Pillars + Hallway", "sqm": "Custom", "spec": "Per pillar spec", "price": "R 45,000", "tier": "Tier 3 · Custom cut" },
+        { "id": "Zone E", "name": "VIP Lounge Interior", "sqm": "75m²", "spec": "20mm Indoor Elite", "price": "R 155,000", "tier": "★ Crown Jewel · Case Study Zone" }
+      ],
+      "totalPackage": {
+        "name": "All 5 Zones · Full Venue",
+        "sqm": "271m² · 8-Day Install",
+        "price": "R 595,000",
+        "note": "Photography + Reel Production included"
+      }
     }
   ],
   "beforeAfterHeading": "See the<br><em>transformation.</em>",
