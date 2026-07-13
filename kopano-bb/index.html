@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO -->
+  <title>Kopano B&B Premium Guesthouse | Luxury Accommodation in South Africa</title>
+  <meta name="description" content="Experience African warmth and luxury at Kopano B&B Premium Guesthouse. 10 beautifully appointed rooms, pool, and world-class service. Book hourly, daily, nightly, or weekly." />
+  <meta name="keywords" content="Kopano B&B, guesthouse, luxury accommodation, South Africa, bed and breakfast, premium rooms, pool, book online" />
+  <meta name="author" content="Kopano B&B Premium Guesthouse" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Kopano B&B Premium Guesthouse" />
+  <meta property="og:description" content="African warmth. Luxury detail. Your home away from home." />
+  <meta property="og:image" content="assets/images/hero.jpg" />
+  <meta property="og:type" content="website" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            terra:  { DEFAULT: '#8B4513', light: '#A0522D', dark: '#6B3410', pale: '#F5EDE4' },
+            gold:   { DEFAULT: '#C9A44A', light: '#D4B56A', dark: '#A8893D', pale: '#FBF4E6' },
+            cream:  { DEFAULT: '#FFF8F0', warm: '#F5EAD8', sand: '#E8D5B7' },
+            bark:   { DEFAULT: '#3D2B1F', light: '#5C3D2E', dark: '#2C1810' },
+          },
+          fontFamily: {
+            serif:  ['Cormorant Garamond', 'Georgia', 'serif'],
+            sans:   ['Jost', 'system-ui', 'sans-serif'],
+            script: ['Pinyon Script', 'cursive'],
+          },
+          backgroundImage: {
+            'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background-color: #FFF8F0; color: #3D2B1F; overflow-x: hidden; }
+
+    /* ── Typography ── */
+    h1, h2, h3, h4 { font-family: 'Cormorant Garamond', Georgia, serif; }
+    p, a, button, span, li, label, input, textarea, select { font-family: 'Jost', system-ui, sans-serif; }
+
+    /* ── Nav ── */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      transition: background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease;
+    }
+    #navbar.scrolled {
+      background: rgba(255,248,240,0.95);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 20px rgba(61,43,31,0.10);
+    }
+    .nav-link {
+      font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+      font-weight: 500; color: #fff; transition: color 0.2s;
+    }
+    #navbar.scrolled .nav-link { color: #3D2B1F; }
+    .nav-link:hover { color: #C9A44A !important; }
+
+    /* ── Hero ── */
+    #hero {
+      position: relative; min-height: 100vh;
+      background: url('assets/images/hero.jpg') center center / cover no-repeat;
+      display: flex; align-items: center; justify-content: center;
+    }
+    #hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(160deg, rgba(44,24,16,0.62) 0%, rgba(44,24,16,0.38) 60%, rgba(44,24,16,0.55) 100%);
+    }
+    #hero > * { position: relative; z-index: 1; }
+
+    /* ── Section label ── */
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase;
+      font-weight: 500; color: #C9A44A; margin-bottom: 1rem;
+    }
+    .eyebrow::before, .eyebrow::after {
+      content: ''; display: inline-block; width: 28px; height: 1px;
+      background: #C9A44A; vertical-align: middle; margin: 0 10px;
+    }
+
+    /* ── Divider ── */
+    .ornament {
+      display: flex; align-items: center; gap: 12px;
+      justify-content: center; margin: 1.5rem 0;
+    }
+    .ornament::before, .ornament::after {
+      content: ''; flex: 1; max-width: 80px; height: 1px; background: #C9A44A; opacity: 0.5;
+    }
+    .ornament-diamond {
+      width: 6px; height: 6px; background: #C9A44A;
+      transform: rotate(45deg); flex-shrink: 0;
+    }
+
+    /* ── Room cards ── */
+    .room-card {
+      background: #fff; border: 1px solid #E8D5B7; overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .room-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 48px rgba(61,43,31,0.12);
+    }
+    .rate-badge {
+      display: inline-flex; flex-direction: column; align-items: center;
+      padding: 10px 12px; background: #FBF4E6; border: 1px solid #E8D5B7;
+    }
+    .rate-badge .rate-label {
+      font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: #8B4513; font-weight: 600; font-family: 'Jost', sans-serif;
+    }
+    .rate-badge .rate-value {
+      font-size: 1.1rem; font-weight: 600; color: #3D2B1F;
+      font-family: 'Cormorant Garamond', serif; letter-spacing: 0.02em;
+      margin-top: 2px;
+    }
+
+    /* ── Gallery ── */
+    .gallery-item { overflow: hidden; position: relative; }
+    .gallery-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.06); }
+    .gallery-item::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(44,24,16,0.4) 0%, transparent 50%);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .gallery-item:hover::after { opacity: 1; }
+
+    /* ── Amenity card ── */
+    .amenity-card {
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; padding: 28px 20px; gap: 14px;
+      border: 1px solid #E8D5B7; background: #fff;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .amenity-card:hover {
+      border-color: #C9A44A;
+      box-shadow: 0 8px 32px rgba(201,164,74,0.10);
+    }
+    .amenity-icon {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: #F5EDE4; display: flex; align-items: center; justify-content: center;
+      color: #8B4513; flex-shrink: 0; font-size: 1.3rem;
+    }
+
+    /* ── Booking form ── */
+    .booking-input {
+      width: 100%; padding: 12px 16px;
+      border: 1px solid #E8D5B7; background: #fff;
+      font-family: 'Jost', sans-serif; font-size: 0.875rem;
+      color: #3D2B1F; outline: none;
+      transition: border-color 0.2s;
+    }
+    .booking-input:focus { border-color: #C9A44A; }
+    .booking-input::placeholder { color: #b8a898; }
+
+    /* ── Buttons ── */
+    .btn-primary {
+      display: inline-block; padding: 14px 36px;
+      background: #8B4513; color: #fff;
+      font-family: 'Jost', sans-serif; font-size: 0.75rem;
+      font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+      border: 1px solid #8B4513; cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-primary:hover { background: #6B3410; }
+    .btn-outline {
+      display: inline-block; padding: 13px 34px;
+      background: transparent; color: #8B4513;
+      font-family: 'Jost', sans-serif; font-size: 0.75rem;
+      font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+      border: 1px solid #8B4513; cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { background: #8B4513; color: #fff; }
+    .btn-gold {
+      display: inline-block; padding: 14px 36px;
+      background: #C9A44A; color: #fff;
+      font-family: 'Jost', sans-serif; font-size: 0.75rem;
+      font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+      border: 1px solid #C9A44A; cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-gold:hover { background: #A8893D; }
+
+    /* ── WhatsApp float ── */
+    #wa-float {
+      position: fixed; bottom: 28px; right: 28px; z-index: 100;
+      width: 58px; height: 58px; border-radius: 50%;
+      background: #25D366;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.40);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    #wa-float:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 28px rgba(37,211,102,0.55);
+    }
+    #wa-float svg { width: 30px; height: 30px; fill: #fff; }
+
+    /* ── Parallax-lite via CSS ── */
+    .parallax-section {
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* ── Misc ── */
+    .text-gold { color: #C9A44A; }
+    .text-terra { color: #8B4513; }
+    .bg-terra { background-color: #8B4513; }
+    .bg-gold { background-color: #C9A44A; }
+    .bg-cream { background-color: #FFF8F0; }
+    .bg-cream-warm { background-color: #F5EAD8; }
+    .bg-bark { background-color: #3D2B1F; }
+    .border-gold { border-color: #C9A44A; }
+    .border-sand { border-color: #E8D5B7; }
+
+    /* ── Responsive images (placeholder fallback style) ── */
+    .img-placeholder {
+      background: linear-gradient(135deg, #E8D5B7 0%, #d4b89a 100%);
+      display: flex; align-items: center; justify-content: center;
+      color: #8B4513; font-size: 0.75rem; letter-spacing: 0.1em;
+      text-transform: uppercase; font-weight: 500;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ═══════════════════════════════════════════
+     FLOATING WHATSAPP BUTTON
+═══════════════════════════════════════════ -->
+<a id="wa-float" href="https://wa.me/27717700072" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+  </svg>
+</a>
+
+
+<!-- ═══════════════════════════════════════════
+     NAVIGATION
+═══════════════════════════════════════════ -->
+<nav id="navbar">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-20">
+
+    <!-- Logo -->
+    <a href="#hero" class="flex items-center gap-3 flex-shrink-0">
+      <img src="assets/images/logo.png" alt="Kopano B&B Premium Guesthouse" class="h-14 w-auto" onerror="this.style.display='none'" />
+    </a>
+
+    <!-- Desktop links -->
+    <div class="hidden lg:flex items-center gap-8">
+      <a href="#about"    class="nav-link">About</a>
+      <a href="#rooms"    class="nav-link">Rooms</a>
+      <a href="#amenities" class="nav-link">Amenities</a>
+      <a href="#gallery"  class="nav-link">Gallery</a>
+      <a href="#contact"  class="nav-link">Contact</a>
+      <a href="#booking" class="ml-4 px-5 py-2.5 text-xs font-semibold tracking-widest uppercase
+         border border-gold-DEFAULT text-gold-DEFAULT hover:bg-gold-DEFAULT hover:text-white transition-colors duration-200"
+         style="color:#C9A44A;border-color:#C9A44A;"
+         onmouseover="this.style.background='#C9A44A';this.style.color='#fff'"
+         onmouseout="this.style.background='transparent';this.style.color='#C9A44A'">
+        Book Now
+      </a>
+    </div>
+
+    <!-- Mobile menu button -->
+    <button id="menu-toggle" class="lg:hidden p-2 text-white" aria-label="Open menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden lg:hidden bg-cream-warm/95 backdrop-blur-sm border-t border-sand">
+    <div class="max-w-7xl mx-auto px-6 py-6 flex flex-col gap-4">
+      <a href="#about"     class="text-xs font-semibold tracking-widest uppercase text-bark-DEFAULT hover:text-terra-DEFAULT py-2" style="color:#3D2B1F;" onclick="closeMobileMenu()">About</a>
+      <a href="#rooms"     class="text-xs font-semibold tracking-widest uppercase text-bark-DEFAULT hover:text-terra-DEFAULT py-2" style="color:#3D2B1F;" onclick="closeMobileMenu()">Rooms &amp; Rates</a>
+      <a href="#amenities" class="text-xs font-semibold tracking-widest uppercase text-bark-DEFAULT hover:text-terra-DEFAULT py-2" style="color:#3D2B1F;" onclick="closeMobileMenu()">Amenities</a>
+      <a href="#gallery"   class="text-xs font-semibold tracking-widest uppercase text-bark-DEFAULT hover:text-terra-DEFAULT py-2" style="color:#3D2B1F;" onclick="closeMobileMenu()">Gallery</a>
+      <a href="#contact"   class="text-xs font-semibold tracking-widest uppercase text-bark-DEFAULT hover:text-terra-DEFAULT py-2" style="color:#3D2B1F;" onclick="closeMobileMenu()">Contact</a>
+      <a href="#booking"   class="btn-primary text-center mt-2" onclick="closeMobileMenu()">Book Now</a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ═══════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════ -->
+<section id="hero">
+  <div class="text-center px-6 max-w-3xl mx-auto">
+    <!-- Logo centred over hero -->
+    <img src="assets/images/logo.png"
+         alt="Kopano B&B Premium Guesthouse"
+         class="mx-auto h-32 md:h-44 w-auto mb-8 drop-shadow-2xl"
+         onerror="this.style.display='none'" />
+
+    <p class="font-script text-4xl md:text-5xl text-gold-light mb-4" style="color:#D4B56A;font-family:'Pinyon Script',cursive;">
+      African Warmth. Luxury Detail.
+    </p>
+
+    <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-light text-white leading-none tracking-tight mb-6">
+      Your Home<br /><em>Away From Home</em>
+    </h1>
+
+    <div class="ornament" style="margin:1.5rem auto;max-width:200px;">
+      <div class="ornament-diamond"></div>
+      <div style="flex:1;height:1px;background:#C9A44A;opacity:0.5;"></div>
+      <div class="ornament-diamond"></div>
+    </div>
+
+    <p class="text-white/75 text-base md:text-lg font-light tracking-wide max-w-xl mx-auto mb-10">
+      10 beautifully appointed rooms &nbsp;·&nbsp; Sparkling pool &nbsp;·&nbsp; Premium service
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="#booking" class="btn-gold">Reserve Your Room</a>
+      <a href="#rooms" class="btn-outline" style="color:#fff;border-color:rgba(255,255,255,0.6);"
+         onmouseover="this.style.background='rgba(255,255,255,0.15)'"
+         onmouseout="this.style.background='transparent'">
+        View Rooms &amp; Rates
+      </a>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60">
+    <span class="text-white text-xs tracking-widest uppercase" style="font-family:'Jost',sans-serif;">Discover</span>
+    <div class="w-px h-12 bg-white/50 animate-pulse"></div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     QUICK STATS BAR
+═══════════════════════════════════════════ -->
+<div class="bg-bark" style="background:#3D2B1F;">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="grid grid-cols-2 md:grid-cols-4 divide-x" style="border-color:rgba(255,255,255,0.08);">
+      <div class="px-8 py-7 text-center">
+        <div class="font-serif text-3xl font-semibold text-white mb-1">10</div>
+        <div class="text-xs tracking-widest uppercase font-medium" style="color:rgba(255,255,255,0.5);">Premium Rooms</div>
+      </div>
+      <div class="px-8 py-7 text-center">
+        <div class="font-serif text-3xl font-semibold text-gold-DEFAULT mb-1" style="color:#C9A44A;">4</div>
+        <div class="text-xs tracking-widest uppercase font-medium" style="color:rgba(255,255,255,0.5);">Room Categories</div>
+      </div>
+      <div class="px-8 py-7 text-center">
+        <div class="font-serif text-3xl font-semibold text-white mb-1">24/7</div>
+        <div class="text-xs tracking-widest uppercase font-medium" style="color:rgba(255,255,255,0.5);">Concierge Service</div>
+      </div>
+      <div class="px-8 py-7 text-center">
+        <div class="font-serif text-3xl font-semibold text-gold-DEFAULT mb-1" style="color:#C9A44A;">★ 4.9</div>
+        <div class="text-xs tracking-widest uppercase font-medium" style="color:rgba(255,255,255,0.5);">Guest Rating</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     ABOUT / WELCOME
+═══════════════════════════════════════════ -->
+<section id="about" class="py-24 lg:py-36 bg-cream" style="background:#FFF8F0;">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+
+      <!-- Image block -->
+      <div class="relative">
+        <!-- Main image -->
+        <div class="relative z-10 aspect-[4/5] overflow-hidden shadow-2xl">
+          <img src="assets/images/exterior.jpg" alt="Kopano B&B exterior" class="w-full h-full object-cover" onerror="this.className='img-placeholder w-full h-full';this.removeAttribute('src');this.textContent='Exterior Photo'" />
+        </div>
+        <!-- Accent card -->
+        <div class="absolute -bottom-8 -right-8 z-20 bg-terra-DEFAULT px-8 py-7 text-center shadow-xl" style="background:#8B4513;max-width:180px;">
+          <div class="font-serif text-4xl font-semibold text-white leading-none mb-1">15+</div>
+          <div class="text-xs tracking-wider uppercase text-white/75 font-medium mt-1">Years of<br/>Hospitality</div>
+        </div>
+        <!-- Gold border accent -->
+        <div class="absolute -top-6 -left-6 w-full h-full border border-gold-DEFAULT opacity-25 pointer-events-none" style="border-color:#C9A44A;"></div>
+      </div>
+
+      <!-- Text block -->
+      <div>
+        <span class="eyebrow">Our Story</span>
+        <h2 class="font-serif text-5xl md:text-6xl font-light text-bark leading-tight mb-6" style="color:#3D2B1F;">
+          Where Africa's<br/><em>soul meets luxury</em>
+        </h2>
+
+        <div class="ornament" style="justify-content:flex-start;margin:1.25rem 0 1.75rem;">
+          <div class="ornament-diamond"></div>
+          <div style="width:60px;height:1px;background:#C9A44A;opacity:0.5;"></div>
+        </div>
+
+        <p class="text-base font-light leading-relaxed mb-5" style="color:#5C3D2E;">
+          Nestled in a serene setting, Kopano B&B Premium Guesthouse is a sanctuary where the warmth of African
+          hospitality is elevated by luxury detail. Every room, every surface, every service has been crafted
+          with intention — to make you feel genuinely at home while experiencing something extraordinary.
+        </p>
+        <p class="text-base font-light leading-relaxed mb-8" style="color:#5C3D2E;">
+          <em>"Kopano"</em> — a Sotho word meaning <em>gathering, unity, connection</em> — defines our spirit.
+          Whether you're here for a restful overnight, an extended stay, or a private retreat, we gather
+          comfort, beauty, and care around you.
+        </p>
+
+        <div class="grid grid-cols-2 gap-6 mb-10">
+          <div class="flex gap-4 items-start">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 text-white text-sm" style="background:#8B4513;">✦</div>
+            <div>
+              <div class="font-semibold text-sm text-bark mb-1" style="color:#3D2B1F;">Personalised Service</div>
+              <div class="text-xs text-bark/60 leading-relaxed" style="color:rgba(61,43,31,0.6);">Every guest, every stay — treated as though you are our only one.</div>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 text-white text-sm" style="background:#8B4513;">✦</div>
+            <div>
+              <div class="font-semibold text-sm text-bark mb-1" style="color:#3D2B1F;">Prime Location</div>
+              <div class="text-xs text-bark/60 leading-relaxed" style="color:rgba(61,43,31,0.6);">Conveniently situated with easy access to all major attractions.</div>
+            </div>
+          </div>
+        </div>
+
+        <a href="#booking" class="btn-primary">Book Your Stay</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     ROOMS & RATES
+═══════════════════════════════════════════ -->
+<section id="rooms" class="py-24 lg:py-36 bg-cream-warm" style="background:#F5EAD8;">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+
+    <div class="text-center mb-16">
+      <span class="eyebrow">Accommodation</span>
+      <h2 class="font-serif text-5xl md:text-6xl font-light text-bark" style="color:#3D2B1F;">
+        Rooms &amp; <em>Rates</em>
+      </h2>
+      <p class="mt-4 text-sm font-light max-w-xl mx-auto" style="color:#5C3D2E;">
+        Choose from four categories of beautifully appointed rooms — all including free Wi-Fi,
+        complimentary breakfast, daily housekeeping, and access to our pool and communal spaces.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+
+      <!-- ── Standard Room ── -->
+      <div class="room-card flex flex-col">
+        <div class="aspect-[4/3] overflow-hidden relative">
+          <img src="assets/images/room-standard.jpg" alt="Standard Room"
+               class="w-full h-full object-cover"
+               onerror="this.className='img-placeholder w-full h-full';this.removeAttribute('src');this.textContent='Standard Room'" />
+          <div class="absolute top-4 left-4 px-3 py-1 text-xs tracking-widest uppercase font-semibold text-white" style="background:#8B4513;font-family:'Jost',sans-serif;">
+            4 Rooms Available
+          </div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <h3 class="font-serif text-2xl font-semibold text-bark mb-1" style="color:#3D2B1F;">Standard Room</h3>
+          <p class="text-xs text-terra mb-4 font-medium tracking-wide" style="color:#8B4513;">Queen Bed · En-suite · Up to 2 guests</p>
+          <p class="text-sm font-light leading-relaxed mb-6" style="color:#5C3D2E;">
+            A warm, comfortable retreat with queen bed, en-suite bathroom, air conditioning, and garden or courtyard view.
+          </p>
+          <div class="grid grid-cols-2 gap-2 mb-6">
+            <div class="rate-badge">
+              <span class="rate-label">Hourly</span>
+              <span class="rate-value">R 250</span>
+            </div>
+            <div class="rate-badge">
+              <span class="rate-label">Daily</span>
+              <span class="rate-value">R 600</span>
+            </div>
+            <div class="rate-badge" style="border-color:#C9A44A;background:#FBF4E6;">
+              <span class="rate-label" style="color:#C9A44A;">Nightly</span>
+              <span class="rate-value">R 850</span>
+            </div>
+            <div class="rate-badge">
+              <span class="rate-label">Weekly</span>
+              <span class="rate-value">R 4 500</span>
+            </div>
+          </div>
+          <a href="#booking" class="btn-outline mt-auto text-center">Reserve</a>
+        </div>
+      </div>
+
+      <!-- ── Deluxe Room ── -->
+      <div class="room-card flex flex-col">
+        <div class="aspect-[4/3] overflow-hidden relative">
+          <img src="assets/images/room-deluxe.jpg" alt="Deluxe Room"
+               class="w-full h-full object-cover"
+               onerror="this.className='img-placeholder w-full h-full';this.removeAttribute('src');this.textContent='Deluxe Room'" />
+          <div class="absolute top-4 left-4 px-3 py-1 text-xs tracking-widest uppercase font-semibold text-white" style="background:#8B4513;font-family:'Jost',sans-serif;">
+            3 Rooms Available
+          </div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <h3 class="font-serif text-2xl font-semibold text-bark mb-1" style="color:#3D2B1F;">Deluxe Room</h3>
+          <p class="text-xs text-terra mb-4 font-medium tracking-wide" style="color:#8B4513;">King Bed · En-suite · Up to 2 guests</p>
+          <p class="text-sm font-light leading-relaxed mb-6" style="color:#5C3D2E;">
+            Elevated comfort with king bed, premium linen, spa-style bathroom, mini bar, and pool or garden views.
+          </p>
+          <div class="grid grid-cols-2 gap-2 mb-6">
+            <div class="rate-badge">
+              <span class="rate-label">Hourly</span>
+              <span class="rate-value">R 300</span>
+            </div>
+            <div class="rate-badge">
+              <span class="rate-label">Daily</span>
+              <span class="rate-value">R 800</span>
+            </div>
+            <div class="rate-badge" style="border-color:#C9A44A;background:#FBF4E6;">
+              <span class="rate-label" style="color:#C9A44A;">Nightly</span>
+              <span class="rate-value">R 1 100</span>
+            </div>
+            <div class="rate-badge">
+              <span class="rate-label">Weekly</span>
+              <span class="rate-value">R 5 500</span>
+            </div>
+          </div>
+          <a href="#booking" class="btn-outline mt-auto text-center">Reserve</a>
+        </div>
+      </div>
+
+      <!-- ── Family Suite ── -->
+      <div class="room-card flex flex-col">
+        <div class="aspect-[4/3] overflow-hidden relative">
+          <img src="assets/images/room-family.jpg" alt="Family Suite"
+               class="w-full h-full object-cover"
+               onerror="this.className='img-placeholder w-full h-full';this.removeAttribute('src');this.textContent='Family Suite'" />
+          <div class="absolute top-4 left-4 px-3 py-1 text-xs tracking-widest uppercase font-semibold text-white" style="background:#8B4513;font-family:'Jost',sans-serif;">
+            2 Rooms Available
+          </div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <h3 class="font-serif text-2xl font-semibold text-bark mb-1" style="color:#3D2B1F;">Family Suite</h3>
+          <p class="text-xs text-terra mb-4 font-medium tracking-wide" style="color:#8B4513;">2 Queen Beds · En-suite · Up to 4 guests</p>
+          <p class="text-sm font-light leading-relaxed mb-6" style="color:#5C3D2E;">
+            Spacious family-friendly suite with two queen beds, separate living area, kitchenette, and generous wardrobe.
+          </p>
+          <div class="grid grid-cols-2 gap-2 mb-6">
+            <div class="rate-badge">
+              <span class="rate-label">Hourly</span>
+              <span class="rate-value">R 350</span>
+            </div>
+            <div class="rate-badge">
+              <span class="rate-label">Daily</span>
+              <span class="rate-value">R 1 000</span>
+            </div>
+            <div class="rate-badge" style="border-color:#C9A44A;background:#FBF4E6;">
+              <span class="rate-label" style="color:#C9A44A;">Nightly</span>
+              <span class="rate-value">R 1 400</span>
+            </div>
+            <div class="rate-badge">
+              <span class="rate-label">Weekly</span>
+              <span class="rate-value">R 7 000</span>
+            </div>
+          </div>
+          <a href="#booking" class="btn-outline mt-auto text-center">Reserve</a>
+        </div>
+      </div>
+
+      <!-- ── Executive Suite ── -->
+      <div class="room-card flex flex-col" style="border:1px solid #C9A44A;position:relative;">
+        <div class="absolute top-0 left-0 right-0 h-1 bg-gold" style="background:#C9A44A;"></div>
+        <div class="aspect-[4/3] overflow-hidden relative">
+          <img src="assets/images/room-executive.jpg" alt="Executive Suite"
+               class="w-full h-full object-cover"
+               onerror="this.className='img-placeholder w-full h-full';this.removeAttribute('src');this.textContent='Executive Suite'" />
+          <div class="absolute top-4 left-4 px-3 py-1 text-xs tracking-widest uppercase font-semibold text-white" style="background:#C9A44A;font-family:'Jost',sans-serif;">
+            ★ Signature Suite
+          </div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <h3 class="font-serif text-2xl font-semibold text-bark mb-1" style="color:#3D2B1F;">Executive Suite</h3>
+          <p class="text-xs mb-4 font-medium tracking-wide" style="color:#C9A44A;">King Bed · Luxury Bath · Up to 2 guests</p>
+          <p class="text-sm font-light leading-relaxed mb-6" style="color:#5C3D2E;">
+            Our crown jewel. King bed, freestanding soaking tub, private lounge area, and direct pool access — the ultimate indulgence.
+          </p>
+          <div class="grid grid-cols-2 gap-2 mb-6">
+            <div class="rate-badge">
+              <span class="rate-label">Hourly</span>
+              <span class="rate-value">R 500</span>
+            </div>
+            <div class="rate-badge">
+              <span class="rate-label">Daily</span>
+              <span class="rate-value">R 1 500</span>
+            </div>
+            <div class="rate-badge" style="border-color:#C9A44A;background:#FBF4E6;">
+              <span class="rate-label" style="color:#C9A44A;">Nightly</span>
+              <span class="rate-value">R 2 000</span>
+            </div>
+            <div class="rate-badge">
+              <span class="rate-label">Weekly</span>
+              <span class="rate-value">R 10 000</span>
+            </div>
+          </div>
+          <a href="#booking" class="btn-gold mt-auto text-center">Reserve Suite</a>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="text-center text-xs mt-8 font-light" style="color:rgba(61,43,31,0.5);">
+      All rates include complimentary breakfast &nbsp;·&nbsp; Taxes included &nbsp;·&nbsp; Rates subject to change during peak season
+    </p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     PARALLAX BREAK
+═══════════════════════════════════════════ -->
+<div class="parallax-section py-32 relative" style="background-image:url('assets/images/pool.jpg');">
+  <div class="absolute inset-0" style="background:rgba(44,24,16,0.65);"></div>
+  <div class="relative z-10 text-center px-6 max-w-3xl mx-auto">
+    <span class="eyebrow">The Experience</span>
+    <blockquote class="font-serif text-3xl md:text-5xl font-light text-white italic leading-tight mt-4">
+      "A place where time slows, comfort deepens, and every detail whispers — <em>welcome home.</em>"
+    </blockquote>
+    <div class="ornament mt-8" style="max-width:200px;margin-left:auto;margin-right:auto;">
+      <div class="ornament-diamond"></div>
+      <div style="flex:1;height:1px;background:#C9A44A;opacity:0.5;"></div>
+      <div class="ornament-diamond"></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     AMENITIES
+═══════════════════════════════════════════ -->
+<section id="amenities" class="py-24 lg:py-36 bg-cream" style="background:#FFF8F0;">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+
+    <div class="text-center mb-16">
+      <span class="eyebrow">What We Offer</span>
+      <h2 class="font-serif text-5xl md:text-6xl font-light text-bark" style="color:#3D2B1F;">
+        Amenities &amp; <em>Features</em>
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+      <div class="amenity-card">
+        <div class="amenity-icon">🏊</div>
+        <p class="text-xs font-semibold tracking-wide uppercase text-bark" style="color:#3D2B1F;font-family:'Jost',sans-serif;">Swimming Pool</p>
+      </div>
+      <div class="amenity-card">
+        <div class="amenity-icon">🍳</div>
+        <p class="text-xs font-semibold tracking-wide uppercase text-bark" style="color:#3D2B1F;font-family:'Jost',sans-serif;">Breakfast Included</p>
+      </div>
+      <div class="amenity-card">
+        <div class="amenity-icon">📶</div>
+        <p class="text-xs font-semibold tracking-wide uppercase text-bark" style="color:#3D2B1F;font-family:'Jost',sans-serif;">Free Wi-Fi</p>
+      </div>
+      <div class="amenity-card">
+        <div class="amenity-icon">🅿️</div>
+        <p class="text-xs font-semibold tracking-wide uppercase text-bark" style="color:#3D2B1F;font-family:'Jost',sans-serif;">Secure Parking</p>
+      </div>
+      <div class="amenity-card">
+        <div class="amenity-icon">❄️</div>
+        <p class="text-xs font-semibold tracking-wide uppercase text-bark" style="color:#3D2B1F;font-family:'Jost',sans-serif;">Air Conditioning</p>
+      </div>
+      <div class="amenity-card">
+        <div class="amenity-icon">🔒</div>
+        <p class="text-xs font-semibold tracking-wide uppercase text-bark" style="color:#3D2B1F;font-family:'Jost',sans-serif;">24/7 Security</p>
+      </div>
+      <div class="amenity-card">
+        <div class="amenity-icon">🛁</div>
+        <p class="text-xs font-semibold tracking-wide uppercase text-bark" style="color:#3D2B1F;font-family:'Jost',sans-serif;">En-suite Bathrooms</p>
+      </div>
+      <div class="amenity-card">
+        <div class="amenity-icon">📺</div>
+        <p class="text-xs font-semibold tracking-wide uppercase text-bark" style="color:#3D2B1F;font-family:'Jost',sans-serif;">Smart TV / DSTV</p>
+      </div>
+      <div class="amenity-card">
+        <div class="amenity-icon">☕</div>
+        <p class="text-xs font-semibold tracking-wide uppercase text-bark" style="color:#3D2B1F;font-family:'Jost',sans-serif;">Tea &amp; Coffee Bar</p>
+      </div>
+      <div class="amenity-card">
+        <div class="amenity-icon">🧹</div>
+        <p class="text-xs font-semibold tracking-wide uppercase text-bark" style="color:#3D2B1F;font-family:'Jost',sans-serif;">Daily Housekeeping</p>
+      </div>
+      <div class="amenity-card">
+        <div class="amenity-icon">🌿</div>
+        <p class="text-xs font-semibold tracking-wide uppercase text-bark" style="color:#3D2B1F;font-family:'Jost',sans-serif;">Garden Terrace</p>
+      </div>
+      <div class="amenity-card">
+        <div class="amenity-icon">🚐</div>
+        <p class="text-xs font-semibold tracking-wide uppercase text-bark" style="color:#3D2B1F;font-family:'Jost',sans-serif;">Airport Transfers</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     GALLERY
+═══════════════════════════════════════════ -->
+<section id="gallery" class="py-24 lg:py-36 bg-cream-warm" style="background:#F5EAD8;">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+
+    <div class="text-center mb-16">
+      <span class="eyebrow">Visual Tour</span>
+      <h2 class="font-serif text-5xl md:text-6xl font-light text-bark" style="color:#3D2B1F;">
+        Our <em>Gallery</em>
+      </h2>
+    </div>
+
+    <!-- Masonry-style grid -->
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+      <div class="gallery-item aspect-[4/3] lg:col-span-2 lg:row-span-2">
+        <img src="assets/images/gallery-1.jpg" alt="Kopano B&B pool" onerror="this.className='img-placeholder w-full h-full';this.removeAttribute('src');this.textContent='Pool & Garden'" style="height:100%;" />
+      </div>
+      <div class="gallery-item aspect-[4/3]">
+        <img src="assets/images/gallery-2.jpg" alt="Bedroom interior" onerror="this.className='img-placeholder w-full h-full';this.removeAttribute('src');this.textContent='Bedroom'" style="height:100%;" />
+      </div>
+      <div class="gallery-item aspect-[4/3]">
+        <img src="assets/images/gallery-3.jpg" alt="Breakfast spread" onerror="this.className='img-placeholder w-full h-full';this.removeAttribute('src');this.textContent='Breakfast'" style="height:100%;" />
+      </div>
+      <div class="gallery-item aspect-[4/3]">
+        <img src="assets/images/gallery-4.jpg" alt="Lounge area" onerror="this.className='img-placeholder w-full h-full';this.removeAttribute('src');this.textContent='Lounge'" style="height:100%;" />
+      </div>
+      <div class="gallery-item aspect-[4/3]">
+        <img src="assets/images/gallery-5.jpg" alt="Bathroom" onerror="this.className='img-placeholder w-full h-full';this.removeAttribute('src');this.textContent='Bathroom'" style="height:100%;" />
+      </div>
+      <div class="gallery-item aspect-[4/3] md:col-span-2">
+        <img src="assets/images/gallery-6.jpg" alt="Garden view" onerror="this.className='img-placeholder w-full h-full';this.removeAttribute('src');this.textContent='Garden View'" style="height:100%;" />
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     BOOKING
+═══════════════════════════════════════════ -->
+<section id="booking" class="py-24 lg:py-36 bg-bark" style="background:#3D2B1F;">
+  <div class="max-w-5xl mx-auto px-6 lg:px-10">
+
+    <div class="text-center mb-16">
+      <span class="eyebrow" style="color:#C9A44A;">Make a Reservation</span>
+      <h2 class="font-serif text-5xl md:text-6xl font-light text-white">
+        Book Your <em>Stay</em>
+      </h2>
+      <p class="mt-4 text-sm font-light max-w-md mx-auto" style="color:rgba(255,255,255,0.5);">
+        Secure your room online or WhatsApp us directly. Instant confirmation guaranteed.
+      </p>
+    </div>
+
+    <div class="bg-cream" style="background:#FFF8F0;">
+      <div class="grid lg:grid-cols-5">
+
+        <!-- Form -->
+        <div class="lg:col-span-3 p-8 md:p-12">
+          <form id="booking-form" onsubmit="handleBooking(event)">
+            <div class="grid md:grid-cols-2 gap-5 mb-5">
+              <div>
+                <label class="block text-xs font-semibold tracking-widest uppercase mb-2 text-terra" style="color:#8B4513;">Full Name</label>
+                <input type="text" name="name" placeholder="Your full name" class="booking-input" required />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold tracking-widest uppercase mb-2 text-terra" style="color:#8B4513;">Phone / WhatsApp</label>
+                <input type="tel" name="phone" placeholder="+27 71 000 0000" class="booking-input" required />
+              </div>
+            </div>
+            <div class="mb-5">
+              <label class="block text-xs font-semibold tracking-widest uppercase mb-2 text-terra" style="color:#8B4513;">Email Address</label>
+              <input type="email" name="email" placeholder="your@email.com" class="booking-input" required />
+            </div>
+            <div class="grid md:grid-cols-2 gap-5 mb-5">
+              <div>
+                <label class="block text-xs font-semibold tracking-widest uppercase mb-2 text-terra" style="color:#8B4513;">Room Type</label>
+                <select name="room" class="booking-input">
+                  <option value="">Select room type…</option>
+                  <option value="standard">Standard Room — from R 250/hr</option>
+                  <option value="deluxe">Deluxe Room — from R 300/hr</option>
+                  <option value="family">Family Suite — from R 350/hr</option>
+                  <option value="executive">Executive Suite — from R 500/hr</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold tracking-widest uppercase mb-2 text-terra" style="color:#8B4513;">Duration Type</label>
+                <select name="duration-type" class="booking-input">
+                  <option value="">Select duration…</option>
+                  <option value="hourly">Hourly</option>
+                  <option value="daily">Day Use</option>
+                  <option value="nightly">Overnight</option>
+                  <option value="weekly">Weekly Stay</option>
+                </select>
+              </div>
+            </div>
+            <div class="grid md:grid-cols-2 gap-5 mb-5">
+              <div>
+                <label class="block text-xs font-semibold tracking-widest uppercase mb-2 text-terra" style="color:#8B4513;">Check-in</label>
+                <input type="datetime-local" name="checkin" class="booking-input" required />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold tracking-widest uppercase mb-2 text-terra" style="color:#8B4513;">Check-out</label>
+                <input type="datetime-local" name="checkout" class="booking-input" required />
+              </div>
+            </div>
+            <div class="mb-7">
+              <label class="block text-xs font-semibold tracking-widest uppercase mb-2 text-terra" style="color:#8B4513;">Special Requests</label>
+              <textarea name="notes" rows="3" placeholder="Any special needs, dietary requirements, or requests…" class="booking-input resize-none"></textarea>
+            </div>
+
+            <div id="booking-success" class="hidden mb-4 p-4 border border-green-300 bg-green-50 text-green-800 text-sm">
+              ✓ Request received! We'll confirm via WhatsApp within 1 hour.
+            </div>
+
+            <button type="submit" class="btn-gold w-full text-center py-4">
+              Request Booking
+            </button>
+          </form>
+
+          <p class="text-xs mt-4 text-center" style="color:rgba(61,43,31,0.4);">
+            💳 Secure payment via card or EFT on confirmation &nbsp;·&nbsp; No charge until confirmed
+          </p>
+        </div>
+
+        <!-- Side info -->
+        <div class="lg:col-span-2 p-8 md:p-12" style="background:#F5EAD8;border-left:1px solid #E8D5B7;">
+          <h3 class="font-serif text-2xl font-semibold text-bark mb-6" style="color:#3D2B1F;">Need help?</h3>
+
+          <div class="space-y-5 mb-8">
+            <div class="flex gap-4 items-start">
+              <span class="text-xl flex-shrink-0">📞</span>
+              <div>
+                <div class="text-xs font-semibold tracking-widest uppercase text-terra mb-1" style="color:#8B4513;">Call Us</div>
+                <a href="tel:+27717700072" class="text-bark font-medium hover:text-terra transition-colors" style="color:#3D2B1F;">+27 71 770 0072</a>
+              </div>
+            </div>
+            <div class="flex gap-4 items-start">
+              <span class="text-xl flex-shrink-0">💬</span>
+              <div>
+                <div class="text-xs font-semibold tracking-widest uppercase text-terra mb-1" style="color:#8B4513;">WhatsApp</div>
+                <a href="https://wa.me/27717700072" target="_blank" class="text-bark font-medium hover:text-terra transition-colors" style="color:#3D2B1F;">Chat with us now</a>
+              </div>
+            </div>
+            <div class="flex gap-4 items-start">
+              <span class="text-xl flex-shrink-0">✉️</span>
+              <div>
+                <div class="text-xs font-semibold tracking-widest uppercase text-terra mb-1" style="color:#8B4513;">Email</div>
+                <a href="mailto:stay@kopanobb.co.za" class="text-bark font-medium hover:text-terra transition-colors" style="color:#3D2B1F;">stay@kopanobb.co.za</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="border-t pt-6" style="border-color:#E8D5B7;">
+            <h4 class="font-serif text-lg font-semibold text-bark mb-3" style="color:#3D2B1F;">Booking Policy</h4>
+            <ul class="text-sm space-y-2 font-light" style="color:#5C3D2E;">
+              <li>✦ &nbsp;50% deposit secures your booking</li>
+              <li>✦ &nbsp;Balance due on arrival</li>
+              <li>✦ &nbsp;Free cancellation 48 hrs before check-in</li>
+              <li>✦ &nbsp;Early check-in/late check-out on request</li>
+            </ul>
+          </div>
+
+          <a href="https://wa.me/27717700072?text=Hi%2C%20I'd%20like%20to%20book%20a%20room%20at%20Kopano%20B%26B"
+             target="_blank"
+             class="flex items-center justify-center gap-3 mt-8 py-4 text-white text-sm font-semibold tracking-wide rounded-none"
+             style="background:#25D366;font-family:'Jost',sans-serif;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Book via WhatsApp
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     TESTIMONIALS
+═══════════════════════════════════════════ -->
+<section class="py-24 bg-cream" style="background:#FFF8F0;">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+
+    <div class="text-center mb-14">
+      <span class="eyebrow">Guest Voices</span>
+      <h2 class="font-serif text-5xl md:text-6xl font-light text-bark" style="color:#3D2B1F;">
+        What Guests <em>Say</em>
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="p-8 border border-sand" style="border-color:#E8D5B7;background:#fff;">
+        <div class="text-gold text-xl mb-4" style="color:#C9A44A;">★★★★★</div>
+        <blockquote class="font-serif text-xl italic text-bark font-light leading-relaxed mb-6" style="color:#3D2B1F;">
+          "Honestly the most beautiful guesthouse I've stayed at in South Africa. The attention to detail is just *chef's kiss*."
+        </blockquote>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-semibold" style="background:#8B4513;">NM</div>
+          <div>
+            <div class="text-sm font-semibold text-bark" style="color:#3D2B1F;">Nadia M.</div>
+            <div class="text-xs" style="color:#8B4513;">Johannesburg, ZA</div>
+          </div>
+        </div>
+      </div>
+      <div class="p-8 border border-sand" style="border-color:#E8D5B7;background:#fff;">
+        <div class="text-gold text-xl mb-4" style="color:#C9A44A;">★★★★★</div>
+        <blockquote class="font-serif text-xl italic text-bark font-light leading-relaxed mb-6" style="color:#3D2B1F;">
+          "We stayed for a week and didn't want to leave. The pool, the breakfast, the staff — everything exceeded expectations."
+        </blockquote>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-semibold" style="background:#8B4513;">TK</div>
+          <div>
+            <div class="text-sm font-semibold text-bark" style="color:#3D2B1F;">Thabo K.</div>
+            <div class="text-xs" style="color:#8B4513;">Pretoria, ZA</div>
+          </div>
+        </div>
+      </div>
+      <div class="p-8 border border-sand" style="border-color:#E8D5B7;background:#fff;">
+        <div class="text-gold text-xl mb-4" style="color:#C9A44A;">★★★★★</div>
+        <blockquote class="font-serif text-xl italic text-bark font-light leading-relaxed mb-6" style="color:#3D2B1F;">
+          "Came for a day stay, booked again that same evening for a weekend. Kopano B&B is a hidden gem — so warm, so luxurious."
+        </blockquote>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-semibold" style="background:#8B4513;">SM</div>
+          <div>
+            <div class="text-sm font-semibold text-bark" style="color:#3D2B1F;">Siphiwe M.</div>
+            <div class="text-xs" style="color:#8B4513;">Cape Town, ZA</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     CONTACT
+═══════════════════════════════════════════ -->
+<section id="contact" class="py-24 lg:py-36 bg-cream-warm" style="background:#F5EAD8;">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+
+    <div class="text-center mb-16">
+      <span class="eyebrow">Find Us</span>
+      <h2 class="font-serif text-5xl md:text-6xl font-light text-bark" style="color:#3D2B1F;">
+        Contact &amp; <em>Location</em>
+      </h2>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-12 items-start">
+
+      <!-- Contact info -->
+      <div>
+        <div class="space-y-8 mb-10">
+          <div class="flex gap-5 items-start">
+            <div class="amenity-icon flex-shrink-0">📍</div>
+            <div>
+              <div class="text-xs font-semibold tracking-widest uppercase text-terra mb-1" style="color:#8B4513;">Address</div>
+              <p class="text-bark font-light leading-relaxed" style="color:#3D2B1F;">
+                Kopano B&B Premium Guesthouse<br/>
+                South Africa<br/>
+                <em style="color:#8B4513;font-size:0.8rem;">(Full address provided on booking confirmation)</em>
+              </p>
+            </div>
+          </div>
+          <div class="flex gap-5 items-start">
+            <div class="amenity-icon flex-shrink-0">📞</div>
+            <div>
+              <div class="text-xs font-semibold tracking-widest uppercase text-terra mb-1" style="color:#8B4513;">Phone</div>
+              <a href="tel:+27717700072" class="text-bark font-medium text-lg hover:text-terra transition-colors" style="color:#3D2B1F;">
+                +27 71 770 0072
+              </a>
+            </div>
+          </div>
+          <div class="flex gap-5 items-start">
+            <div class="amenity-icon flex-shrink-0">✉️</div>
+            <div>
+              <div class="text-xs font-semibold tracking-widest uppercase text-terra mb-1" style="color:#8B4513;">Email</div>
+              <a href="mailto:stay@kopanobb.co.za" class="text-bark font-medium text-lg hover:text-terra transition-colors" style="color:#3D2B1F;">
+                stay@kopanobb.co.za
+              </a>
+            </div>
+          </div>
+          <div class="flex gap-5 items-start">
+            <div class="amenity-icon flex-shrink-0">🕐</div>
+            <div>
+              <div class="text-xs font-semibold tracking-widest uppercase text-terra mb-1" style="color:#8B4513;">Check-in / Check-out</div>
+              <p class="text-bark font-light" style="color:#3D2B1F;">
+                Check-in: 14:00 onwards<br/>
+                Check-out: 11:00<br/>
+                <span class="text-sm" style="color:#8B4513;">Early / late arrangements on request</span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <a href="https://wa.me/27717700072?text=Hi%20Kopano%20B%26B%2C%20I%20have%20an%20enquiry"
+           target="_blank"
+           class="flex items-center gap-3 px-7 py-4 inline-flex text-white text-sm font-semibold"
+           style="background:#25D366;font-family:'Jost',sans-serif;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          WhatsApp Us
+        </a>
+      </div>
+
+      <!-- Map -->
+      <div class="overflow-hidden shadow-xl" style="height:400px;background:#E8D5B7;display:flex;align-items:center;justify-content:center;">
+        <!-- Replace src with real Google Maps embed URL for your address -->
+        <iframe
+          id="map-frame"
+          width="100%" height="400" style="border:0;" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://maps.google.com/maps?q=Kopano+B%26B+Guesthouse+South+Africa&output=embed"
+          title="Kopano B&B location"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════ -->
+<footer class="bg-bark py-16" style="background:#2C1810;">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="grid md:grid-cols-3 gap-10 mb-12">
+
+      <!-- Brand -->
+      <div>
+        <img src="assets/images/logo.png" alt="Kopano B&B" class="h-20 w-auto mb-4" onerror="this.style.display='none'" />
+        <p class="text-sm font-light leading-relaxed mb-5" style="color:rgba(255,255,255,0.5);">
+          Where African warmth meets luxury. 10 beautifully appointed rooms, personalised service, and a genuine home-away-from-home experience.
+        </p>
+        <a href="https://wa.me/27717700072" target="_blank"
+           class="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase py-3 px-5"
+           style="border:1px solid rgba(201,164,74,0.4);color:#C9A44A;font-family:'Jost',sans-serif;">
+          ↗ Book on WhatsApp
+        </a>
+      </div>
+
+      <!-- Quick links -->
+      <div>
+        <h4 class="text-xs font-semibold tracking-widest uppercase mb-5" style="color:#C9A44A;font-family:'Jost',sans-serif;">Quick Links</h4>
+        <ul class="space-y-3">
+          <li><a href="#about"     class="text-sm font-light hover:text-white transition-colors" style="color:rgba(255,255,255,0.5);">About Us</a></li>
+          <li><a href="#rooms"     class="text-sm font-light hover:text-white transition-colors" style="color:rgba(255,255,255,0.5);">Rooms &amp; Rates</a></li>
+          <li><a href="#amenities" class="text-sm font-light hover:text-white transition-colors" style="color:rgba(255,255,255,0.5);">Amenities</a></li>
+          <li><a href="#gallery"   class="text-sm font-light hover:text-white transition-colors" style="color:rgba(255,255,255,0.5);">Gallery</a></li>
+          <li><a href="#booking"   class="text-sm font-light hover:text-white transition-colors" style="color:rgba(255,255,255,0.5);">Book a Room</a></li>
+          <li><a href="#contact"   class="text-sm font-light hover:text-white transition-colors" style="color:rgba(255,255,255,0.5);">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Room types -->
+      <div>
+        <h4 class="text-xs font-semibold tracking-widest uppercase mb-5" style="color:#C9A44A;font-family:'Jost',sans-serif;">Room Types</h4>
+        <ul class="space-y-3">
+          <li class="flex justify-between text-sm font-light" style="color:rgba(255,255,255,0.5);">
+            <span>Standard Room</span><span style="color:#C9A44A;">From R 250</span>
+          </li>
+          <li class="flex justify-between text-sm font-light" style="color:rgba(255,255,255,0.5);">
+            <span>Deluxe Room</span><span style="color:#C9A44A;">From R 300</span>
+          </li>
+          <li class="flex justify-between text-sm font-light" style="color:rgba(255,255,255,0.5);">
+            <span>Family Suite</span><span style="color:#C9A44A;">From R 350</span>
+          </li>
+          <li class="flex justify-between text-sm font-light" style="color:rgba(255,255,255,0.5);">
+            <span>Executive Suite</span><span style="color:#C9A44A;">From R 500</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t pt-8 flex flex-col md:flex-row items-center justify-between gap-4" style="border-color:rgba(255,255,255,0.08);">
+      <p class="text-xs font-light" style="color:rgba(255,255,255,0.3);">
+        © 2026 Kopano B&B Premium Guesthouse. All rights reserved.
+      </p>
+      <p class="text-xs font-light" style="color:rgba(255,255,255,0.2);">
+        Designed by <span style="color:rgba(201,164,74,0.6);">The Connection Network</span>
+      </p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════ -->
+<script>
+  // ── Nav scroll behaviour ──
+  const navbar = document.getElementById('navbar');
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 80) {
+      navbar.classList.add('scrolled');
+      menuToggle.querySelector('svg').style.stroke = '#3D2B1F';
+    } else {
+      navbar.classList.remove('scrolled');
+      menuToggle.querySelector('svg').style.stroke = '#fff';
+    }
+  });
+
+  menuToggle.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+
+  function closeMobileMenu() {
+    mobileMenu.classList.add('hidden');
+  }
+
+  // ── Booking form ──
+  function handleBooking(e) {
+    e.preventDefault();
+    const form = e.target;
+    const data = Object.fromEntries(new FormData(form));
+
+    // Build WhatsApp message as fallback
+    const msg = `Hi Kopano B&B! I'd like to book:%0A%0A` +
+      `Name: ${encodeURIComponent(data.name)}%0A` +
+      `Phone: ${encodeURIComponent(data.phone)}%0A` +
+      `Room: ${encodeURIComponent(data.room)}%0A` +
+      `Duration: ${encodeURIComponent(data['duration-type'])}%0A` +
+      `Check-in: ${encodeURIComponent(data.checkin)}%0A` +
+      `Check-out: ${encodeURIComponent(data.checkout)}%0A` +
+      `Notes: ${encodeURIComponent(data.notes || 'None')}`;
+
+    // Show success + open WhatsApp
+    document.getElementById('booking-success').classList.remove('hidden');
+    form.reset();
+    setTimeout(() => {
+      window.open(`https://wa.me/27717700072?text=${msg}`, '_blank');
+    }, 600);
+  }
+
+  // ── Lazy-load gallery images ──
+  if ('IntersectionObserver' in window) {
+    const imgs = document.querySelectorAll('img[loading="lazy"]');
+    // Already handled by browser lazy loading
+  }
+</script>
+
+</body>
+</html>
